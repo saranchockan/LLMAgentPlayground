@@ -1,5 +1,8 @@
-from playwright.sync_api import Playwright, sync_playwright
+from typing import Dict
 
+from playwright.sync_api import ElementHandle, Playwright, sync_playwright
+
+from job_search_element_picker import get_job_search_element
 from perplexity_playground import call_perpexity_llm
 from prompts import (
     COMPANY_NAME,
@@ -40,13 +43,18 @@ def run(playwright: Playwright):
     """
     page.wait_for_selector("input", timeout=10000)
 
-    input_elements = page.query_selector_all("input")
-    input_elements_html_str_arr = []
-    for input_element in input_elements:
-        print(input_element.get_property("outerHTML"))
-        input_elements_html_str_arr.append(str(input_element.get_property("outerHTML")))
+    search_elements = page.query_selector_all("input")
+    search_elements_map: Dict[str, ElementHandle] = {}
+    for search_element in search_elements:
+        search_element_html_str = str(search_element.get_property("outerHTML"))
+        search_elements_map[search_element_html_str] = search_element
 
-    print(str(input_elements_html_str_arr))
+    print(list(search_elements_map.keys()))
+    job_search_element_key = get_job_search_element(list(search_elements_map.keys()))
+    job_search_element = search_elements_map[job_search_element_key]
+
+    job_search_element.type("Software")
+    job_search_element.press("Enter")
 
     input("Press Enter to close the browser...")
     browser.close()
