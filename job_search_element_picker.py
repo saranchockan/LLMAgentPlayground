@@ -30,6 +30,3 @@ def get_job_search_element(html_input_elements: List[str]) -> str:
             )
         ),
     )
-
-
-print(get_job_search_element(HTML_INPUT_ELEMENT))

@@ -25,6 +25,7 @@ def run(playwright: Playwright):
     """
 
     # TODO: Add error handling
+    # TODO: Add career url validation
     # TODO: LLM DB Cache: if perplexity has previously
     # give us this company's career page URL, extract
     # URL from DB
@@ -43,6 +44,8 @@ def run(playwright: Playwright):
     """
     page.wait_for_selector("input", timeout=10000)
 
+    # TODO: Error handle cases where
+    # there are no search inputs
     search_elements = page.query_selector_all("input")
     search_elements_map: Dict[str, ElementHandle] = {}
     for search_element in search_elements:
@@ -51,6 +54,22 @@ def run(playwright: Playwright):
 
     print(list(search_elements_map.keys()))
     job_search_element_key = get_job_search_element(list(search_elements_map.keys()))
+    # TODO: Add error handling
+    # Case 1: Hallucination: If the LLM returns a job_search_element_key
+    # that is not in the search_elements_map, teach the LLM that it is hallucinating
+    # and tell it to pick an input element from the provided list
+    # Case 2: Misdirection: LLM picks an input element from the examples. Tell the
+    # LLM that it picked an input element from the list and tell it to pick
+    # an input element from the user provided list.
+
+    # TODO: Memory
+    # How can the LLM learn to pick search elements better by relying
+    # on past examples?
+
+    # TODO: Collect examples
+    # As the LLM performs this task, collect a list of input elements
+    # and output. This will be useful for fine tune data modelling
+
     job_search_element = search_elements_map[job_search_element_key]
 
     job_search_element.type("Software")
