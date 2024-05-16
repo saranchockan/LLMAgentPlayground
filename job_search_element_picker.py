@@ -6,7 +6,7 @@ for job openings in the company in the career website.
 """
 
 from typing import List
-from perplexity_playground import call_perpexity_llm
+from perplexity_playground import MIXTRAL_8X7B_INSTRUCT_MODEL, call_perpexity_llm
 from prompts import (
     SEARCH_FOR_SOFTWARE_ROLES_SYS_PROMPT,
     SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT,
@@ -29,4 +29,5 @@ def get_job_search_element(html_input_elements: List[str]) -> str:
                 HTML_INPUT_ELEMENTS=html_input_elements
             )
         ),
+        model=MIXTRAL_8X7B_INSTRUCT_MODEL,
     )
