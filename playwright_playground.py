@@ -1,9 +1,13 @@
+import asyncio
 from typing import Dict
 
-from playwright.sync_api import ElementHandle, Playwright, sync_playwright
+from playwright.async_api import async_playwright
+from playwright.async_api import ElementHandle, Playwright
+from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_search_element_picker import get_job_search_element
 from perplexity_playground import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
+from playwright_utils import extract_anchor_elements
 from prompts import (
     COMPANY_NAME,
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
@@ -11,11 +15,12 @@ from prompts import (
 )
 
 
-def run(playwright: Playwright):
+async def run(playwright: Playwright):
 
     chromium = playwright.chromium
-    browser = chromium.launch(headless=False)
-    page = browser.new_page()
+    browser = await chromium.launch(headless=False)
+    page = await browser.new_page()
+    page.set_default_timeout(10000)
 
     print(
         f"✨✨✨ Extracting software engineering positions from {COMPANY_NAME} ✨✨✨"
@@ -37,7 +42,7 @@ def run(playwright: Playwright):
 
     print(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
-    page.goto(company_career_page_url)
+    await page.goto(company_career_page_url)
 
     """
     SEARCH for software engineer roles in the 
@@ -46,12 +51,12 @@ def run(playwright: Playwright):
 
     # TODO: Error handle cases where
     # there are no search inputs. Eg - Notion!
-    page.wait_for_selector("input", timeout=10000)
+    await page.wait_for_selector("input", timeout=10000)
 
     search_elements = page.query_selector_all("input")
     search_elements_map: Dict[str, ElementHandle] = {}
-    for search_element in search_elements:
-        search_element_html_str = str(search_element.get_property("outerHTML"))
+    for search_element in await search_elements:
+        search_element_html_str = str(await search_element.get_property("outerHTML"))
         search_elements_map[search_element_html_str] = search_element
 
     print(search_elements_map)
@@ -78,8 +83,8 @@ def run(playwright: Playwright):
 
     job_search_element = search_elements_map[job_search_element_key]
 
-    job_search_element.type("Software")
-    job_search_element.press("Enter")
+    await job_search_element.type("Software")
+    await job_search_element.press("Enter")
 
     """
     At this stage, the state of the world can be N scenarios
@@ -91,25 +96,37 @@ def run(playwright: Playwright):
 
     Extrack links to software engineer roles
     """
-    links = page.locator("a")
-    link_texts = [link.text_content() for link in links.all()]
-    link_urls = [link.get_attribute("href") for link in links.all()]
 
-    # Print the link texts and URLs
-    for text, url in zip(link_texts, link_urls):
-        print(f"Link text: {text}, URL: {url}")
+    try:
+        links = page.locator("a")
+        link_texts = [await link.text_content() for link in await links.all()]
+        link_urls = [await link.get_attribute("href") for link in await links.all()]
 
-    # Get all the buttons on the page
-    buttons = page.locator("button")
-    button_texts = [button.text_content() for button in buttons.all()]
+        # Print the link texts and URLs
+        for text, url in zip(link_texts, link_urls):
+            print(f"Link text: {text}, URL: {url}")
+    except PlaywrightTimeoutError:
+        print("Timeout! Page does not have links")
 
-    # Print the button texts
-    for text in button_texts:
-        print(f"Button text: {text}")
+    try:
+        # Get all the buttons on the page
+        buttons = page.locator("button")
+        button_texts = [await button.text_content() for button in await buttons.all()]
+        # Print the button texts
+        for text in button_texts:
+            print(f"Button text: {text}")
+    except PlaywrightTimeoutError:
+        print("Timeout! Page does not have buttons")
+
+    await extract_anchor_elements(page)
 
     input("Press Enter to close the browser...")
-    browser.close()
+    await browser.close()
 
 
-with sync_playwright() as playwright:
-    run(playwright)
+async def main():
+    async with async_playwright() as playwright:
+        await run(playwright)
+
+
+asyncio.run(main=main())
