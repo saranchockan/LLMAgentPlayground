@@ -42,13 +42,12 @@ async def run_job_hunter(playwright: Playwright):
     # TODO: LLM DB Cache: if perplexity has previously
     # give us this company's career page URL, extract
     # URL from DB
-    # company_career_page_url = call_perpexity_llm(
-    #     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-    #     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
-    #     model=SONAR_SMALL_ONLINE_MODEL,
-    # )
+    company_career_page_url = call_perpexity_llm(
+        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+        model=SONAR_SMALL_ONLINE_MODEL,
+    )
 
-    company_career_page_url = "https://www.lyft.com/careers"
     print(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
     await page.goto(company_career_page_url)

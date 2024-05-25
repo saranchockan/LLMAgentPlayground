@@ -108,7 +108,6 @@ async def fetch_web_element_metadata(
             for sib in siblings:
                 tag_name = await sib.get_property("tagName")
                 tag_name_value = await tag_name.json_value()
-                print(tag_name_value)
                 if tag_name_value.lower() != selector.value:
                     filtered_siblings.append(sib)
             # siblings = [sib for sib in siblings if sib.]
