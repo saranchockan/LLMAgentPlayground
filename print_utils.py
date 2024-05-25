@@ -29,3 +29,32 @@ def print_var_name_value(var):
         if value is var:
             print(f"{name} = {value}")
             break
+
+
+from typing import List
+
+from playwright_data_interface import WebElement
+
+
+def print_metadata_list(metadata_list: List[WebElement.Metadata]) -> None:
+    """
+    Prints a list of Metadata objects in a readable format with spacing.
+
+    Args:
+        metadata_list (List[Metadata]): A list of Metadata objects.
+
+    Returns:
+        None
+    """
+    print("[")
+    for i, metadata in enumerate(metadata_list):
+        print("   {")
+        for j, (key, value) in enumerate(metadata.items()):
+            print(f'      {key}: "{value}",', end="")
+            if j < len(metadata) - 1:
+                print()
+        print("\n   }", end="")
+        if i < len(metadata_list) - 1:
+            print(",")
+        print()
+    print("]")

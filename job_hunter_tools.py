@@ -8,19 +8,8 @@ from playwright.async_api import ElementHandle, Page
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
+from playwright_data_interface import WebElement
 from print_utils import print_if_not_empty, print_var_name_value
-
-
-class WebElement:
-    class Selector(Enum):
-        ANCHOR = "a"
-        BUTTON = "button"
-        INPUT = "input"
-
-    class Metadata(TypedDict):
-        label: str
-        url: str
-        description: str
 
 
 async def search_software_roles(page: Page):
@@ -33,9 +22,11 @@ async def search_software_roles(page: Page):
     # TODO: Error handle cases where
     # there are no search inputs. Eg - Notion!
     try:
-        await page.wait_for_selector(WebElement.Selector.INPUT.value, timeout=10000)
+        await page.wait_for_selector(WebElement.HTMLElement.INPUT.value, timeout=10000)
 
-        search_elements = await page.query_selector_all(WebElement.Selector.INPUT.value)
+        search_elements = await page.query_selector_all(
+            WebElement.HTMLElement.INPUT.value
+        )
 
         print_var_name_value(search_elements)
 
@@ -82,7 +73,7 @@ async def search_software_roles(page: Page):
 
 
 async def fetch_web_element_metadata(
-    page: Page, selector: WebElement.Selector
+    page: Page, selector: WebElement.HTMLElement
 ) -> List[WebElement.Metadata]:
     """Extracts metadata of anchor (<element> </element>) elements
     from the web page
@@ -107,7 +98,9 @@ async def fetch_web_element_metadata(
             except:
                 ...
         elementsMetadata.append(
-            WebElement.Metadata(label=label, url=url, description=description)
+            WebElement.Metadata(
+                label=label, url=url, description=description, element_type=selector
+            )
         )
     return elementsMetadata
 

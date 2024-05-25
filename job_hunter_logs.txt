@@ -1,0 +1,232 @@
+✨✨✨ Extracting software engineering positions from Anthropic ✨✨✨
+Anthropic Career Page URL: https://www.anthropic.com/careers
+Timeout! Page does not have search
+<a> Elements
+[
+   {
+      label: "",
+      url: "https://www.anthropic.com/",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Claude",
+      url: "https://www.anthropic.com/claude",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "API",
+      url: "https://www.anthropic.com/api",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Research",
+      url: "https://www.anthropic.com/research",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Company",
+      url: "https://www.anthropic.com/company",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "News",
+      url: "https://www.anthropic.com/news",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Careers",
+      url: "https://www.anthropic.com/careers",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "See Open Roles",
+      url: "https://www.anthropic.com/jobs",
+      description: "See Open Roles",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "US Candidate Privacy Policy",
+      url: "https://docs.google.com/document/d/1V2mvrHvJmtqZg8XE3OUREw_9kHKLLTiB/edit",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "UK Employee and Candidate Privacy Policy",
+      url: "https://docs.google.com/document/d/1Qfle1owSwktTlBtDqh2I0POSVg9n4Ava/edit",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "",
+      url: "https://www.anthropic.com/",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Claude",
+      url: "https://www.anthropic.com/claude",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "API",
+      url: "https://www.anthropic.com/api",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Research",
+      url: "https://www.anthropic.com/research",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Company",
+      url: "https://www.anthropic.com/company",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Customers",
+      url: "https://www.anthropic.com/customers",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "News",
+      url: "https://www.anthropic.com/news",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Careers",
+      url: "https://www.anthropic.com/careers",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Press Inquiries",
+      url: "mailto:press@anthropic.com",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Support",
+      url: "https://support.anthropic.com/",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Status",
+      url: "https://status.anthropic.com/",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Twitter",
+      url: "https://twitter.com/AnthropicAI",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/company/anthropicresearch",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Availability",
+      url: "https://www.anthropic.com/supported-countries",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Terms of Service – Consumer",
+      url: "https://www.anthropic.com/legal/consumer-terms",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Terms of Service – Commercial",
+      url: "https://www.anthropic.com/legal/commercial-terms",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Privacy Policy",
+      url: "https://www.anthropic.com/legal/privacy",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Usage Policy",
+      url: "https://www.anthropic.com/legal/aup",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Responsible Disclosure Policy",
+      url: "https://www.anthropic.com/responsible-disclosure-policy",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   },
+
+   {
+      label: "Compliance",
+      url: "https://trust.anthropic.com/",
+      description: "",
+      element_type: "HTMLElement.ANCHOR",
+   }
+]
+<button> Elements
+[
+   {
+      label: "",
+      url: "",
+      description: "",
+      element_type: "HTMLElement.BUTTON",
+   },
+
+   {
+      label: "Privacy Choices",
+      url: "",
+      description: "",
+      element_type: "HTMLElement.BUTTON",
+   }
+]
+Press Enter to close the browser...

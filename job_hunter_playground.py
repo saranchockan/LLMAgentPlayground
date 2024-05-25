@@ -1,6 +1,7 @@
 import asyncio
+from enum import Enum
 from time import sleep
-from typing import Dict
+from typing import Dict, TypedDict
 
 from playwright.async_api import ElementHandle, Playwright
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
@@ -8,12 +9,13 @@ from playwright.async_api import async_playwright
 
 from job_hunter_llm_utils import get_job_search_element
 from job_hunter_tools import (
-    WebElement,
     fetch_web_element_metadata,
     search_software_roles,
     take_screenshot,
 )
+from playwright_data_interface import WebElement
 from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
+from print_utils import print_metadata_list
 from prompts import (
     COMPANY_NAME,
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
@@ -76,10 +78,14 @@ async def run_job_hunter(playwright: Playwright):
     """
     sleep(5)
     print("<a> Elements")
-    print(await fetch_web_element_metadata(page, WebElement.Selector.ANCHOR))
+    print_metadata_list(
+        await fetch_web_element_metadata(page, WebElement.HTMLElement.ANCHOR)
+    )
 
     print("<button> Elements")
-    print(await fetch_web_element_metadata(page, WebElement.Selector.BUTTON))
+    print_metadata_list(
+        await fetch_web_element_metadata(page, WebElement.HTMLElement.BUTTON)
+    )
 
     input("Press Enter to close the browser...")
     await browser.close()
