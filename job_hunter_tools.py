@@ -84,6 +84,8 @@ async def fetch_web_element_metadata(
     elements: List[ElementHandle] = await page.query_selector_all(selector.value)
     elementsMetadata: List[WebElement] = []
     for element in elements:
+        tag_name = await element.get_property("tagName")
+        tag_name = await tag_name.json_value()
         label = await element.inner_text()
         href = await element.get_attribute("href")
         url = get_absolute_url(page, href)
@@ -95,13 +97,22 @@ async def fetch_web_element_metadata(
         # in a neighboring div or h2 Eg - https://www.anthropic.com/jobs
         # Get parent element
         parent = await element.query_selector("..")
+        if parent is None:
+            continue
 
         # If parent exists, get all child elements
         if parent:
-            siblings = await parent.query_selector_all("*")
+            siblings = await parent.query_selector_all(":scope > *")
             # Remove the current element from the list of siblings
-            siblings = [sib for sib in siblings if sib != element]
+            filtered_siblings = []
             for sib in siblings:
+                tag_name = await sib.get_property("tagName")
+                tag_name_value = await tag_name.json_value()
+                print(tag_name_value)
+                if tag_name_value.lower() != selector.value:
+                    filtered_siblings.append(sib)
+            # siblings = [sib for sib in siblings if sib.]
+            for sib in filtered_siblings:
                 try:
                     description += await sib.inner_text() + " "
                 except:
