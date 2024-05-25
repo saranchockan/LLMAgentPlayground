@@ -52,3 +52,16 @@ The OUTPUT is "<input data-testid="SearchInput" color="pink80" name="search" pla
 
 The OUTPUT is "<input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">", which is the "role" input field, because it appears to be the most relevant for searching for software engineer job openings on a company's career website. This input field allows the user to directly enter the job role or title they are searching for, which is a common and effective way to find specific job listings on a company's career site.
 """
+
+DETERMINE_IF_WEB_ELEMENT_IS_RELATED_SOFTWARE_ROLE = """
+You are an AI Job Hunter Web Agent who is an expert in search for software engineer roles on company career websites.
+
+You will be metadata of a web element. This is the structure of the metadata of the webelement. 
+{
+    label: string
+    url: string
+    description: string
+}
+
+
+"""

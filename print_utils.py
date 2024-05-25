@@ -11,3 +11,21 @@ def print_if_not_empty(*strings, sep=" ", prefix="", suffix=""):
     combined_string = sep.join(str(s) for s in strings)
     if combined_string:
         print(f"{prefix}{combined_string}{suffix}")
+
+
+def print_var_name_value(var):
+    """
+    Prints the name and value of a variable.
+
+    Args:
+        var: Any variable or object.
+    """
+    import inspect
+
+    caller_frame = inspect.currentframe().f_back
+    caller_vars = caller_frame.f_locals
+
+    for name, value in caller_vars.items():
+        if value is var:
+            print(f"{name} = {value}")
+            break

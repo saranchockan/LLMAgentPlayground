@@ -16,7 +16,7 @@ headers = {
 
 def call_perpexity_llm(sys_prompt: str, user_prompt: str, model: str) -> str:
     payload = {
-        "model": "sonar-small-online",
+        "model": model,
         "messages": [
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": user_prompt},

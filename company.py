@@ -13,6 +13,12 @@ dynamics to get open software engineering roles.
 4. Lyft
 5. Uber
 6. Palantir
+7. OpenAI
+
+8. Notion
+   Notion does not have a search input for searching for open
+   software roles.
+
 
 
 
