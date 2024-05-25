@@ -13,9 +13,9 @@ from job_hunter_tools import (
     search_software_roles,
     take_screenshot,
 )
-from playwright_data_interface import WebElement
+from playwright_data_interface import WebElementType
 from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
-from print_utils import print_metadata_list
+from utils import print_metadata_list
 from prompts import (
     COMPANY_NAME,
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
@@ -42,12 +42,13 @@ async def run_job_hunter(playwright: Playwright):
     # TODO: LLM DB Cache: if perplexity has previously
     # give us this company's career page URL, extract
     # URL from DB
-    company_career_page_url = call_perpexity_llm(
-        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
-        model=SONAR_SMALL_ONLINE_MODEL,
-    )
+    # company_career_page_url = call_perpexity_llm(
+    #     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+    #     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+    #     model=SONAR_SMALL_ONLINE_MODEL,
+    # )
 
+    company_career_page_url = "https://www.lyft.com/careers"
     print(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
     await page.goto(company_career_page_url)
@@ -78,14 +79,10 @@ async def run_job_hunter(playwright: Playwright):
     """
     sleep(5)
     print("<a> Elements")
-    print_metadata_list(
-        await fetch_web_element_metadata(page, WebElement.HTMLElement.ANCHOR)
-    )
+    print_metadata_list(await fetch_web_element_metadata(page, WebElementType.ANCHOR))
 
     print("<button> Elements")
-    print_metadata_list(
-        await fetch_web_element_metadata(page, WebElement.HTMLElement.BUTTON)
-    )
+    print_metadata_list(await fetch_web_element_metadata(page, WebElementType.BUTTON))
 
     input("Press Enter to close the browser...")
     await browser.close()

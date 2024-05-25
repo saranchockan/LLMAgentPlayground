@@ -36,7 +36,7 @@ from typing import List
 from playwright_data_interface import WebElement
 
 
-def print_metadata_list(metadata_list: List[WebElement.Metadata]) -> None:
+def print_metadata_list(metadata_list: List[WebElement]) -> None:
     """
     Prints a list of Metadata objects in a readable format with spacing.
 
@@ -58,3 +58,16 @@ def print_metadata_list(metadata_list: List[WebElement.Metadata]) -> None:
             print(",")
         print()
     print("]")
+
+
+def remove_newlines(text):
+    """
+    Removes newline characters (\n) from a given string.
+
+    Args:
+        text (str): The input string.
+
+    Returns:
+        str: The string with newline characters removed.
+    """
+    return text.replace("\n", "")

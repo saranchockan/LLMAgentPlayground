@@ -8,8 +8,8 @@ from playwright.async_api import ElementHandle, Page
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
-from playwright_data_interface import WebElement
-from print_utils import print_if_not_empty, print_var_name_value
+from playwright_data_interface import WebElementType, WebElement
+from utils import print_if_not_empty, print_var_name_value, remove_newlines
 
 
 async def search_software_roles(page: Page):
@@ -22,11 +22,9 @@ async def search_software_roles(page: Page):
     # TODO: Error handle cases where
     # there are no search inputs. Eg - Notion!
     try:
-        await page.wait_for_selector(WebElement.HTMLElement.INPUT.value, timeout=10000)
+        await page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
 
-        search_elements = await page.query_selector_all(
-            WebElement.HTMLElement.INPUT.value
-        )
+        search_elements = await page.query_selector_all(WebElementType.INPUT.value)
 
         print_var_name_value(search_elements)
 
@@ -73,8 +71,8 @@ async def search_software_roles(page: Page):
 
 
 async def fetch_web_element_metadata(
-    page: Page, selector: WebElement.HTMLElement
-) -> List[WebElement.Metadata]:
+    page: Page, selector: WebElementType
+) -> List[WebElement]:
     """Extracts metadata of anchor (<element> </element>) elements
     from the web page
 
@@ -84,22 +82,45 @@ async def fetch_web_element_metadata(
     """
 
     elements: List[ElementHandle] = await page.query_selector_all(selector.value)
-    elementsMetadata: List[WebElement.Metadata] = []
+    elementsMetadata: List[WebElement] = []
     for element in elements:
         label = await element.inner_text()
         href = await element.get_attribute("href")
         url = get_absolute_url(page, href)
 
-        sub_elements = await element.query_selector_all(":scope > *")
         description = ""
+
+        # Extract metadata of neighboring elements
+        # This is useful when we have an <a>'s description
+        # in a neighboring div or h2 Eg - https://www.anthropic.com/jobs
+        # Get parent element
+        parent = await element.query_selector("..")
+
+        # If parent exists, get all child elements
+        if parent:
+            siblings = await parent.query_selector_all("*")
+            # Remove the current element from the list of siblings
+            siblings = [sib for sib in siblings if sib != element]
+            for sib in siblings:
+                try:
+                    description += await sib.inner_text() + " "
+                except:
+                    ...
+
+        # Extract metadata of sub elements
+        sub_elements = await element.query_selector_all(":scope > *")
+
         for sub_element in sub_elements:
             try:
                 description += await sub_element.inner_text()
             except:
                 ...
         elementsMetadata.append(
-            WebElement.Metadata(
-                label=label, url=url, description=description, element_type=selector
+            WebElement(
+                label=label,
+                url=url,
+                description=remove_newlines(description),
+                element_type=selector,
             )
         )
     return elementsMetadata

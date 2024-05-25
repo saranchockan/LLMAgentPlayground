@@ -8,6 +8,9 @@ dynamics to get open software engineering roles.
 
 3. Anthropic 
 /careers -> Button: "See Open Roles" -> List of Buttons Dropdowns "Engineering
+/jobs 
+- Search has options - you can't just search for "Software".
+
 
 
 4. Lyft

@@ -1,216 +1,877 @@
-✨✨✨ Extracting software engineering positions from Anthropic ✨✨✨
-Anthropic Career Page URL: https://www.anthropic.com/careers
-Timeout! Page does not have search
+✨✨✨ Extracting software engineering positions from Lyft ✨✨✨
+Lyft Career Page URL: https://www.lyft.com/careers
+search_elements = [<JSHandle preview=JSHandle@<input value="" name="search" color="pink80" placeholde…/>>, <JSHandle preview=JSHandle@node>, <JSHandle preview=JSHandle@node>]
+search_elements_map = {'<input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">': <JSHandle preview=JSHandle@<input value="" name="search" color="pink80" placeholde…/>>, '<input data-testid="core-ui-dropdown" name="categoryFiter" role="combobox" aria-expanded="false" aria-autocomplete="none" aria-readonly="false" aria-describedby="core-ui-id-4564559050-description" aria-invalid="false" id="core-ui-id-4564559050" readonly="" class="sc-1v6kknp-5 hsPasW">': <JSHandle preview=JSHandle@<input readonly role="combobox" name="categoryFiter" ar…/>>, '<input data-testid="core-ui-dropdown" name="locationFilter" role="combobox" aria-expanded="false" aria-autocomplete="none" aria-readonly="false" aria-describedby="core-ui-id-4708066336-description" aria-invalid="false" id="core-ui-id-4708066336" readonly="" class="sc-1v6kknp-5 hsPasW">': <JSHandle preview=JSHandle@<input readonly role="combobox" aria-invalid="false" na…/>>}
+job_search_element_key = <input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">
 <a> Elements
 [
    {
       label: "",
-      url: "https://www.anthropic.com/",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      url: "https://www.lyft.com/",
+      description: "   ",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Claude",
-      url: "https://www.anthropic.com/claude",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "CAREERS",
+      url: "https://www.lyft.com/careers",
+      description: " CAREERS CAREERS CAREERS",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "API",
-      url: "https://www.anthropic.com/api",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "DRIVER",
+      url: "https://www.lyft.com/driver",
+      description: " DRIVER DRIVER  DRIVER",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Research",
-      url: "https://www.anthropic.com/research",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "RIDER",
+      url: "https://www.lyft.com/rider",
+      description: " RIDER RIDER  RIDER",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Company",
-      url: "https://www.anthropic.com/company",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "BUSINESS",
+      url: "https://www.lyft.com/business",
+      description: " BUSINESS BUSINESS  BUSINESS",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "News",
-      url: "https://www.anthropic.com/news",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "LOG IN",
+      url: "https://www.lyft.com/login",
+      description: " LOG IN LOG IN  LOG IN",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Careers",
-      url: "https://www.anthropic.com/careers",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
-   },
-
-   {
-      label: "See Open Roles",
-      url: "https://www.anthropic.com/jobs",
-      description: "See Open Roles",
-      element_type: "HTMLElement.ANCHOR",
-   },
-
-   {
-      label: "US Candidate Privacy Policy",
-      url: "https://docs.google.com/document/d/1V2mvrHvJmtqZg8XE3OUREw_9kHKLLTiB/edit",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
-   },
-
-   {
-      label: "UK Employee and Candidate Privacy Policy",
-      url: "https://docs.google.com/document/d/1Qfle1owSwktTlBtDqh2I0POSVg9n4Ava/edit",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "SIGN UP",
+      url: "https://lyft.sng.link/Adnq0/zbd1?_dl=lyft%3A%2F%2Fride",
+      description: "SIGN UP SIGN UP SIGN UP",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
       label: "",
-      url: "https://www.anthropic.com/",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      url: "https://www.lyft.com/",
+      description: "   ",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Claude",
-      url: "https://www.anthropic.com/claude",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Log in",
+      url: "https://www.lyft.com/login",
+      description: "Log in Log in Log in Log in Log in",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "API",
-      url: "https://www.anthropic.com/api",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "DRIVER",
+      url: "https://www.lyft.com/driver",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  DRIVER",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Research",
-      url: "https://www.anthropic.com/research",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Earnings",
+      url: "https://www.lyft.com/driver/pay",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Earnings",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Company",
-      url: "https://www.anthropic.com/company",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Cities",
+      url: "https://www.lyft.com/driver/cities",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Cities",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Customers",
-      url: "https://www.anthropic.com/customers",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Help",
+      url: "https://www.lyft.com/click/dax-help-center",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Help",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "News",
-      url: "https://www.anthropic.com/news",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Apply to drive",
+      url: "https://www.lyft.com/drive-with-lyft",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Apply to drive",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "RIDER",
+      url: "https://www.lyft.com/rider",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  RIDER",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Cities",
+      url: "https://www.lyft.com/rider/cities",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Cities",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "For Business",
+      url: "https://www.lyft.com/rider/business",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  For Business",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Help",
+      url: "https://www.lyft.com/click/pax-help-center",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Help",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Sign up to ride",
+      url: "https://lyft.sng.link/Adnq0/zbd1?_dl=lyft%3A%2F%2Fride",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Sign up to ride",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "business",
+      url: "https://www.lyft.com/business",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  business",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "LOG IN",
+      url: "https://www.lyft.com/login",
+      description: " DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  LOG IN",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "See open jobs",
+      url: "https://www.lyft.com/careers#openings",
+      description: " See open jobs Life at Lyft Inclusion & Diversity Early Talent Programs ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Life at Lyft",
+      url: "https://www.lyft.com/careers/life-at-lyft",
+      description: " See open jobs Life at Lyft Inclusion & Diversity Early Talent Programs ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Inclusion & Diversity",
+      url: "https://www.lyft.com/diversity",
+      description: " See open jobs Life at Lyft Inclusion & Diversity Early Talent Programs ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Early Talent Programs",
+      url: "https://www.lyft.com/careers/early-talent",
+      description: " See open jobs Life at Lyft Inclusion & Diversity Early Talent Programs ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Search job openings",
+      url: "https://www.lyft.com/careers?search=Software#openings",
+      description: "Search job openings Search job openings Search job openings Search job openings Search job openings",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Learn more",
+      url: "https://www.lyft.com/careers/life-at-lyft",
+      description: "Learn more ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Learn more",
+      url: "https://www.lyft.com/careers/early-talent",
+      description: "Learn more ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Learn more",
+      url: "https://www.lyft.com/diversity/",
+      description: "Learn more ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Security Software Engineer Tech Lead
+
+Mexico City, Mexico",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7324257002?gh_jid=7324257002",
+      description: "Security & Privacy Security & Privacy Security & Privacy  Security Software Engineer Tech LeadMexico City, Mexico  Security Software Engineer Tech Lead  Mexico City, Mexico  Senior Software Engineer, Security FoundationsSeattle, WA  Senior Software Engineer, Security Foundations  Seattle, WA  Senior Software Engineer, Security FoundationsSan Francisco, CA  Senior Software Engineer, Security Foundations  San Francisco, CA   Security Software Engineer Tech LeadMexico City, Mexico",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Security Foundations
+
+Seattle, WA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7221735002?gh_jid=7221735002",
+      description: "Security & Privacy Security & Privacy Security & Privacy  Security Software Engineer Tech LeadMexico City, Mexico  Security Software Engineer Tech Lead  Mexico City, Mexico  Senior Software Engineer, Security FoundationsSeattle, WA  Senior Software Engineer, Security Foundations  Seattle, WA  Senior Software Engineer, Security FoundationsSan Francisco, CA  Senior Software Engineer, Security Foundations  San Francisco, CA   Senior Software Engineer, Security FoundationsSeattle, WA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Security Foundations
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7239819002?gh_jid=7239819002",
+      description: "Security & Privacy Security & Privacy Security & Privacy  Security Software Engineer Tech LeadMexico City, Mexico  Security Software Engineer Tech Lead  Mexico City, Mexico  Senior Software Engineer, Security FoundationsSeattle, WA  Senior Software Engineer, Security Foundations  Seattle, WA  Senior Software Engineer, Security FoundationsSan Francisco, CA  Senior Software Engineer, Security Foundations  San Francisco, CA   Senior Software Engineer, Security FoundationsSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Frontend Software Engineer
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7443667002?gh_jid=7443667002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Frontend Software EngineerToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lead Software Engineer, Frontend
+
+Mexico City, Mexico",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7089310002?gh_jid=7089310002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Lead Software Engineer, FrontendMexico City, Mexico",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Backend Software Engineer - All Teams
+
+Mexico City, Mexico",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7087106002?gh_jid=7087106002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Backend Software Engineer - All TeamsMexico City, Mexico",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Data Pipelines
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7221865002?gh_jid=7221865002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, Data PipelinesToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Electrification
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7194230002?gh_jid=7194230002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, ElectrificationSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer in Test
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7076195002?gh_jid=7076195002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer in TestToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Lyft Media
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7326830002?gh_jid=7326830002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, Lyft MediaNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Networking
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7373072002?gh_jid=7373072002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, NetworkingToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Observability
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7070370002?gh_jid=7070370002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, ObservabilityToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer, Rider
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7052119002?gh_jid=7052119002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer, RiderToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Senior Software Engineer - Routing
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7430146002?gh_jid=7430146002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Senior Software Engineer - RoutingNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer, Android (Mapping)
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7330505002?gh_jid=7330505002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer, Android (Mapping)Toronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer-Backend
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7438400002?gh_jid=7438400002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer-BackendToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer, Business Travel
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7436797002?gh_jid=7436797002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer, Business TravelSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer in Test
+
+Mexico City, Mexico",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7405317002?gh_jid=7405317002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer in TestMexico City, Mexico",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer, Lyft Media
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7428427002?gh_jid=7428427002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer, Lyft MediaNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer, Lyft Media
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7428430002?gh_jid=7428430002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer, Lyft MediaNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Software Engineer, Observability
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7451174002?gh_jid=7451174002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineer, ObservabilityToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Sr Software Engineer, Data Platform
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7089446002?gh_jid=7089446002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Sr Software Engineer, Data PlatformSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer-Data Platform
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7446597002?gh_jid=7446597002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer-Data PlatformNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer-Data Platform
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7446588002?gh_jid=7446588002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer-Data PlatformSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer - ETA & Routing
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7435342002?gh_jid=7435342002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer - ETA & RoutingSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer - ETA & Routing
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7456933002?gh_jid=7456933002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer - ETA & RoutingNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Lyft Media
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7264324002?gh_jid=7264324002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, Lyft MediaSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Lyft Media
+
+New York, NY",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7263711002?gh_jid=7263711002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, Lyft MediaNew York, NY",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Lyft Media
+
+Seattle, WA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7264326002?gh_jid=7264326002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, Lyft MediaSeattle, WA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Networking
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7373069002?gh_jid=7373069002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, NetworkingToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Observability
+
+Toronto, Canada",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7294930002?gh_jid=7294930002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, ObservabilityToronto, Canada",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Staff Software Engineer, Rider
+
+San Francisco, CA",
+      url: "https://app.careerpuck.com/job-board/lyft/job/7307434002?gh_jid=7307434002",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Staff Software Engineer, RiderSan Francisco, CA",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "applicantaccommodation@lyft.com",
+      url: "mailto:applicantaccommodation@lyft.com",
+      description: "applicantaccommodation@lyft.com ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Know Your Rights",
+      url: "https://assets.ctfassets.net/q8mvene1wzq4/2NeAmFiSURPivGR47voqsx/987dc8da644037060937caec315e8ea1/EEOC_KnowYourRights_screen_reader_10_20__1_.pdf",
+      description: "Know Your Rights Lyft Equal Opportunity and Affirmative Action Policy ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lyft Equal Opportunity and Affirmative Action Policy",
+      url: "https://assets.ctfassets.net/q8mvene1wzq4/4rrdVat20lMlnKfFz4Fxz4/f8cdd62b60856ea9b9d38ab2e5b653ca/Lyft_EO_AA_Policy_March_2023.pdf",
+      description: "Know Your Rights Lyft Equal Opportunity and Affirmative Action Policy ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "FMLA Poster",
+      url: "//assets.ctfassets.net/q8mvene1wzq4/1P80exlLmvSnodEe93m75J/f183bb2c194393239e82b31f97d722c1/FMLA_Poster.pdf",
+      description: "FMLA Poster EPPA Poster ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "EPPA Poster",
+      url: "//assets.ctfassets.net/q8mvene1wzq4/tH8OKvCXRnktMyp5Z9Asr/4841e872a3b14f578c3d60594cb06f1b/EPPA_Poster.pdf",
+      description: "FMLA Poster EPPA Poster ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "E-Verify",
+      url: "//assets.ctfassets.net/q8mvene1wzq4/7c5CAovqxxBl72suqQYlLe/3d866b1bd173110b103b39373ccff9f8/E_Verify.pdf",
+      description: "E-Verify ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Right to Work Statement",
+      url: "//assets.ctfassets.net/q8mvene1wzq4/7i24en98TtDCpluWszeDxL/b8dbafe8b42732aa51fadfc95293a716/Right_to_Work_Statement.pdf",
+      description: "Right to Work Statement ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Become a Driver",
+      url: "https://www.lyft.com/drive-with-lyft",
+      description: "Become a Driver Become a Driver Become a Driver",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "New Driver Guide",
+      url: "https://www.lyft.com/driver/new-driver-guide",
+      description: "New Driver Guide New Driver Guide New Driver Guide",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Earnings",
+      url: "https://www.lyft.com/driver/pay",
+      description: "Earnings Earnings Earnings",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Cities",
+      url: "https://www.lyft.com/driver/cities",
+      description: "Cities Cities Cities",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Help",
+      url: "https://www.lyft.com/click/dax-help-center",
+      description: "Help Help Help",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Safety",
+      url: "https://www.lyft.com/driver/safety",
+      description: "Safety Safety Safety",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Application Requirements",
+      url: "https://www.lyft.com/driver-application-requirements",
+      description: "Application Requirements Application Requirements Application Requirements",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Express Drive",
+      url: "https://www.lyft.com/expressdrive",
+      description: "Express Drive Express Drive Express Drive",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Bonus",
+      url: "https://www.lyft.com/driver/bonus",
+      description: "Bonus Bonus Bonus",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lyft Rewards",
+      url: "https://www.lyft.com/driver/rewards",
+      description: "Lyft Rewards Lyft Rewards Lyft Rewards",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Go Electric",
+      url: "https://www.lyft.com/driver/go-electric",
+      description: "Go Electric Go Electric Go Electric",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Insurance",
+      url: "https://www.lyft.com/driver/insurance",
+      description: "Insurance Insurance Insurance",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Black Car Fleets",
+      url: "https://www.lyft.com/black-car-fleet",
+      description: "Black Car Fleets Black Car Fleets Black Car Fleets",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Driver Blog",
+      url: "https://www.lyft.com/hub",
+      description: "Driver Blog Driver Blog Driver Blog",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Sign up to ride",
+      url: "https://www.lyft.com/rider",
+      description: "Sign up to ride Sign up to ride Sign up to ride",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lyft Pink",
+      url: "https://www.lyft.com/memberships",
+      description: "Lyft Pink Lyft Pink Lyft Pink",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Cities",
+      url: "https://www.lyft.com/rider/cities",
+      description: "Cities Cities Cities",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Help",
+      url: "https://www.lyft.com/click/pax-help-center",
+      description: "Help Help Help",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Safety",
+      url: "https://www.lyft.com/rider/safety",
+      description: "Safety Safety Safety",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Business Profile",
+      url: "https://www.lyft.com/rider/business",
+      description: "Business Profile Business Profile Business Profile",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Rewards",
+      url: "https://www.lyft.com/rider/rewards",
+      description: "Rewards Rewards Rewards",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Events",
+      url: "https://www.lyft.com/events",
+      description: "Events Events Events",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Airports",
+      url: "https://www.lyft.com/rider/airports",
+      description: "Airports Airports Airports",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Gift Cards",
+      url: "https://www.lyft.com/gift",
+      description: "Gift Cards Gift Cards Gift Cards",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lyft Family",
+      url: "https://www.lyft.com/rider/family",
+      description: "Lyft Family Lyft Family Lyft Family",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Donate",
+      url: "https://www.lyft.com/donate",
+      description: "Donate Donate Donate",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
       label: "Careers",
-      url: "https://www.anthropic.com/careers",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      url: "https://www.lyft.com/careers",
+      description: "Careers Careers Careers",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Press Inquiries",
-      url: "mailto:press@anthropic.com",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Lyft Up",
+      url: "https://www.lyft.com/lyftup/programs",
+      description: "Lyft Up Lyft Up Lyft Up",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Support",
-      url: "https://support.anthropic.com/",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Business",
+      url: "https://www.lyft.com/business",
+      description: "Business Business Business",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Status",
-      url: "https://status.anthropic.com/",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Healthcare",
+      url: "https://www.lyft.com/healthcare",
+      description: "Healthcare Healthcare Healthcare",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Twitter",
-      url: "https://twitter.com/AnthropicAI",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Bikes",
+      url: "https://www.lyft.com/bikes",
+      description: "Bikes Bikes Bikes",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/company/anthropicresearch",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Scooters",
+      url: "https://www.lyft.com/scooters",
+      description: "Scooters Scooters Scooters",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Availability",
-      url: "https://www.anthropic.com/supported-countries",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Autonomous",
+      url: "https://www.lyft.com/autonomous",
+      description: "Autonomous Autonomous Autonomous",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Terms of Service – Consumer",
-      url: "https://www.anthropic.com/legal/consumer-terms",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Lyft Media",
+      url: "https://www.lyft.com/media",
+      description: "Lyft Media Lyft Media Lyft Media",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Terms of Service – Commercial",
-      url: "https://www.anthropic.com/legal/commercial-terms",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Developers",
+      url: "https://www.lyft.com/developers",
+      description: "Developers Developers Developers",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Privacy Policy",
-      url: "https://www.anthropic.com/legal/privacy",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Newsroom",
+      url: "https://www.lyft.com/blog",
+      description: "Newsroom Newsroom Newsroom",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Usage Policy",
-      url: "https://www.anthropic.com/legal/aup",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Press",
+      url: "https://www.lyft.com/press",
+      description: "Press Press Press",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Responsible Disclosure Policy",
-      url: "https://www.anthropic.com/responsible-disclosure-policy",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Investor Relations",
+      url: "https://investor.lyft.com",
+      description: "Investor Relations Investor Relations Investor Relations",
+      element_type: "WebElementType.ANCHOR",
    },
 
    {
-      label: "Compliance",
-      url: "https://trust.anthropic.com/",
-      description: "",
-      element_type: "HTMLElement.ANCHOR",
+      label: "Lyft driver app",
+      url: "https://www.lyft.com/app?type=driver",
+      description: "Lyft driver app Lyft driver app Lyft driver app Lyft driver app Lyft driver app",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Lyft rider app",
+      url: "https://lyft.sng.link/Adnq0/f4cw?_dl=lyft%3A%2F%2Fride&_smtype=3",
+      description: "Lyft rider app Lyft rider app Lyft rider app Lyft rider app Lyft rider app",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "",
+      url: "https://twitter.com/lyft",
+      description: "  ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "",
+      url: "https://www.facebook.com/lyft",
+      description: "  ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "",
+      url: "https://www.instagram.com/lyft",
+      description: "  ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Terms",
+      url: "https://www.lyft.com/terms",
+      description: "Terms ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Privacy",
+      url: "https://www.lyft.com/privacy",
+      description: "Privacy ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Accessibility Statement",
+      url: "https://www.lyft.com/accessibility",
+      description: "Accessibility Statement ",
+      element_type: "WebElementType.ANCHOR",
+   },
+
+   {
+      label: "Your Privacy Choices ",
+      url: "https://www.lyft.com/privacy/sharing",
+      description: "Your Privacy Choices  ",
+      element_type: "WebElementType.ANCHOR",
    }
 ]
 <button> Elements
@@ -218,15 +879,92 @@ Timeout! Page does not have search
    {
       label: "",
       url: "",
-      description: "",
-      element_type: "HTMLElement.BUTTON",
+      description: "CAREERS  CAREERS CAREERS DRIVER  DRIVER DRIVER  RIDER  RIDER RIDER  BUSINESS  BUSINESS BUSINESS  LOG IN  LOG IN LOG IN  SIGN UP SIGN UP SIGN UP SIGN UP   Log inDRIVEREarningsCitiesHelpApply to driveRIDERCitiesFor BusinessHelpSign up to ridebusinessLOG INSelect an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Log in      Log in Log in Log in Log in Log in Log in Log in Log in Log in    DRIVEREarningsCitiesHelpApply to driveRIDERCitiesFor BusinessHelpSign up to ridebusinessLOG INSelect an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  DRIVEREarningsCitiesHelpApply to driveRIDERCitiesFor BusinessHelpSign up to ridebusinessLOG INSelect an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)   DRIVER DRIVER  Earnings Earnings  Cities Cities  Help Help  Apply to drive Apply to drive    RIDER RIDER  Cities Cities  For Business For Business  Help Help  Sign up to ride Sign up to ride    business business    LOG IN LOG IN    Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) ENEnglish (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)EN  Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)EN Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil)EN Select an optionEnglish (US)Español (Estados Unidos)Français (Canada)Português (Brasil) Select an option English (US) Español (Estados Unidos) Français (Canada) Português (Brasil) EN EN EN   EN                                   ",
+      element_type: "WebElementType.BUTTON",
    },
 
    {
-      label: "Privacy Choices",
+      label: "",
       url: "",
-      description: "",
-      element_type: "HTMLElement.BUTTON",
+      description: "Log in Log in Log in Log in Log in Log in Log in    ",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "EN",
+      url: "",
+      description: "EN EN   EN English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US) Español (Estados Unidos) Français (Canada) Português (Brasil)  English (US)  English (US)  English (US)  English (US)  English (US) English (US)    Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos)  Español (Estados Unidos) Español (Estados Unidos)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada)  Français (Canada) Français (Canada)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil)  Português (Brasil) Português (Brasil)  EN",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "EN",
+      url: "",
+      description: "EN EN   EN                                  EN",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "",
+      url: "",
+      description: "   ",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "",
+      url: "",
+      description: "   ",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "Clear filter",
+      url: "",
+      description: "Clear filter Clear filter Clear filter Clear filter Clear filter",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "Security & Privacy",
+      url: "",
+      description: "Security & Privacy Security & Privacy Security & Privacy  Security Software Engineer Tech LeadMexico City, Mexico  Security Software Engineer Tech Lead  Mexico City, Mexico  Senior Software Engineer, Security FoundationsSeattle, WA  Senior Software Engineer, Security Foundations  Seattle, WA  Senior Software Engineer, Security FoundationsSan Francisco, CA  Senior Software Engineer, Security Foundations  San Francisco, CA   Security & Privacy",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "Software Engineering",
+      url: "",
+      description: "Software Engineering Software Engineering Software Engineering  Frontend Software EngineerToronto, Canada  Frontend Software Engineer  Toronto, Canada  Lead Software Engineer, FrontendMexico City, Mexico  Lead Software Engineer, Frontend  Mexico City, Mexico  Senior Backend Software Engineer - All TeamsMexico City, Mexico  Senior Backend Software Engineer - All Teams  Mexico City, Mexico  Senior Software Engineer, Data PipelinesToronto, Canada  Senior Software Engineer, Data Pipelines  Toronto, Canada  Senior Software Engineer, ElectrificationSan Francisco, CA  Senior Software Engineer, Electrification  San Francisco, CA  Senior Software Engineer in TestToronto, Canada  Senior Software Engineer in Test  Toronto, Canada  Senior Software Engineer, Lyft MediaNew York, NY  Senior Software Engineer, Lyft Media  New York, NY  Senior Software Engineer, NetworkingToronto, Canada  Senior Software Engineer, Networking  Toronto, Canada  Senior Software Engineer, ObservabilityToronto, Canada  Senior Software Engineer, Observability  Toronto, Canada  Senior Software Engineer, RiderToronto, Canada  Senior Software Engineer, Rider  Toronto, Canada  Senior Software Engineer - RoutingNew York, NY  Senior Software Engineer - Routing  New York, NY  Software Engineer, Android (Mapping)Toronto, Canada  Software Engineer, Android (Mapping)  Toronto, Canada  Software Engineer-BackendToronto, Canada  Software Engineer-Backend  Toronto, Canada  Software Engineer, Business TravelSan Francisco, CA  Software Engineer, Business Travel  San Francisco, CA  Software Engineer in TestMexico City, Mexico  Software Engineer in Test  Mexico City, Mexico  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, Lyft MediaNew York, NY  Software Engineer, Lyft Media  New York, NY  Software Engineer, ObservabilityToronto, Canada  Software Engineer, Observability  Toronto, Canada  Sr Software Engineer, Data PlatformSan Francisco, CA  Sr Software Engineer, Data Platform  San Francisco, CA  Staff Software Engineer-Data PlatformNew York, NY  Staff Software Engineer-Data Platform  New York, NY  Staff Software Engineer-Data PlatformSan Francisco, CA  Staff Software Engineer-Data Platform  San Francisco, CA  Staff Software Engineer - ETA & RoutingSan Francisco, CA  Staff Software Engineer - ETA & Routing  San Francisco, CA  Staff Software Engineer - ETA & RoutingNew York, NY  Staff Software Engineer - ETA & Routing  New York, NY  Staff Software Engineer, Lyft MediaSan Francisco, CA  Staff Software Engineer, Lyft Media  San Francisco, CA  Staff Software Engineer, Lyft MediaNew York, NY  Staff Software Engineer, Lyft Media  New York, NY  Staff Software Engineer, Lyft MediaSeattle, WA  Staff Software Engineer, Lyft Media  Seattle, WA  Staff Software Engineer, NetworkingToronto, Canada  Staff Software Engineer, Networking  Toronto, Canada  Staff Software Engineer, ObservabilityToronto, Canada  Staff Software Engineer, Observability  Toronto, Canada  Staff Software Engineer, RiderSan Francisco, CA  Staff Software Engineer, Rider  San Francisco, CA   Software Engineering",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "DRIVER",
+      url: "",
+      description: "DRIVER DRIVER DRIVER DRIVER  Become a DriverNew Driver GuideEarningsCitiesHelpSafetyApplication RequirementsExpress DriveBonusLyft RewardsGo ElectricInsuranceBlack Car FleetsDriver Blog Become a Driver Become a Driver Become a Driver New Driver Guide New Driver Guide New Driver Guide Earnings Earnings Earnings Cities Cities Cities Help Help Help Safety Safety Safety Application Requirements Application Requirements Application Requirements Express Drive Express Drive Express Drive Bonus Bonus Bonus Lyft Rewards Lyft Rewards Lyft Rewards Go Electric Go Electric Go Electric Insurance Insurance Insurance Black Car Fleets Black Car Fleets Black Car Fleets Driver Blog Driver Blog Driver Blog   DRIVER",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "RIDER",
+      url: "",
+      description: "RIDER RIDER RIDER RIDER  Sign up to rideLyft PinkCitiesHelpSafetyBusiness ProfileRewardsEventsAirportsGift CardsLyft FamilyDonate Sign up to ride Sign up to ride Sign up to ride Lyft Pink Lyft Pink Lyft Pink Cities Cities Cities Help Help Help Safety Safety Safety Business Profile Business Profile Business Profile Rewards Rewards Rewards Events Events Events Airports Airports Airports Gift Cards Gift Cards Gift Cards Lyft Family Lyft Family Lyft Family Donate Donate Donate   RIDER",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "LYFT",
+      url: "",
+      description: "LYFT LYFT LYFT LYFT  CareersLyft UpBusinessHealthcareBikesScootersAutonomousLyft MediaDevelopersNewsroomPressInvestor Relations Careers Careers Careers Lyft Up Lyft Up Lyft Up Business Business Business Healthcare Healthcare Healthcare Bikes Bikes Bikes Scooters Scooters Scooters Autonomous Autonomous Autonomous Lyft Media Lyft Media Lyft Media Developers Developers Developers Newsroom Newsroom Newsroom Press Press Press Investor Relations Investor Relations Investor Relations   LYFT",
+      element_type: "WebElementType.BUTTON",
+   },
+
+   {
+      label: "EN",
+      url: "",
+      description: "EN EN   EN                                  EN",
+      element_type: "WebElementType.BUTTON",
    }
 ]
 Press Enter to close the browser...

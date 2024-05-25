@@ -15,8 +15,10 @@ Action: Search for "Software" in the search input.
 Regardless of whether you have searched for software roles 
 or not...
 
-Reason: I am on the careers page. Are there links 
-and buttons I can click that are related to software?
+Reason: I am on the careers page. Are there clickable elements (links, buttons) I can click that are related to software?
+NOTE: There is more clickable elements than just links and buttons. 
+Anthropic jobs page shows us that there can be <div> and <span>
+that can be clickable
 
 
 These reasoning and actions should end 
