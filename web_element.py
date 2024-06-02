@@ -9,7 +9,7 @@ class WebElementType(Enum):
 
 
 class WebElement(TypedDict):
+    element_type: WebElementType
     label: str
     url: str
     description: str
-    element_type: WebElementType

@@ -1,5 +1,6 @@
 import asyncio
 from enum import Enum
+import os
 from time import sleep
 from typing import Dict, TypedDict
 
@@ -11,16 +12,17 @@ from job_hunter_llm_utils import get_job_search_element
 from job_hunter_tools import (
     fetch_web_element_metadata,
     search_software_roles,
+    take_full_page_screenshots,
     take_screenshot,
 )
-from playwright_data_interface import WebElementType
 from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
-from utils import print_metadata_list
 from prompts import (
     COMPANY_NAME,
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
 )
+from utils import print_web_element_list
+from web_element import WebElementType
 
 
 async def run_job_hunter(playwright: Playwright):
@@ -78,30 +80,41 @@ async def run_job_hunter(playwright: Playwright):
     """
     sleep(5)
     print("<a> Elements")
-    print_metadata_list(await fetch_web_element_metadata(page, WebElementType.ANCHOR))
+    print_web_element_list(
+        await fetch_web_element_metadata(page, WebElementType.ANCHOR)
+    )
 
     print("<button> Elements")
-    print_metadata_list(await fetch_web_element_metadata(page, WebElementType.BUTTON))
+    print_web_element_list(
+        await fetch_web_element_metadata(page, WebElementType.BUTTON)
+    )
 
     input("Press Enter to close the browser...")
     await browser.close()
 
 
-async def main():
-    async with async_playwright() as playwright:
-        await run_job_hunter(playwright)
+SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 
 
-asyncio.run(main=main())
-
-
-async def run_screen_shot_script():
+async def run_screenshot_script():
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
         page = await browser.new_page()
-        await page.goto("https://www.palantir.com/careers")
+        await page.goto(SCREENSHOT_URL)
 
         # Take a full page screenshot
-        await take_screenshot(page, "screenshots/palantir.png", full_page=True)
+        await take_screenshot(page, "screenshots/screenshot.png", full_page=True)
+        await take_full_page_screenshots(
+            page=page, output_prefix="full_page_screenshot"
+        )
 
         await browser.close()
+
+
+async def main():
+    async with async_playwright() as playwright:
+        # await run_job_hunter(playwright)
+        await run_screenshot_script()
+
+
+asyncio.run(main=main())

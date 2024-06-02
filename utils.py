@@ -33,12 +33,12 @@ def print_var_name_value(var):
 
 from typing import List
 
-from playwright_data_interface import WebElement
+from web_element import WebElement
 
 
-def print_metadata_list(metadata_list: List[WebElement]) -> None:
+def print_web_element_list(metadata_list: List[WebElement]) -> None:
     """
-    Prints a list of Metadata objects in a readable format with spacing.
+    Prints a list of WebElement objects in a readable format with spacing.
 
     Args:
         metadata_list (List[Metadata]): A list of Metadata objects.

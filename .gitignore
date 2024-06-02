@@ -1,4 +1,4 @@
 .vscode/
 screenshots/
 .DS_Store
-.txt
+*.txt

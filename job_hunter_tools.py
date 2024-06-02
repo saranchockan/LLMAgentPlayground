@@ -8,7 +8,7 @@ from playwright.async_api import ElementHandle, Page
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
-from playwright_data_interface import WebElementType, WebElement
+from web_element import WebElementType, WebElement
 from utils import print_if_not_empty, print_var_name_value, remove_newlines
 
 
@@ -48,6 +48,8 @@ async def search_software_roles(page: Page):
         # Case 2: Misdirection: LLM picks an input element from the examples. Tell the
         # LLM that it picked an input element from the list and tell it to pick
         # an input element from the user provided list.
+        # Case 3: LLM determines that none of the search input
+        # are for searching software roles
 
         # TODO: Memory
         # How can the LLM learn to pick search elements better by relying
@@ -64,6 +66,8 @@ async def search_software_roles(page: Page):
 
         job_search_element = search_elements_map[job_search_element_key]
 
+        # TODO: Instead of naively typing in 'Software', we should check
+        # if the search input has options. For example, https://www.anthropic.com/jobs
         await job_search_element.type("Software")
         await job_search_element.press("Enter")
     except PlaywrightTimeoutError:
@@ -100,6 +104,8 @@ async def fetch_web_element_metadata(
         if parent is None:
             continue
 
+        # TODO: Clean up this logic
+
         # If parent exists, get all child elements
         if parent:
             siblings = await parent.query_selector_all(":scope > *")
@@ -127,10 +133,10 @@ async def fetch_web_element_metadata(
                 ...
         elementsMetadata.append(
             WebElement(
-                label=label,
+                element_type=selector,
+                label=remove_newlines(label),
                 url=url,
                 description=remove_newlines(description),
-                element_type=selector,
             )
         )
     return elementsMetadata
@@ -165,6 +171,46 @@ async def take_screenshot(page: Page, screenshot_path, full_page=False):
     except Exception as e:
         print(f"Error taking screenshot: {e}")
         return False
+
+
+async def take_full_page_screenshots(
+    page: Page,
+    output_prefix: str,
+    viewport_width: int = 1920,
+    viewport_height: int = 1080,
+):
+    """
+    Take multiple screenshots to cover the entire web page.
+
+    Args:
+        page (Page): The Playwright page object.
+        output_prefix (str): The prefix for the screenshot file names.
+        viewport_width (int, optional): The viewport width in pixels. Defaults to 1920.
+        viewport_height (int, optional): The viewport height in pixels. Defaults to 1080.
+
+    Yields:
+        str: The path of each screenshot file.
+    """
+    # Get the height of the rendered page
+    height = await page.evaluate("() => document.body.scrollHeight")
+
+    # Set the viewport size
+    await page.set_viewport_size(
+        viewport_size={"width": viewport_width, "height": viewport_height}
+    )
+
+    # Calculate the number of screenshots needed
+    num_screenshots = (height // viewport_height) + 1
+
+    # Scroll and capture screenshots
+    for i in range(num_screenshots):
+        # Scroll to the desired position
+        scroll_position = i * viewport_height
+        await page.evaluate(f"window.scrollTo(0, {scroll_position})")
+
+        # Capture the screenshot
+        screenshot_path = f"screenshots/{output_prefix}_{i}.png"
+        await page.screenshot(path=screenshot_path)
 
 
 def get_absolute_url(page: Page, url: Union[str, None]) -> str:
