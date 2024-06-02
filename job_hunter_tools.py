@@ -176,8 +176,8 @@ async def take_screenshot(page: Page, screenshot_path, full_page=False):
 async def take_full_page_screenshots(
     page: Page,
     output_prefix: str,
-    viewport_width: int = 1920,
-    viewport_height: int = 1080,
+    viewport_width: int = 1092,
+    viewport_height: int = 1092,
 ):
     """
     Take multiple screenshots to cover the entire web page.
@@ -185,11 +185,8 @@ async def take_full_page_screenshots(
     Args:
         page (Page): The Playwright page object.
         output_prefix (str): The prefix for the screenshot file names.
-        viewport_width (int, optional): The viewport width in pixels. Defaults to 1920.
-        viewport_height (int, optional): The viewport height in pixels. Defaults to 1080.
-
-    Yields:
-        str: The path of each screenshot file.
+        viewport_width (int, optional): The viewport width in pixels. Defaults to 1092.
+        viewport_height (int, optional): The viewport height in pixels. Defaults to 11092080.
     """
     # Get the height of the rendered page
     height = await page.evaluate("() => document.body.scrollHeight")
