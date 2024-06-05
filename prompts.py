@@ -67,16 +67,19 @@ You will be metadata of a web element. This is the structure of the metadata of 
 """
 
 
-"""
-    You are an AI trained to analyze images of a web page. The images stitched together forms the web page. Determine if the web page is for a software engineering role job listing where the user can fill out their information and submit the job application. Evaluate the web page based on the following criteria:
+DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT = """
+    You are an AI trained to analyze images of a web page. The images stitched together is the entire web page. Determine if the web page is for a software engineering role job listing where the user can fill out their information and submit the job application. Evaluate the web page based on the following criteria:
 
     1. Job Title and Description: Look for terms related to software engineering such as "Software Engineer," "Developer," "Programmer," or similar titles. Read the description to ensure it aligns with typical software engineering duties.
 
     2. Application Form: Check for fields where applicants can enter their personal information, such as name, email, phone number, resume/CV, and cover letter. These fields must be present on the web page. 
 
     3. Submission Mechanism: Identify if there is a visible button or link that allows users to submit their application, often labeled as "Apply," "Submit," or similar.
+
     If the web page contains all of these elements, then it is a job listing for a software engineering role. Your output should be "True" if the web page meets these criteria and "False" if it does not.
 
     Output Format:
     Your output should be a single word: "True" or "False."
+
+    REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """

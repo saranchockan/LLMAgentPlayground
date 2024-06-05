@@ -8,7 +8,10 @@ from playwright.async_api import ElementHandle, Playwright
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 from playwright.async_api import async_playwright
 
-from job_hunter_llm_utils import get_job_search_element
+from job_hunter_llm_utils import (
+    determine_if_web_page_is_software_role_application,
+    get_job_search_element,
+)
 from job_hunter_tools import (
     fetch_web_element_metadata,
     search_software_roles,
@@ -115,6 +118,7 @@ async def main():
     async with async_playwright() as playwright:
         # await run_job_hunter(playwright)
         await run_screenshot_script()
+        determine_if_web_page_is_software_role_application()
 
 
 asyncio.run(main=main())
