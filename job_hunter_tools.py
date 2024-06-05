@@ -209,6 +209,8 @@ async def take_full_page_screenshots(
         screenshot_path = f"screenshots/{output_prefix}_{i}.png"
         await page.screenshot(path=screenshot_path)
 
+    return num_screenshots
+
 
 def get_absolute_url(page: Page, url: Union[str, None]) -> str:
     """Gets the absolute url relative to the page

@@ -99,17 +99,17 @@ async def run_job_hunter(playwright: Playwright):
 SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 
 
-async def run_screenshot_script():
+async def run_software_job_app_web_page_detection_script():
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
         page = await browser.new_page()
         await page.goto(SCREENSHOT_URL)
 
         # Take a full page screenshot
-        await take_screenshot(page, "screenshots/screenshot.png", full_page=True)
-        await take_full_page_screenshots(
+        num_of_screenshots = await take_full_page_screenshots(
             page=page, output_prefix="full_page_screenshot"
         )
+        determine_if_web_page_is_software_role_application(num_of_screenshots)
 
         await browser.close()
 
@@ -117,8 +117,7 @@ async def run_screenshot_script():
 async def main():
     async with async_playwright() as playwright:
         # await run_job_hunter(playwright)
-        await run_screenshot_script()
-        determine_if_web_page_is_software_role_application()
+        await run_software_job_app_web_page_detection_script()
 
 
 asyncio.run(main=main())
