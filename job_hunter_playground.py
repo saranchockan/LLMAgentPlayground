@@ -16,7 +16,6 @@ from job_hunter_tools import (
     fetch_web_element_metadata,
     search_software_roles,
     take_full_page_screenshots,
-    take_screenshot,
 )
 from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
 from prompts import (

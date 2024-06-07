@@ -147,32 +147,6 @@ def is_web_element_related_to_software_engineering_role(
 ) -> bool: ...
 
 
-async def take_screenshot(page: Page, screenshot_path, full_page=False):
-    """
-    Takes a screenshot of the given Playwright page.
-
-    Args:
-        page (Page): The Playwright page object.
-        screenshot_path (str): The path to save the screenshot file.
-        full_page (bool, optional): Whether to capture the full scrollable page. Defaults to False.
-        quality (int, optional): The quality of the screenshot (0-100). Defaults to 100.
-
-    Returns:
-        bool: True if the screenshot was taken successfully, False otherwise.
-    """
-    try:
-        # Create the directory if it doesn't exist
-        os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
-
-        # Take the screenshot
-        await page.screenshot(path=screenshot_path, full_page=full_page)
-        print(f"Screenshot saved to: {screenshot_path}")
-        return True
-    except Exception as e:
-        print(f"Error taking screenshot: {e}")
-        return False
-
-
 async def take_full_page_screenshots(
     page: Page,
     output_prefix: str,
