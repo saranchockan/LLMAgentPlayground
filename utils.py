@@ -1,3 +1,28 @@
+import re
+from typing import Any, List
+
+from web_element import WebElement
+
+
+def remove_special_chars(input_str):
+    """
+    Removes all special characters (including apostrophes) from a string.
+
+    Args:
+        input_str (str): The input string.
+
+    Returns:
+        str: The input string with all special characters removed.
+    """
+    # Define a regular expression pattern to match special characters
+    pattern = r"[^a-zA-Z0-9\s]"
+
+    # Use the re.sub() function to replace all matches with an empty string
+    cleaned_str = re.sub(pattern, "", input_str)
+
+    return cleaned_str
+
+
 def print_if_not_empty(*strings, sep=" ", prefix="", suffix=""):
     """
     Prints the given strings if their concatenation is not empty.
@@ -10,7 +35,7 @@ def print_if_not_empty(*strings, sep=" ", prefix="", suffix=""):
     """
     combined_string = sep.join(str(s) for s in strings)
     if combined_string:
-        print(f"{prefix}{combined_string}{suffix}")
+        print(f"{prefix}{combined_string}{suffix}", end="\n")
 
 
 def print_var_name_value(var):
@@ -27,13 +52,31 @@ def print_var_name_value(var):
 
     for name, value in caller_vars.items():
         if value is var:
-            print(f"{name} = {value}")
+            print(f"{name} = {value}", end="\n")
             break
 
 
-from typing import List
+def print_with_newline(value: Any, end: str = "\n") -> None:
+    """
+    Prints the given value to the console, followed by a newline character.
 
-from web_element import WebElement
+    Args:
+        value (Any): The value to be printed.
+        end (str, optional): The string to be printed at the end of the value.
+                             Defaults to a newline character ('\n').
+
+    Returns:
+        None
+
+    Example:
+        >>> print_with_newline("Hello, World!")
+        Hello, World!
+
+        >>> print_with_newline(42, end='--')
+        42--
+
+    """
+    print(value, end=end)
 
 
 def print_web_element_list(metadata_list: List[WebElement]) -> None:

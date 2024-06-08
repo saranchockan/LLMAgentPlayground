@@ -61,7 +61,11 @@ async def run_job_hunter(playwright: Playwright):
     company's career page.
     """
 
-    await search_software_roles(page=page)
+    try:
+        await search_software_roles(page=page)
+    except:
+        print("Search failed!")
+        ...
 
     """
     At this stage, the state of the world can be N scenarios
