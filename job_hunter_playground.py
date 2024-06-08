@@ -115,8 +115,8 @@ async def run_software_job_app_web_page_detection_script():
 
 async def main():
     async with async_playwright() as playwright:
-        # await run_job_hunter(playwright)
-        await run_software_job_app_web_page_detection_script()
+        await run_job_hunter(playwright)
+        # await run_software_job_app_web_page_detection_script()
 
 
 asyncio.run(main=main())

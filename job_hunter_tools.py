@@ -77,8 +77,8 @@ async def search_software_roles(page: Page):
 async def fetch_web_element_metadata(
     page: Page, selector: WebElementType
 ) -> List[WebElement]:
-    """Extracts metadata of anchor (<element> </element>) elements
-    from the web page
+    """Extracts metadata of web elements (eg - anchor (<element> </element>))
+    from the page.
 
     Args:
         page (Page):
@@ -88,49 +88,43 @@ async def fetch_web_element_metadata(
     elements: List[ElementHandle] = await page.query_selector_all(selector.value)
     elementsMetadata: List[WebElement] = []
     for element in elements:
-        tag_name = await element.get_property("tagName")
-        tag_name = await tag_name.json_value()
         label = await element.inner_text()
         href = await element.get_attribute("href")
         url = get_absolute_url(page, href)
 
+        # Extract metadata of adjacent elements
+        # This is useful when we have an <a>'s description
+        # in a adjacent div or h2 Eg - https://www.anthropic.com/jobs
+
+        # Get parent element
+        parent_element = await element.query_selector("..")
+
+        # If parent exists, get all adjacent elements
+        # of element
+        adjacent_elements = (
+            await parent_element.query_selector_all(":scope > *")
+            if parent_element
+            else []
+        )
+
+        # Extract metadata of sub elements
+        child_elements = await element.query_selector_all(":scope > *")
+
+        neighbor_elements = adjacent_elements + child_elements
         description = ""
 
-        # Extract metadata of neighboring elements
-        # This is useful when we have an <a>'s description
-        # in a neighboring div or h2 Eg - https://www.anthropic.com/jobs
-        # Get parent element
-        parent = await element.query_selector("..")
-        if parent is None:
-            continue
-
-        # TODO: Clean up this logic
-
-        # If parent exists, get all child elements
-        if parent:
-            siblings = await parent.query_selector_all(":scope > *")
-            # Remove the current element from the list of siblings
-            filtered_siblings = []
-            for sib in siblings:
-                tag_name = await sib.get_property("tagName")
-                tag_name_value = await tag_name.json_value()
-                if tag_name_value.lower() != selector.value:
-                    filtered_siblings.append(sib)
-            # siblings = [sib for sib in siblings if sib.]
-            for sib in filtered_siblings:
+        for neighbor_element in neighbor_elements:
+            tag_name = await neighbor_element.get_property("tagName")
+            tag_name_value = await tag_name.json_value()
+            # Neighboring elements that are of the same
+            # web element type of element is highly likely
+            # to not contain useful metadata
+            if tag_name_value.lower() != selector.value:
                 try:
-                    description += await sib.inner_text() + " "
+                    description += await neighbor_element.inner_text() + " "
                 except:
                     ...
 
-        # Extract metadata of sub elements
-        sub_elements = await element.query_selector_all(":scope > *")
-
-        for sub_element in sub_elements:
-            try:
-                description += await sub_element.inner_text()
-            except:
-                ...
         elementsMetadata.append(
             WebElement(
                 element_type=selector,
