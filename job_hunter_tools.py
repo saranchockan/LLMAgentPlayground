@@ -8,8 +8,13 @@ from playwright.async_api import ElementHandle, Page
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
-from web_element import WebElementType, WebElement
-from utils import print_if_not_empty, print_var_name_value, remove_newlines
+from utils import (
+    print_var_name_value,
+    print_with_newline,
+    remove_newlines,
+    remove_special_chars,
+)
+from web_element import WebElement, WebElementType
 
 
 async def search_software_roles(page: Page):
@@ -26,16 +31,19 @@ async def search_software_roles(page: Page):
 
         search_elements = await page.query_selector_all(WebElementType.INPUT.value)
 
-        print_var_name_value(search_elements)
-
         search_elements_map: Dict[str, ElementHandle] = {}
         for search_element in search_elements:
-            search_element_html_str = str(
-                await search_element.get_property("outerHTML")
+            # Removing special chars because
+            # LLM can re-format special chars that
+            # affect str comparison ' -> \'
+            search_element_html_str = remove_special_chars(
+                str(await search_element.get_property("outerHTML"))
             )
             search_elements_map[search_element_html_str] = search_element
 
         print_var_name_value(search_elements_map)
+        html_input_elements = list(search_elements_map.keys())
+        print_var_name_value(html_input_elements)
         # TODO: Prompt the LLM to return empty output if none of the
         # input elements are relevant for job search
         job_search_element_key = get_job_search_element(
@@ -66,10 +74,15 @@ async def search_software_roles(page: Page):
 
         job_search_element = search_elements_map[job_search_element_key]
 
-        # TODO: Instead of naively typing in 'Software', we should check
-        # if the search input has options. For example, https://www.anthropic.com/jobs
-        await job_search_element.type("Software")
-        await job_search_element.press("Enter")
+        # # TODO: Instead of naively typing in 'Software', we should check
+        # # if the search input has options. For example, https://www.anthropic.com/jobs
+        try:
+            await job_search_element.type("Software")
+            await job_search_element.press("Enter")
+        except:
+            print_with_newline("Unable to search!")
+            ...
+
     except PlaywrightTimeoutError:
         print("Timeout! Page does not have search")
 

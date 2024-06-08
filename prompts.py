@@ -8,11 +8,12 @@ EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT = f"""Can you output the URL that is
 official careers page for a tech company called {COMPANY_NAME}? 
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE."""
 
-SEARCH_FOR_SOFTWARE_ROLES_SYS_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in search for software engineer roles on company career websites. 
+
+SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT = """ You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. 
 
 You will be given a list called HTML_INPUT_ELEMENTS. Each element in HTML_INPUT_ELEMENTS list is an HTML input element that is searchable on a company's career website.   
 You should pick one input element that is prompting the user to search for specific job openings in the company. The input element you pick should be
-the most relevant for searching for software engineer job openings on a company's career website. This selected input element allows the user to directly enter the job role or title they are searching for, which is a common and effective way to find specific job listings on a company's career site.
+the most relevant for searching for software engineer job openings on a company's career website. This selected input element allows the user to directly enter the type of job they are searching for, which is a common and effective way to find specific job listings on a company's career site.
 
 Pick an element from HTML_INPUT_ELEMENTS LIST. Remember, YOUR OUTPUT SHOULD ONLY BE AN ELEMENT FROM HTML_INPUT_ELEMENTS LIST and NOTHING ELSE.
 
@@ -37,12 +38,10 @@ HTML_INPUT_ELEMENTS = [
 
 OUTPUT = <input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">
 </example>
-"""
 
-SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT = """
 USR_HTML_INPUT_ELEMENTS = {HTML_INPUT_ELEMENTS}
 
-Pick the most relevant input element from the USR_HTML_INPUT_ELEMENTS list that allows the user to directly enter the job role or title they are searching for. This input element should be the most effective for finding specific software engineer job openings on a company's career website.
+Pick the most relevant input element from the USR_HTML_INPUT_ELEMENTS list that allows the user to directly enter the type of job they are searching for. This input element should be the most effective for finding specific software engineer job openings on a company's career website.
 
 Pick an element from USR_HTML_INPUT_ELEMENTS LIST. Remember, YOUR OUTPUT SHOULD ONLY BE AN ELEMENT FROM USR_HTML_INPUT_ELEMENTS LIST and NOTHING ELSE.
 """

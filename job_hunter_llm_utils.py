@@ -2,12 +2,19 @@ import base64
 from typing import List
 
 from anthropic import Anthropic
+from anthropic.types import Message
 
+from anthropic_utils import extract_text_from_message
 from perplexity_utils import MIXTRAL_8X7B_INSTRUCT_MODEL, call_perpexity_llm
 from prompts import (
     DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT,
-    SEARCH_FOR_SOFTWARE_ROLES_SYS_PROMPT,
     SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT,
+)
+
+ANTHROPIC_API_KEY = "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"
+client = Anthropic(
+    # This is the default and can be omitted
+    api_key=ANTHROPIC_API_KEY,
 )
 
 
@@ -24,22 +31,20 @@ def get_job_search_element(html_input_elements: List[str]) -> str:
     Returns:
         str: _description_
     """
-    return call_perpexity_llm(
-        sys_prompt=SEARCH_FOR_SOFTWARE_ROLES_SYS_PROMPT,
-        user_prompt=str(
-            SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT.format(
-                HTML_INPUT_ELEMENTS=html_input_elements
-            )
-        ),
-        model=MIXTRAL_8X7B_INSTRUCT_MODEL,
+
+    message: Message = client.messages.create(
+        model="claude-3-opus-20240229",
+        max_tokens=1024,
+        messages=[
+            {
+                "role": "user",
+                "content": SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT.format(
+                    HTML_INPUT_ELEMENTS=html_input_elements
+                ),
+            },
+        ],
     )
-
-
-ANTHROPIC_API_KEY = "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"
-client = Anthropic(
-    # This is the default and can be omitted
-    api_key=ANTHROPIC_API_KEY,
-)
+    return extract_text_from_message(message)
 
 
 def determine_if_web_page_is_software_role_application(num_of_web_page_images: int):
