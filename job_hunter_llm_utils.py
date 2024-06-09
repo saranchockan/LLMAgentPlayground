@@ -88,4 +88,4 @@ def determine_if_web_page_is_software_role_application(num_of_web_page_images: i
             }
         ],
     )
-    print(message)
+    print(extract_text_from_message(message=message))

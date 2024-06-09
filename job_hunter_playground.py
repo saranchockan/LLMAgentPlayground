@@ -1,6 +1,6 @@
 import asyncio
-from enum import Enum
 import os
+from enum import Enum
 from time import sleep
 from typing import Dict, TypedDict
 
@@ -23,7 +23,7 @@ from prompts import (
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
 )
-from utils import print_web_element_list
+from utils import print_web_element_list, print_with_newline
 from web_element import WebElementType
 
 
@@ -34,7 +34,7 @@ async def run_job_hunter(playwright: Playwright):
     page = await browser.new_page()
     page.set_default_timeout(100000)
 
-    print(
+    print_with_newline(
         f"✨✨✨ Extracting software engineering positions from {COMPANY_NAME} ✨✨✨"
     )
     """
@@ -52,7 +52,7 @@ async def run_job_hunter(playwright: Playwright):
         model=SONAR_SMALL_ONLINE_MODEL,
     )
 
-    print(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
+    print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
     await page.goto(company_career_page_url)
 
@@ -85,12 +85,12 @@ async def run_job_hunter(playwright: Playwright):
     Extrack links to software engineer roles
     """
     sleep(5)
-    print("<a> Elements")
+    print_with_newline("<a> Elements")
     print_web_element_list(
         await fetch_web_element_metadata(page, WebElementType.ANCHOR)
     )
 
-    print("<button> Elements")
+    print_with_newline("<button> Elements")
     print_web_element_list(
         await fetch_web_element_metadata(page, WebElementType.BUTTON)
     )
@@ -119,8 +119,8 @@ async def run_software_job_app_web_page_detection_script():
 
 async def main():
     async with async_playwright() as playwright:
-        await run_job_hunter(playwright)
-        # await run_software_job_app_web_page_detection_script()
+        # await run_job_hunter(playwright)
+        await run_software_job_app_web_page_detection_script()
 
 
 asyncio.run(main=main())

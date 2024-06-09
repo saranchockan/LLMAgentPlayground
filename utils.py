@@ -52,11 +52,11 @@ def print_var_name_value(var):
 
     for name, value in caller_vars.items():
         if value is var:
-            print(f"{name} = {value}", end="\n")
+            print_with_newline(f"{name} = {value}")
             break
 
 
-def print_with_newline(value: Any, end: str = "\n") -> None:
+def print_with_newline(value: Any, end: str = "\n\n") -> None:
     """
     Prints the given value to the console, followed by a newline character.
 
