@@ -1,5 +1,7 @@
 import requests
 
+from web_element import WebElement
+
 
 PERPLEXITY_API_TOKEN = "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"
 
@@ -12,6 +14,9 @@ headers = {
     "content-type": "application/json",
     "authorization": f"Bearer {PERPLEXITY_API_TOKEN}",
 }
+
+import re
+from typing import TypedDict, Dict, List
 
 
 def call_perpexity_llm(sys_prompt: str, user_prompt: str, model: str) -> str:

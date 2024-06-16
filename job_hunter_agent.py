@@ -33,5 +33,20 @@ Store the job application/listing page in DB and then Job Applier Agent
 will take care of the rest. 
 
 
+This is tree-type recursion search, this might not require an agent that is strong at graph cycle workflows.
+
+Base Case
+Is this page a job applicaiton listing for a software engineering role
+
+Recursive Case
+Go through every WebElement
+- Is this career related
+    - Visit that web page
+    - Search
+    - Extract <a> and <button>
+        Is this career related
+            ...
+
+
 
 """

@@ -1,5 +1,5 @@
 import re
-from typing import Any, List
+from typing import Any, Dict, List, Mapping, TypedDict
 
 from web_element import WebElement
 
@@ -103,6 +103,25 @@ def print_web_element_list(metadata_list: List[WebElement]) -> None:
     print("]")
 
 
+def print_web_element(web_element: WebElement) -> None:
+    """
+    Prints a list of WebElement objects in a readable format with spacing.
+
+    Args:
+        web_element (List[Metadata]): A list of Metadata objects.
+
+    Returns:
+        None
+    """
+    print("   {")
+    for j, (key, value) in enumerate(web_element.items()):
+        print(f'      {key}: "{value}",', end="")
+        if j < len(web_element) - 1:
+            print()
+    print("\n   }", end="")
+    print()
+
+
 def remove_newlines(text):
     """
     Removes newline characters (\n) from a given string.
@@ -114,3 +133,36 @@ def remove_newlines(text):
         str: The string with newline characters removed.
     """
     return text.replace("\n", "")
+
+
+def str_to_bool(string):
+    """
+    Convert a string to a boolean value.
+
+    Args:
+        string (str): The input string to be converted. The function expects
+            the string to be either "True" or "False" (case-insensitive).
+
+    Returns:
+        bool: The boolean value corresponding to the input string.
+
+    Raises:
+        ValueError: If the input string is not "True" or "False" (case-insensitive).
+
+    Examples:
+        >>> str_to_bool("True")
+        True
+        >>> str_to_bool("FALSE")
+        False
+        >>> str_to_bool("hello")
+        Traceback (most recent call last):
+            ...
+        ValueError: Invalid input: hello. Expected 'True' or 'False'.
+    """
+    string = string.lower()
+    if string == "true":
+        return True
+    elif string == "false":
+        return False
+    else:
+        raise ValueError(f"Invalid input: {string}. Expected 'True' or 'False'.")

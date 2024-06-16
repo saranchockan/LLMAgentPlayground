@@ -2,7 +2,7 @@ import asyncio
 import os
 from enum import Enum
 from time import sleep
-from typing import Dict, TypedDict
+from typing import Dict, List, TypedDict
 
 from playwright.async_api import ElementHandle, Playwright
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
@@ -11,9 +11,11 @@ from playwright.async_api import async_playwright
 from job_hunter_llm_utils import (
     determine_if_web_page_is_software_role_application,
     get_job_search_element,
+    is_web_element_related_to_career_exploration,
 )
 from job_hunter_tools import (
     fetch_web_element_metadata,
+    is_web_element_related_to_software_engineering_role,
     search_software_roles,
     take_full_page_screenshots,
 )
@@ -23,8 +25,12 @@ from prompts import (
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
 )
-from utils import print_web_element_list, print_with_newline
-from web_element import WebElementType
+from utils import (
+    print_web_element,
+    print_web_element_list,
+    print_with_newline,
+)
+from web_element import WebElement, WebElementType, order_web_elements_by_regex
 
 
 async def run_job_hunter(playwright: Playwright):
@@ -85,15 +91,45 @@ async def run_job_hunter(playwright: Playwright):
     Extrack links to software engineer roles
     """
     sleep(5)
-    print_with_newline("<a> Elements")
-    print_web_element_list(
-        await fetch_web_element_metadata(page, WebElementType.ANCHOR)
+    anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
+        page, WebElementType.ANCHOR
     )
 
-    print_with_newline("<button> Elements")
-    print_web_element_list(
-        await fetch_web_element_metadata(page, WebElementType.BUTTON)
+    button_web_elements: List[WebElement] = await fetch_web_element_metadata(
+        page, WebElementType.BUTTON
     )
+
+    interactable_web_elements = order_web_elements_by_regex(
+        anchor_web_elements + button_web_elements
+    )
+
+    """
+    TODO: Keywords to regex
+    "job" "software" "engineer "apply" "lever" "greenhouse" "career"...
+
+    Push prioritized web elements to the top of the list,
+    run through is_web_element_related_to_career_exploration, 
+    run the process in DFS, put a condition
+    to stop checking web elemenst after n jobs have been extracted
+    The objective here is to reduce the calls to LLMs. (Or maybe
+    this doesn't matter to scale since we are still developing MVP)
+
+    AND
+
+    do we get web elements in order? If so, we can deduct that
+    starting set of elements are in header and the ending set of
+    elements are in footer. So, we start DFS in elements in the middle
+    set. 
+
+    """
+
+    print_web_element_list(interactable_web_elements)
+
+    # for web_element in interactable_web_elements:
+    #     if web_element["url"] not in company_career_page_url:
+    #         if is_web_element_related_to_career_exploration(web_element=web_element):
+    #             print_web_element(web_element)
+    #     ...
 
     input("Press Enter to close the browser...")
     await browser.close()
@@ -105,6 +141,7 @@ SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 async def run_software_job_app_web_page_detection_script():
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
+
         page = await browser.new_page()
         await page.goto(SCREENSHOT_URL)
 
@@ -119,8 +156,8 @@ async def run_software_job_app_web_page_detection_script():
 
 async def main():
     async with async_playwright() as playwright:
-        # await run_job_hunter(playwright)
-        await run_software_job_app_web_page_detection_script()
+        await run_job_hunter(playwright)
+        # await run_software_job_app_web_page_detection_script()
 
 
 asyncio.run(main=main())

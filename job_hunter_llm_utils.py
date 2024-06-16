@@ -1,4 +1,5 @@
 import base64
+from cProfile import label
 from typing import List
 
 from anthropic import Anthropic
@@ -8,8 +9,11 @@ from anthropic_utils import extract_text_from_message
 from perplexity_utils import MIXTRAL_8X7B_INSTRUCT_MODEL, call_perpexity_llm
 from prompts import (
     DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT,
+    IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT,
     SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT,
 )
+from utils import print_with_newline, str_to_bool
+from web_element import WebElement
 
 ANTHROPIC_API_KEY = "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"
 client = Anthropic(
@@ -45,6 +49,23 @@ def get_job_search_element(html_input_elements: List[str]) -> str:
         ],
     )
     return extract_text_from_message(message)
+
+
+def is_web_element_related_to_career_exploration(web_element: WebElement) -> bool:
+    web_element_str = web_element.__str__()
+    message: Message = client.messages.create(
+        model="claude-3-opus-20240229",
+        max_tokens=1024,
+        messages=[
+            {
+                "role": "user",
+                "content": IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT.format(
+                    WEB_ELEMENT_METADATA=web_element_str
+                ),
+            },
+        ],
+    )
+    return str_to_bool(extract_text_from_message(message))
 
 
 def determine_if_web_page_is_software_role_application(num_of_web_page_images: int):

@@ -74,8 +74,8 @@ async def search_software_roles(page: Page):
 
         job_search_element = search_elements_map[job_search_element_key]
 
-        # # TODO: Instead of naively typing in 'Software', we should check
-        # # if the search input has options. For example, https://www.anthropic.com/jobs
+        # TODO: Instead of naively typing in 'Software', we should check
+        # if the search input has options. For example, https://www.anthropic.com/jobs
         try:
             await job_search_element.type("Software")
             await job_search_element.press("Enter")
@@ -97,8 +97,25 @@ async def fetch_web_element_metadata(
         page (Page):
             page to extract anchor elements.
     """
+    # Retrieving elements from <main> lets us
+    # chase to relevent elements (<footer> elements are definitively not relevant) and reduce calls
+    # to LLMs to determine career relevancy
+    main_element = await page.query_selector("main")
+    # elements: List[ElementHandle] = (
+    #     await main_element.query_selector_all(selector.value)
+    #     if main_element
+    #     else await page.query_selector_all(
+    #         f"{selector.value}:not(footer {selector.value})"
+    #     )
+    # )
 
-    elements: List[ElementHandle] = await page.query_selector_all(selector.value)
+    if main_element:
+        elements = await main_element.query_selector_all(selector.value)
+    else:
+        s = f"{selector.value}:not(footer {selector.value})"
+        print_with_newline(f"No main content, filtering out footer elements: {s}")
+        elements = await page.query_selector_all(s)
+
     elementsMetadata: List[WebElement] = []
     for element in elements:
         label = await element.inner_text()
