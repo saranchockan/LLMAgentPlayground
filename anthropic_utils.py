@@ -1,7 +1,7 @@
 from anthropic.types import Message
 
 
-def extract_text_from_message(message: Message):
+def extract_text_from_anthropic_message(message: Message):
     """
     Extracts and concatenates all text content from a Message object.
 

@@ -20,23 +20,21 @@ Pick an element from HTML_INPUT_ELEMENTS LIST. Remember, YOUR OUTPUT SHOULD ONLY
 Here are two examples -
 
 <example>
-HTML_INPUT_ELEMENTS = [
-"<input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">"
-"<input data-testid="core-ui-dropdown" name="categoryFiter" role="combobox" aria-expanded="false" aria-autocomplete="none" aria-readonly="false" aria-describedby="core-ui-id-8154769791-description" aria-invalid="false" id="core-ui-id-8154769791" readonly="" class="sc-1v6kknp-5 hsPasW">"
-"<input data-testid="core-ui-dropdown" name="locationFilter" role="combobox" aria-expanded="false" aria-autocomplete="none" aria-readonly="false" aria-describedby="core-ui-id-4236106179-description" aria-invalid="false" id="core-ui-id-4236106179" readonly="" class="sc-1v6kknp-5 hsPasW">"
-]
-OUTPUT = <input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">
+
+HTML_INPUT_ELEMENTS = ['input datatestidSearchInput colorpink80 namesearch placeholderOpenings classscbc6dc2282 hQcbLS value', 'input datatestidcoreuidropdown namecategoryFiter rolecombobox ariaexpandedfalse ariaautocompletenone ariareadonlyfalse 
+ariadescribedbycoreuiid8154769791description ariainvalidfalse idcoreuiid8154769791 readonly classsc1v6kknp5 hsPasW', 'input datatestidcoreuidropdown namelocationFilter rolecombobox ariaexpandedfalse ariaautocompletenone ariareadonlyfalse ariadescribedbycoreuiid4236106179description ariainvalidfalse idcoreuiid4236106179 readonly classsc1v6kknp5 hsPasW']
+
+OUTPUT = input datatestidSearchInput colorpink80 namesearch placeholderOpenings classscbc6dc2282 hQcbLS value
+
 </example>
 
 <example>
-HTML_INPUT_ELEMENTS = [
-"<input type="text" class="" style="label:input;color:inherit;background:0;opacity:1;width:100%;grid-area:1 / 2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0" autocapitalize="none" autocomplete="off" autocorrect="off" id="Department-IIm4gVcW87dBN1Mt9dAW2-input" spellcheck="false" tabindex="0" value="" aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" role="combobox">",
-"<input type="hidden" name="department" value="all-departments">",
-"<input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">",
-"<input type="text" class="" style="label:input;color:inherit;background:0;opacity:1;width:100%;grid-area:1 / 2;font:inherit;min-width:2px;border:0;margin:0;outline:0;padding:0" autocapitalize="none" autocomplete="off" autocorrect="off" id="Location-n8IT109WCG-xZkIguoWin-input" spellcheck="false" tabindex="0" value="" aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" role="combobox">",
-"<input type="hidden" name="location" value="all-locations">",]
 
-OUTPUT = <input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">
+HTML_INPUT_ELEMENTS = ['input typetext class stylelabelinputcolorinheritbackground0opacity1width100gridarea1  2fontinheritminwidth2pxborder0margin0outline0padding0 autocapitalizenone autocompleteoff autocorrectoff idDepartmentIIm4gVcW87dBN1Mt9dAW2input spellcheckfalse tabindex0 value ariaautocompletelist ariaexpandedfalse ariahaspopuptrue rolecombobox', 'input typehidden namedepartment valuealldepartments
+', 'input typetext classBaseInputmoduleinputAt1nr BaseInputmodulesize48OHWCP namerole value idrolezRPV1pf0o6eghG60mGVW9 spellcheckfalse', 'input typetext class stylelabelinputcolorinheritbackground0opacity1width100gridarea1  2fontinheritminwidth2pxborder0margin0outline0padding0 autocapitalizenone autocompleteoff autocorrectoff idLocationn8IT109WCGxZkIguoWininput spellcheckfalse tabindex0 value ariaautocompletelist ariaexpandedfalse ariahaspopuptrue rolecombobox', 'input typehidden namelocation valuealllocations',]
+
+OUTPUT = input typetext classBaseInputmoduleinputAt1nr BaseInputmodulesize48OHWCP namerole value idrolezRPV1pf0o6eghG60mGVW9 spellcheckfalse
+
 </example>
 
 USR_HTML_INPUT_ELEMENTS = {HTML_INPUT_ELEMENTS}

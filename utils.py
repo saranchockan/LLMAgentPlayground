@@ -1,7 +1,57 @@
 import re
 from typing import Any, Dict, List, Mapping, TypedDict
 
-from web_element import WebElement
+
+from typing import TypeVar, Iterable, Callable, DefaultDict, Generic
+from collections import defaultdict
+
+
+def get_first_or_raise(lst):
+    """
+    Returns the first element of a list or raises a ValueError if the list is empty.
+
+    Args:
+        lst (list): The input list.
+
+    Returns:
+        The first element of the list.
+
+    Raises:
+        ValueError: If the input list is empty.
+    """
+    if not lst:
+        raise ValueError("The input list is empty.")
+
+    return lst[0]
+
+
+T = TypeVar("T")
+K = TypeVar("K")
+
+
+def group_by(items: Iterable[T], key: Callable[[T], K]) -> DefaultDict[K, list[T]]:
+    """
+    Group a collection of items by a key function.
+
+    Args:
+        items (Iterable[T]): The collection of items to be grouped.
+        key (Callable[[T], K]): A function that takes an item and returns a key to group by.
+
+    Returns:
+        DefaultDict[K, list[T]]: A dictionary-like object where the keys are the unique values
+            returned by the key function, and the values are lists of items that share that key.
+
+    Example:
+        >>> people = [{"name": "Alice", "age": 25}, {"name": "Bob", "age": 30}]
+        >>> grouped_by_age = group_by(people, lambda p: p["age"])
+        >>> grouped_by_age
+        defaultdict(<class 'list'>, {25: [{'name': 'Alice', 'age': 25}], 30: [{'name': 'Bob', 'age': 30}]})
+    """
+    result: DefaultDict[K, list[T]] = defaultdict(list)
+    for item in items:
+        key_value = key(item)
+        result[key_value].append(item)
+    return result
 
 
 def remove_special_chars(input_str):
@@ -77,49 +127,6 @@ def print_with_newline(value: Any, end: str = "\n\n") -> None:
 
     """
     print(value, end=end)
-
-
-def print_web_element_list(metadata_list: List[WebElement]) -> None:
-    """
-    Prints a list of WebElement objects in a readable format with spacing.
-
-    Args:
-        metadata_list (List[Metadata]): A list of Metadata objects.
-
-    Returns:
-        None
-    """
-    print("[")
-    for i, metadata in enumerate(metadata_list):
-        print("   {")
-        for j, (key, value) in enumerate(metadata.items()):
-            print(f'      {key}: "{value}",', end="")
-            if j < len(metadata) - 1:
-                print()
-        print("\n   }", end="")
-        if i < len(metadata_list) - 1:
-            print(",")
-        print()
-    print("]")
-
-
-def print_web_element(web_element: WebElement) -> None:
-    """
-    Prints a list of WebElement objects in a readable format with spacing.
-
-    Args:
-        web_element (List[Metadata]): A list of Metadata objects.
-
-    Returns:
-        None
-    """
-    print("   {")
-    for j, (key, value) in enumerate(web_element.items()):
-        print(f'      {key}: "{value}",', end="")
-        if j < len(web_element) - 1:
-            print()
-    print("\n   }", end="")
-    print()
 
 
 def remove_newlines(text):

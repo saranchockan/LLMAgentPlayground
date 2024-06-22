@@ -1,10 +1,11 @@
 import os
 from enum import Enum
 from re import L
-from typing import Dict, List, TypedDict, Union
+from typing import Any, Dict, List, TypedDict, Union
 from urllib.parse import urljoin, urlparse
+from time import sleep
 
-from playwright.async_api import ElementHandle, Page
+from playwright.async_api import ElementHandle, Page, BrowserContext
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
@@ -72,23 +73,33 @@ async def search_software_roles(page: Page):
 
         print_var_name_value(job_search_element_key)
 
-        job_search_element = search_elements_map[job_search_element_key]
+        if job_search_element_key:
+            try:
+                job_search_element = search_elements_map[job_search_element_key]
+            except KeyError as k:
+                print("Key Error")
+                raise k
 
-        # TODO: Instead of naively typing in 'Software', we should check
-        # if the search input has options. For example, https://www.anthropic.com/jobs
-        try:
-            await job_search_element.type("Software")
-            await job_search_element.press("Enter")
-        except:
-            print_with_newline("Unable to search!")
+            # TODO: Instead of naively typing in 'Software', we should check
+            # if the search input has options. For example, https://www.anthropic.com/jobs
+            print("Attempting to search for software roles...")
+            try:
+                await job_search_element.type("Software")
+                await job_search_element.press("Enter")
+            except:
+                print_with_newline("Unable to search!")
+                ...
+        else:
+            # TODO: Handle None job_search_element_key
             ...
 
     except PlaywrightTimeoutError:
         print("Timeout! Page does not have search")
 
 
+# TODO: shift this to webelement module
 async def fetch_web_element_metadata(
-    page: Page, selector: WebElementType
+    context: BrowserContext, page: Page, selector: WebElementType
 ) -> List[WebElement]:
     """Extracts metadata of web elements (eg - anchor (<element> </element>))
     from the page.
@@ -101,13 +112,6 @@ async def fetch_web_element_metadata(
     # chase to relevent elements (<footer> elements are definitively not relevant) and reduce calls
     # to LLMs to determine career relevancy
     main_element = await page.query_selector("main")
-    # elements: List[ElementHandle] = (
-    #     await main_element.query_selector_all(selector.value)
-    #     if main_element
-    #     else await page.query_selector_all(
-    #         f"{selector.value}:not(footer {selector.value})"
-    #     )
-    # )
 
     if main_element:
         elements = await main_element.query_selector_all(selector.value)
@@ -120,7 +124,13 @@ async def fetch_web_element_metadata(
     for element in elements:
         label = await element.inner_text()
         href = await element.get_attribute("href")
-        url = get_absolute_url(page, href)
+        urls: List[str] = []
+        root_url = get_absolute_url(page, href)
+        if root_url:
+            urls.append(root_url)
+
+        tag_name = await element.get_property("tagName")
+        tag_name_value = await tag_name.json_value()
 
         # Extract metadata of adjacent elements
         # This is useful when we have an <a>'s description
@@ -131,39 +141,119 @@ async def fetch_web_element_metadata(
 
         # If parent exists, get all adjacent elements
         # of element
+
         adjacent_elements = (
-            await parent_element.query_selector_all(":scope > *")
+            await get_all_child_elements(parent_element, tag_name_value)
             if parent_element
             else []
         )
 
         # Extract metadata of sub elements
-        child_elements = await element.query_selector_all(":scope > *")
+        child_elements = await get_all_child_elements(
+            element=element, element_filter=tag_name_value
+        )
 
         neighbor_elements = adjacent_elements + child_elements
         description = ""
 
         for neighbor_element in neighbor_elements:
-            tag_name = await neighbor_element.get_property("tagName")
-            tag_name_value = await tag_name.json_value()
+            neighbor_element_tag_name = await neighbor_element.get_property("tagName")
+            neighbor_element_tag_name_value = (
+                await neighbor_element_tag_name.json_value()
+            )
             # Neighboring elements that are of the same
             # web element type of element is highly likely
             # to not contain useful metadata
-            if tag_name_value.lower() != selector.value:
+            if neighbor_element_tag_name_value.lower() != selector.value:
                 try:
                     description += await neighbor_element.inner_text() + " "
                 except:
                     ...
+                try:
+                    href = await neighbor_element.get_attribute("href")
+                    child_url = get_absolute_url(page, href)
+                    if child_url:
+                        urls.append(child_url)
+                except:
+                    ...
+        if urls == []:
+            if "software" in label.lower() or "software" in description.lower():
+                """
+                There will be buttons with no urls (Like Lyft "software")
+                We will ignore them for now
+                """
+                print_var_name_value(label)
+                print_var_name_value(description)
+                new_url = None
 
-        elementsMetadata.append(
-            WebElement(
-                element_type=selector,
-                label=remove_newlines(label),
-                url=url,
-                description=remove_newlines(description),
-            )
-        )
+                if selector == WebElementType.BUTTON:
+                    # Go to this button and get the url
+                    # and then come back
+                    try:
+                        async with page.context.expect_page() as new_page_info:
+                            await element.click(button="left", modifiers=["Meta"])
+
+                            # Get the new page object
+                            new_page = await new_page_info.value
+
+                            # Get the URL of the new page
+                            new_tab_url = new_page.url
+
+                            elementsMetadata.append(
+                                WebElement(
+                                    element_type=selector,
+                                    label=remove_special_chars(remove_newlines(label)),
+                                    url=str(new_tab_url),
+                                    description=remove_special_chars(
+                                        remove_newlines(description)
+                                    ),
+                                )
+                            )
+                            await new_page.close()
+                    except Exception as e:
+                        print(e)
+
+            ...
+        else:
+            elementsMetadata += [
+                WebElement(
+                    element_type=selector,
+                    label=remove_special_chars(remove_newlines(label)),
+                    url=url,
+                    description=remove_special_chars(remove_newlines(description)),
+                )
+                for url in urls
+            ]
     return elementsMetadata
+
+
+async def get_all_child_elements(
+    element: ElementHandle, element_filter: Any
+) -> List[ElementHandle]:
+    all_child_elements: List[ElementHandle] = []
+
+    async def helper(
+        curr_element: Union[ElementHandle, None],
+        all_child_elements: List[ElementHandle],
+    ):
+        if not curr_element:
+            return
+        child_elements: List[ElementHandle] = await curr_element.query_selector_all(
+            ":scope > *"
+        )
+        all_child_elements += child_elements
+        for child_element in child_elements:
+            tag_name = await child_element.get_property("tagName")
+            tag_name_value = await tag_name.json_value()
+            # Neighboring elements that are of the same
+            # web element type of element is highly likely
+            # to not contain useful metadata
+            if tag_name_value != element_filter:
+                await helper(child_element, all_child_elements)
+
+    await helper(element, all_child_elements)
+
+    return all_child_elements
 
 
 def is_web_element_related_to_software_engineering_role(
@@ -210,7 +300,7 @@ async def take_full_page_screenshots(
     return num_screenshots
 
 
-def get_absolute_url(page: Page, url: Union[str, None]) -> str:
+def get_absolute_url(page: Page, url: Union[str, None]) -> Union[str, None]:
     """Gets the absolute url relative to the page
 
     Args:
@@ -221,7 +311,7 @@ def get_absolute_url(page: Page, url: Union[str, None]) -> str:
         str: absolute url
     """
     if url == None:
-        return ""
+        return None
 
     def is_absolute_url(url) -> bool:
         """Checks if the url is absolute

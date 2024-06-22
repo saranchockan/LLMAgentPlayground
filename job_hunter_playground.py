@@ -25,18 +25,21 @@ from prompts import (
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
 )
-from utils import (
-    print_web_element,
+from utils import print_with_newline
+from web_element import (
+    WebElement,
+    WebElementType,
+    coalesce_web_elements,
+    order_web_elements_by_regex,
     print_web_element_list,
-    print_with_newline,
 )
-from web_element import WebElement, WebElementType, order_web_elements_by_regex
 
 
 async def run_job_hunter(playwright: Playwright):
 
     chromium = playwright.chromium
     browser = await chromium.launch(headless=False)
+    context = await browser.new_context()
     page = await browser.new_page()
     page.set_default_timeout(100000)
 
@@ -58,6 +61,8 @@ async def run_job_hunter(playwright: Playwright):
         model=SONAR_SMALL_ONLINE_MODEL,
     )
 
+    # company_career_page_url = "https://www.benchling.com/careers"
+
     print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
     await page.goto(company_career_page_url)
@@ -69,8 +74,9 @@ async def run_job_hunter(playwright: Playwright):
 
     try:
         await search_software_roles(page=page)
-    except:
+    except Exception as e:
         print("Search failed!")
+        print("Exception:", e)
         ...
 
     """
@@ -92,19 +98,26 @@ async def run_job_hunter(playwright: Playwright):
     """
     sleep(5)
     anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        page, WebElementType.ANCHOR
-    )
-
-    button_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        page, WebElementType.BUTTON
-    )
-
-    interactable_web_elements = order_web_elements_by_regex(
-        anchor_web_elements + button_web_elements
+        context, page, WebElementType.ANCHOR
     )
 
     """
-    TODO: Keywords to regex
+    We search of buttons b/c some websites
+    don't expose <a> hrefs For eg - Benchling
+
+    There could be anchors and buttons that represent the same 
+    thing and we should coalesce them.
+
+    Buttons that don't have URLs are compeletly valid 
+    and should be clicked
+
+    """
+    button_web_elements: List[WebElement] = await fetch_web_element_metadata(
+        context, page, WebElementType.BUTTON
+    )
+
+    """
+    Keywords to regex
     "job" "software" "engineer "apply" "lever" "greenhouse" "career"...
 
     Push prioritized web elements to the top of the list,
@@ -122,8 +135,13 @@ async def run_job_hunter(playwright: Playwright):
     set. 
 
     """
+    interactable_web_elements = order_web_elements_by_regex(
+        coalesce_web_elements((anchor_web_elements + button_web_elements))
+    )
 
     print_web_element_list(interactable_web_elements)
+
+    # TODO: Coalesce anchors and buttons
 
     # for web_element in interactable_web_elements:
     #     if web_element["url"] not in company_career_page_url:
