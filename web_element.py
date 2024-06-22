@@ -98,7 +98,7 @@ def print_web_element_list(metadata_list: List[WebElement]) -> None:
     print("]")
 
 
-def print_web_element(web_element: Dict) -> None:
+def print_web_element(web_element: WebElement) -> None:
     """
     Prints a list of WebElement objects in a readable format with spacing.
 

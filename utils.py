@@ -5,6 +5,38 @@ from typing import Any, Dict, List, Mapping, TypedDict
 from typing import TypeVar, Iterable, Callable, DefaultDict, Generic
 from collections import defaultdict
 
+from difflib import SequenceMatcher
+
+
+def similarity_ratio(str1: str, str2: str) -> float:
+    """
+    Calculate the similarity ratio between two strings.
+
+    Parameters:
+    str1 (str): The first string.
+    str2 (str): The second string.
+
+    Returns:
+    float: The similarity ratio between the two strings.
+    """
+    return SequenceMatcher(None, str1, str2).ratio()
+
+
+def are_urls_similar(url1: str, url2: str, threshold: float = 0.9) -> bool:
+    """
+    Determine if two URLs are similar based on a given threshold.
+
+    Parameters:
+    url1 (str): The first URL.
+    url2 (str): The second URL.
+    threshold (float): The similarity ratio threshold. Default is 0.9.
+
+    Returns:
+    bool: True if the similarity ratio is above the threshold, False otherwise.
+    """
+    ratio = similarity_ratio(url1, url2)
+    return ratio >= threshold
+
 
 def get_first_or_raise(lst):
     """

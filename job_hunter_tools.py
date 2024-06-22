@@ -9,6 +9,11 @@ from playwright.async_api import ElementHandle, Page, BrowserContext
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_llm_utils import get_job_search_element
+from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
+from prompts import (
+    EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+    EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+)
 from utils import (
     print_var_name_value,
     print_with_newline,
@@ -16,6 +21,14 @@ from utils import (
     remove_special_chars,
 )
 from web_element import WebElement, WebElementType
+
+
+async def get_company_page_career_url() -> str:
+    return call_perpexity_llm(
+        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+        model=SONAR_SMALL_ONLINE_MODEL,
+    )
 
 
 async def search_software_roles(page: Page):

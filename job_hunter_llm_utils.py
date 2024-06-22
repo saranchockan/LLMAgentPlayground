@@ -9,13 +9,16 @@ from anthropic_utils import extract_text_from_anthropic_message
 from openai_utils import extract_message_from_openai_message
 from perplexity_utils import MIXTRAL_8X7B_INSTRUCT_MODEL, call_perpexity_llm
 from prompts import (
-    DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT,
+    IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT,
+    IS_WEB_PAGE_A_SOFTWARE_APPLICATION_PROMPT,
     IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT,
     SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT,
 )
 from utils import print_with_newline, str_to_bool
 from web_element import WebElement
 import os
+
+from playwright.async_api import async_playwright
 
 ANTHROPIC_API_KEY = "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"
 anthropicClient = Anthropic(
@@ -89,7 +92,9 @@ def is_web_element_related_to_career_exploration(web_element: WebElement) -> boo
     return str_to_bool(extract_text_from_anthropic_message(message))
 
 
-def determine_if_web_page_is_software_role_application(num_of_web_page_images: int):
+def is_web_page_a_software_role_application(
+    num_of_web_page_images: int,
+) -> bool:
     """
     https://docs.anthropic.com/en/docs/vision
     """
@@ -132,7 +137,7 @@ def determine_if_web_page_is_software_role_application(num_of_web_page_images: i
     content = images_content + [
         {
             "type": "text",
-            "text": DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT,
+            "text": IS_WEB_PAGE_A_SOFTWARE_APPLICATION_PROMPT,
         },
     ]
 
@@ -146,4 +151,43 @@ def determine_if_web_page_is_software_role_application(num_of_web_page_images: i
             }
         ],
     )
-    print(extract_text_from_anthropic_message(message=message))
+    return str_to_bool((extract_text_from_anthropic_message(message=message)))
+
+
+from playwright.sync_api import sync_playwright
+from bs4 import BeautifulSoup
+
+
+async def is_job_application_web_page_a_software_role(job_app_url: str) -> bool:
+    print("is_job_application_web_page_a_software_role", job_app_url)
+
+    async def extract_all_text_from_web_page(url):
+        async with async_playwright() as p:
+            browser = await p.chromium.launch()
+            page = await browser.new_page()
+            await page.goto(url)
+
+            # Get the full HTML content
+            html_content = await page.content()
+
+            # Parse HTML and extract text
+            soup = BeautifulSoup(html_content, "html.parser")
+            all_text = soup.get_text(separator=" ", strip=True)
+
+            await browser.close()
+            return all_text
+
+    completion = openAIClient.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {
+                "role": "user",
+                "content": IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT.format(
+                    WEB_PAGE_TEXT=await extract_all_text_from_web_page(job_app_url)
+                ),
+            },
+        ],
+    )
+    ret = str_to_bool(extract_message_from_openai_message(completion))
+    print("is_job_application_web_page_a_software_role", job_app_url, ret)
+    return ret

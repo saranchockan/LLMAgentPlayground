@@ -71,7 +71,7 @@ REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """
 
 
-DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT = """
+IS_WEB_PAGE_A_SOFTWARE_APPLICATION_PROMPT = """
 You are an AI trained to analyze images of a web page. The images stitched together is the entire web page. Determine if the web page is for a software engineering role job listing where the user can fill out their information and submit the job application. Evaluate the web page based on the following criteria:
 
 1. Job Title and Description: Look for terms related to software engineering such as "Software Engineer," "Developer," "Programmer," or similar titles. Read the description to ensure it aligns with typical software engineering duties.
@@ -86,4 +86,18 @@ Output Format:
 Your output should be a single word: "True" or "False."
 
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
+"""
+
+IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. This is text from a job application web page. Determine if the text indicates that the web page is for a software engineering role.
+
+<text>
+{WEB_PAGE_TEXT} 
+</text>
+
+
+Output Format:
+Your output should be a single word: "True" or "False."
+
+REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
+
 """

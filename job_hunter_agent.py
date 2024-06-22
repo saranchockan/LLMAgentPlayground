@@ -1,52 +1,136 @@
-"""
+import asyncio
+from time import sleep
+from typing import List
 
-The core idea of agents is to use a language model to choose a sequence of actions to take. In chains, a sequence of actions is hardcoded (in code). In agents, a language model is used as a reasoning engine to determine which actions to take and in which order.
+from playwright.async_api import ElementHandle, Playwright
 
-Reasoning -> Actions
+from job_hunter_llm_utils import (
+    is_job_application_web_page_a_software_role,
+    is_web_page_a_software_role_application,
+    is_web_element_related_to_career_exploration,
+)
+from job_hunter_playground import is_url_software_role_application
+from job_hunter_tools import (
+    fetch_web_element_metadata,
+    get_company_page_career_url,
+    search_software_roles,
+)
+from prompts import COMPANY_NAME
+from utils import (
+    are_urls_similar,
+    get_first_or_raise,
+    print_var_name_value,
+    print_with_newline,
+)
+from web_element import (
+    WebElement,
+    WebElementType,
+    coalesce_web_elements,
+    order_web_elements_by_regex,
+    print_web_element,
+    print_web_element_list,
+)
 
-Fact: I am currently on the company's career page. 
-
-
-Reason: Is there a search input that can let me search for 
-open software engineering roles?
-Action: Search for "Software" in the search input. 
-
-
-Regardless of whether you have searched for software roles 
-or not...
-
-Reason: I am on the careers page. Are there clickable elements (links, buttons) I can click that are related to software?
-NOTE: There is more clickable elements than just links and buttons. 
-Anthropic jobs page shows us that there can be <div> and <span>
-that can be clickable
-
-
-These reasoning and actions should end 
-when you land a job application page. 
-
-How do you determine that you are on a job listing/application
-page? // https://chatgpt.com/c/0e4f0c4d-7bd8-4b7a-ae5a-6e21bcdd43f3 :) 
-
-
-
-Store the job application/listing page in DB and then Job Applier Agent
-will take care of the rest. 
-
-
-This is tree-type recursion search, this might not require an agent that is strong at graph cycle workflows.
-
-Base Case
-Is this page a job applicaiton listing for a software engineering role
-
-Recursive Case
-Go through every WebElement
-- Is this career related
-    - Visit that web page
-    - Search
-    - Extract <a> and <button>
-        Is this career related
-            ...
+from playwright.async_api import async_playwright
 
 
+async def run_job_hunter_agent(playwright: Playwright):
+    print_with_newline(
+        f"✨✨✨ Extracting software engineering positions from {COMPANY_NAME} ✨✨✨"
+    )
+    company_career_page_url = await get_company_page_career_url()
+    ...
 
-"""
+    print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
+
+    chromium = playwright.chromium
+    browser = await chromium.launch(headless=False)
+    context = await browser.new_context()
+    page = await browser.new_page()
+    page.set_default_timeout(100000)
+
+    software_role_app_urls: List[WebElement] = [
+        WebElement(
+            description="",
+            label="",
+            url="https://boards.greenhouse.io/anthropic/jobs/4035354008",
+            element_type=WebElementType.ANCHOR,
+        )
+    ]
+
+    async def software_role_app_web_crawler(
+        url: str, software_role_app_urls: List[WebElement]
+    ):
+        if len(software_role_app_urls) != 1:
+            return
+        # Navigate to URL in browser
+        await page.goto(url)
+
+        """
+        SEARCH for software engineer roles in the 
+        current page.
+        """
+
+        try:
+            await search_software_roles(page=page)
+        except Exception as e:
+            print("Search failed!")
+            print("Exception:", e)
+
+        sleep(5)
+        anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
+            context, page, WebElementType.ANCHOR
+        )
+        button_web_elements: List[WebElement] = await fetch_web_element_metadata(
+            context, page, WebElementType.BUTTON
+        )
+        interactable_web_elements = order_web_elements_by_regex(
+            coalesce_web_elements((anchor_web_elements + button_web_elements))
+        )
+
+        for web_element in interactable_web_elements:
+            if is_web_element_related_to_career_exploration(web_element=web_element):
+                try:
+                    software_role_url = get_first_or_raise(software_role_app_urls)
+
+                    if are_urls_similar(software_role_url["url"], web_element["url"]):
+                        if await is_job_application_web_page_a_software_role(
+                            web_element["url"]
+                        ):
+                            print("Found software engineering role w/o vision!")
+                            print_web_element(web_element=web_element)
+                            software_role_app_urls.append(web_element)
+                            continue
+                        print("Not a software engineering application role!")
+                        print_web_element(web_element=web_element)
+                        continue
+                except Exception as e:
+                    print(e)
+                print("Running vision !! !!")
+                if await is_url_software_role_application(url=web_element["url"]):
+                    print("Found software engineering role w/ vision!")
+                    print_web_element(web_element=web_element)
+                    software_role_app_urls.append(web_element)
+                    continue
+
+                await software_role_app_web_crawler(
+                    url=web_element["url"],
+                    software_role_app_urls=software_role_app_urls,
+                )
+
+        ...
+
+    await software_role_app_web_crawler(
+        url=company_career_page_url, software_role_app_urls=software_role_app_urls
+    )
+
+    print("Software engineering web app elements")
+    print_web_element_list(software_role_app_urls)
+
+
+async def main():
+    async with async_playwright() as playwright:
+        await run_job_hunter_agent(playwright)
+
+
+asyncio.run(main=main())

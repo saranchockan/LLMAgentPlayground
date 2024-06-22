@@ -9,7 +9,7 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 from playwright.async_api import async_playwright
 
 from job_hunter_llm_utils import (
-    determine_if_web_page_is_software_role_application,
+    is_web_page_a_software_role_application,
     get_job_search_element,
     is_web_element_related_to_career_exploration,
 )
@@ -60,8 +60,6 @@ async def run_job_hunter(playwright: Playwright):
         EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
         model=SONAR_SMALL_ONLINE_MODEL,
     )
-
-    # company_career_page_url = "https://www.benchling.com/careers"
 
     print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
@@ -156,20 +154,22 @@ async def run_job_hunter(playwright: Playwright):
 SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 
 
-async def run_software_job_app_web_page_detection_script():
+async def is_url_software_role_application(url: str) -> bool:
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
 
         page = await browser.new_page()
-        await page.goto(SCREENSHOT_URL)
+        await page.goto(url)
 
         # Take a full page screenshot
         num_of_screenshots = await take_full_page_screenshots(
             page=page, output_prefix="full_page_screenshot"
         )
-        determine_if_web_page_is_software_role_application(num_of_screenshots)
+        r = is_web_page_a_software_role_application(num_of_screenshots)
 
         await browser.close()
+
+        return r
 
 
 async def main():
@@ -178,4 +178,4 @@ async def main():
         # await run_software_job_app_web_page_detection_script()
 
 
-asyncio.run(main=main())
+# asyncio.run(main=main())
