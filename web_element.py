@@ -49,7 +49,7 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
     return coalesced_web_elements
 
 
-def order_web_elements_by_regex(dicts: List[WebElement]) -> List[WebElement]:
+def order_web_elements_by_career_regex(dicts: List[WebElement]) -> List[WebElement]:
     """
     Orders a list of typed dictionaries based on the best match of a regular expression search
     through all their elements.

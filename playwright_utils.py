@@ -270,7 +270,6 @@ async def fetch_elements_description_and_url(
         3. Handles exceptions gracefully by printing error messages if retrieving inner text or href fails.
 
     """
-    print_var_name_value(fetch_urls)
     descriptions: List[str] = []
     urls: List[str] = []
 

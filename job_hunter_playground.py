@@ -1,6 +1,7 @@
 import os
 from time import sleep
 from typing import List
+import asyncio
 
 from playwright.async_api import Playwright, async_playwright
 
@@ -9,14 +10,17 @@ from job_hunter_tools import (
     get_company_page_career_url,
     search_software_roles,
 )
-from job_hunter_utils import is_web_page_a_software_role_application
+from job_hunter_utils import (
+    is_job_application_web_page_a_software_role,
+    is_web_page_a_software_role_application,
+)
 from playwright_utils import take_full_page_screenshots
 from utils import print_with_newline
 from web_element import (
     WebElement,
     WebElementType,
     coalesce_web_elements,
-    order_web_elements_by_regex,
+    order_web_elements_by_career_regex,
     print_web_element_list,
 )
 
@@ -24,7 +28,6 @@ COMPANY_NAME = os.environ["COMPANY_NAME"]
 
 
 async def run_job_hunter(playwright: Playwright):
-
     chromium = playwright.chromium
     browser = await chromium.launch(headless=False)
     context = await browser.new_context()
@@ -45,7 +48,7 @@ async def run_job_hunter(playwright: Playwright):
     await page.goto(company_career_page_url)
 
     """
-    SEARCH for software engineer roles in the 
+    SEARCH for software engineer roles in the
     company's career page.
     """
 
@@ -68,7 +71,7 @@ async def run_job_hunter(playwright: Playwright):
         Search for software (Lyft)
         Click on Engineering button (Anthropic)
     B) A software role page
-        At this point of time, AgentHunt is done. AgentApply 
+        At this point of time, AgentHunt is done. AgentApply
         should take over to deem role fit and apply
 
     Extrack links to software engineer roles
@@ -80,10 +83,10 @@ async def run_job_hunter(playwright: Playwright):
     We search of buttons b/c some websites
     don't expose <a> hrefs For eg - Benchling
 
-    There could be anchors and buttons that represent the same 
+    There could be anchors and buttons that represent the same
     thing and we should coalesce them.
 
-    Buttons that don't have URLs are compeletly valid 
+    Buttons that don't have URLs are compeletly valid
     and should be clicked
 
     """
@@ -94,7 +97,7 @@ async def run_job_hunter(playwright: Playwright):
     "job" "software" "engineer "apply" "lever" "greenhouse" "career"...
 
     Push prioritized web elements to the top of the list,
-    run through is_web_element_related_to_career_exploration, 
+    run through is_web_element_related_to_career_exploration,
     run the process in DFS, put a condition
     to stop checking web elemenst after n jobs have been extracted
     The objective here is to reduce the calls to LLMs. (Or maybe
@@ -105,10 +108,10 @@ async def run_job_hunter(playwright: Playwright):
     do we get web elements in order? If so, we can deduct that
     starting set of elements are in header and the ending set of
     elements are in footer. So, we start DFS in elements in the middle
-    set. 
+    set.
 
     """
-    interactable_web_elements = order_web_elements_by_regex(
+    interactable_web_elements = order_web_elements_by_career_regex(
         coalesce_web_elements((anchor_web_elements + button_web_elements))
     )
 
@@ -121,28 +124,15 @@ async def run_job_hunter(playwright: Playwright):
 SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 
 
-async def is_url_software_role_application(url: str) -> bool:
-    async with async_playwright() as playwright:
-        browser = await playwright.chromium.launch()
-
-        page = await browser.new_page()
-        await page.goto(url)
-
-        # Take a full page screenshot
-        num_of_screenshots = await take_full_page_screenshots(
-            page=page, output_prefix="full_page_screenshot"
-        )
-        r = is_web_page_a_software_role_application(num_of_screenshots)
-
-        await browser.close()
-
-        return r
-
-
 async def main():
     async with async_playwright() as playwright:
         await run_job_hunter(playwright)
-        # await run_software_job_app_web_page_detection_script()
 
 
-# asyncio.run(main=main())
+print(
+    asyncio.run(
+        main=is_job_application_web_page_a_software_role(
+            "https://boards.greenhouse.io/anthropic/jobs/4020295008"
+        )
+    )
+)

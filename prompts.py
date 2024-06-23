@@ -82,7 +82,18 @@ Your output should be a single word: "True" or "False."
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """
 
-IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. This is text from a job application web page. Determine if the text indicates that the web page is for a software engineering role.
+IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. This is text from a job application web page. Determine if the text indicates that the web page is for a software engineering role. 
+
+Evaluate based on the following criteria:
+
+1. Mentions of software development, programming, or coding.
+References to specific programming languages or software technologies.
+
+2. Responsibilities related to designing, developing, testing, or maintaining software.
+
+3. Requirements for software engineering skills or experience.
+
+4. Involvement in software projects or development teams.
 
 <text>
 {WEB_PAGE_TEXT} 
@@ -91,7 +102,8 @@ IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT = """You are an AI Job Hunter Web Agent 
 
 Output Format:
 Your output should be a single word: "True" or "False."
+"""
 
+"""
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
-
 """

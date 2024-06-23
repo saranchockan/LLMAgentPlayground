@@ -33,5 +33,9 @@ def get_element_raw_html_text(url: str, selector: str):
         browser.close()
 
 
-url = "https://www.benchling.com/careers"
-get_element_raw_html_text(url=url, selector="button")
+url = "https://boards.greenhouse.io/anthropic/jobs/4020295008"
+print(
+    extract_all_text(
+        url=url,
+    )
+)

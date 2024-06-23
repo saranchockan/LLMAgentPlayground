@@ -6,10 +6,14 @@ from time import sleep
 from typing import Any, Callable, Dict, List, Optional, Set, TypedDict, Union
 from urllib.parse import urljoin, urlparse
 
-from playwright.async_api import BrowserContext, ElementHandle, Page
+from playwright.async_api import BrowserContext, ElementHandle, Page, Playwright
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
+from playwright.async_api import async_playwright
 
-from job_hunter_utils import get_job_search_element
+from job_hunter_utils import (
+    get_job_search_element,
+    is_web_page_a_software_role_application,
+)
 from perplexity import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
 from playwright_utils import (
     click_and_retrieve_new_tab_url,
@@ -21,6 +25,7 @@ from playwright_utils import (
     get_element_inner_text,
     get_element_tag_name,
     get_element_url,
+    take_full_page_screenshots,
 )
 from prompts import (
     EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
@@ -39,9 +44,13 @@ from web_element import (
     WebElement,
     WebElementType,
     coalesce_web_elements,
-    order_web_elements_by_regex,
+    order_web_elements_by_career_regex,
     web_element_list_contains_element_handle,
 )
+
+# TODO: Should be in a separate "Env" module
+# instead of reading in every other module
+COMPANY_NAME = os.getenv("COMPANY_NAME", "")
 
 
 def get_company_page_career_url(company_name: str) -> str:
@@ -150,7 +159,7 @@ async def search_software_roles(
     print_with_newline("Unable to search for software roles!")
 
 
-async def get_interactable_career_web_elements(
+async def get_interactable_web_elements(
     page: Page, restore_page_initial_dom_state: Callable
 ) -> List[WebElement]:
     """_summary_
@@ -161,17 +170,16 @@ async def get_interactable_career_web_elements(
     Returns:
         List[WebElement]: _description_
     """
-    interactable_web_elements = order_web_elements_by_regex(
-        coalesce_web_elements(
-            await fetch_interactable_web_elements(
-                page, restore_page_initial_dom_state=restore_page_initial_dom_state
-            ),
-        )
+    interactable_web_elements = coalesce_web_elements(
+        await fetch_interactable_web_elements(
+            page, restore_page_initial_dom_state=restore_page_initial_dom_state
+        ),
     )
+
     return interactable_web_elements
 
 
-# TODO: shift this to webelement module
+# TODO: Shift web element fns to WebElement module
 async def fetch_interactable_web_elements(
     page: Page, restore_page_initial_dom_state: Callable
 ) -> List[WebElement]:
@@ -278,3 +286,38 @@ async def fetch_interactable_web_elements(
             ...
 
     return interactable_web_elements
+
+
+async def is_web_element_a_software_role_application(web_element: WebElement) -> bool:
+
+    if is_web_element_company_career_page(web_element=web_element):
+        debug_print(
+            "Web Element is not a software role application since it is a career page!"
+        )
+        return False
+
+    async with async_playwright() as playwright:
+        browser = await playwright.chromium.launch(headless=True)
+
+        page = await browser.new_page()
+        try:
+            await page.goto(web_element["url"])
+        except Exception as e:
+            # TODO: Catch timeout error and
+            # retry
+            print(e)
+            return False
+
+        # Take a full page screenshot
+        num_of_screenshots = await take_full_page_screenshots(
+            page=page, output_prefix="full_page_screenshot"
+        )
+        r = is_web_page_a_software_role_application(num_of_screenshots)
+
+        await browser.close()
+
+        return r
+
+
+def is_web_element_company_career_page(web_element: WebElement) -> bool:
+    return web_element["label"] == f"{COMPANY_NAME} career page"

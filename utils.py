@@ -278,3 +278,9 @@ def debug_print(*args, **kwargs):
     """
     if os.environ.get("DEBUG", "").upper() == "ON":
         print(*args, **kwargs)
+
+
+def format_execution_time(execution_time: float):
+    minutes = int(execution_time // 60)
+    seconds = execution_time % 60
+    return f"{minutes:02d}:{seconds:05.2f}"
