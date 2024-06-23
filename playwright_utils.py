@@ -105,7 +105,7 @@ async def extract_all_text_from_web_page(url: str) -> str:
 
 
 async def click_and_retrieve_new_tab_url(
-    page: Page, element: ElementHandle, restore_page_initial_dom_state: Callable
+    page: Page, element: ElementHandle
 ) -> Union[str, None]:
     """
     TODO: Add paramter for callable func reset_page()
@@ -127,39 +127,33 @@ async def click_and_retrieve_new_tab_url(
     Raises:
         Exception: If any error occurs during the process, it will be printed to the console.
     """
-    max_attempts = 2
-    for attempt in range(max_attempts):
-        try:
-            # Expect a new page to be opened
-            async with page.context.expect_page(timeout=500) as new_page_info:
-                # Click the element with Meta key (Command key on macOS)
-                print("Attempting to click button")
-                await element.click(button="left", modifiers=["Meta"], timeout=500)
-                print("Clicked button")
+    try:
+        # Expect a new page to be opened
+        async with page.context.expect_page(timeout=500) as new_page_info:
+            # Click the element with Meta key (Command key on macOS)
+            print("Attempting to click button")
+            await element.click(button="left", modifiers=["Meta"], timeout=500)
+            print("Clicked button")
 
-                # Get the new page object
-                new_page = await new_page_info.value
+            # Get the new page object
+            new_page = await new_page_info.value
 
-                print("Got new page")
+            print("Got new page")
 
-                # Get the URL of the new page
-                new_tab_url = new_page.url
+            # Get the URL of the new page
+            new_tab_url = new_page.url
 
-                print("Got new_tab_url", new_tab_url)
+            print("Got new_tab_url", new_tab_url)
 
-                # Close the new page
-                await new_page.close()
+            # Close the new page
+            await new_page.close()
 
-                print("Closed new page")
+            print("Closed new page")
 
-                return new_tab_url
-        except Exception as e:
-            if "Element is not attached to the DOM" in str(e):
-                if attempt == max_attempts - 1:
-                    print(e)
-                    await restore_page_initial_dom_state()
-                    sleep(5)
-            print(e)
+            return new_tab_url
+    except Exception as e:
+
+        print(e)
 
 
 async def get_all_child_elements(
@@ -306,9 +300,7 @@ async def get_element_inner_text(element: ElementHandle) -> Union[str, None]:
         return None
 
 
-async def get_element_url(
-    page: Page, element: ElementHandle, restore_page_initial_dom_state: Callable
-) -> Union[str, None]:
+async def get_element_url(page: Page, element: ElementHandle) -> Union[str, None]:
     href = await element.get_attribute("href")
     url = get_absolute_url(page, href)
     if is_truthy(url):
@@ -317,7 +309,6 @@ async def get_element_url(
     return await click_and_retrieve_new_tab_url(
         page=page,
         element=element,
-        restore_page_initial_dom_state=restore_page_initial_dom_state,
     )
 
 

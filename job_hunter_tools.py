@@ -146,9 +146,7 @@ async def search_software_roles(
     print_with_newline("Unable to search for software roles!")
 
 
-async def get_interactable_career_web_elements(
-    page: Page, restore_page_initial_dom_state: Callable
-) -> List[WebElement]:
+async def get_interactable_career_web_elements(page: Page) -> List[WebElement]:
     """_summary_
 
     Args:
@@ -158,17 +156,13 @@ async def get_interactable_career_web_elements(
         List[WebElement]: _description_
     """
     interactable_web_elements = order_web_elements_by_regex(
-        coalesce_web_elements(
-            await fetch_interactable_web_elements(page, restore_page_initial_dom_state)
-        )
+        coalesce_web_elements(await fetch_interactable_web_elements(page))
     )
     return interactable_web_elements
 
 
 # TODO: shift this to webelement module
-async def fetch_interactable_web_elements(
-    page: Page, restore_page_initial_dom_state: Callable
-) -> List[WebElement]:
+async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
     """Extracts metadata of web elements (eg - anchor (<element> </element>))
     from the page.
 
@@ -204,7 +198,6 @@ async def fetch_interactable_web_elements(
         url = await get_element_url(
             page=page,
             element=element,
-            restore_page_initial_dom_state=restore_page_initial_dom_state,
         )
         """
         Extract metadata of neighboring elements
