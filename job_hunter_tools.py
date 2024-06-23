@@ -1,8 +1,9 @@
 import os
+from ast import Set
 from enum import Enum
 from re import L
 from time import sleep
-from typing import Any, Callable, Dict, List, Optional, TypedDict, Union
+from typing import Any, Callable, Dict, List, Optional, Set, TypedDict, Union
 from urllib.parse import urljoin, urlparse
 
 from playwright.async_api import BrowserContext, ElementHandle, Page
@@ -16,6 +17,7 @@ from playwright_utils import (
     fetch_neighboring_elements,
     get_absolute_url,
     get_all_child_elements,
+    get_element_html,
     get_element_inner_text,
     get_element_tag_name,
     get_element_url,
@@ -37,6 +39,7 @@ from web_element import (
     WebElementType,
     coalesce_web_elements,
     order_web_elements_by_regex,
+    web_element_list_contains_element_handle,
 )
 
 
@@ -146,7 +149,9 @@ async def search_software_roles(
     print_with_newline("Unable to search for software roles!")
 
 
-async def get_interactable_career_web_elements(page: Page) -> List[WebElement]:
+async def get_interactable_career_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
+) -> List[WebElement]:
     """_summary_
 
     Args:
@@ -156,13 +161,19 @@ async def get_interactable_career_web_elements(page: Page) -> List[WebElement]:
         List[WebElement]: _description_
     """
     interactable_web_elements = order_web_elements_by_regex(
-        coalesce_web_elements(await fetch_interactable_web_elements(page))
+        coalesce_web_elements(
+            await fetch_interactable_web_elements(
+                page, restore_page_initial_dom_state=restore_page_initial_dom_state
+            ),
+        )
     )
     return interactable_web_elements
 
 
 # TODO: shift this to webelement module
-async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
+async def fetch_interactable_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
+) -> List[WebElement]:
     """Extracts metadata of web elements (eg - anchor (<element> </element>))
     from the page.
 
@@ -180,64 +191,93 @@ async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
 
     if main_element:
         # elements = await main_element.query_selector_all(selector.value)
-        elements = await main_element.query_selector_all("button")
+        elements = await main_element.query_selector_all("a,button")
     else:
-        elements = await page.query_selector_all("button")
+        elements = await page.query_selector_all("a,button")
 
     interactable_web_elements: List[WebElement] = []
-    for element in elements:
-        label = remove_special_chars(remove_newlines(await element.inner_text()))
-        description = none_to_str(await get_element_inner_text(element=element))
-
-        tag_name = await get_element_tag_name(element=element)
-
-        print_var_name_value(label)
-        print_var_name_value(description)
-        print_var_name_value(tag_name)
-        print()
-        url = await get_element_url(
-            page=page,
-            element=element,
-        )
-        """
-        Extract metadata of neighboring elements
-        This is useful when we have an <a>'s description
-        in a adjacent div or h2.
-        For eg - https://www.anthropic.com/jobs
-        """
-        (
-            neighbor_elements_descriptions,
-            neighbor_elements_urls,
-        ) = await fetch_elements_description_and_url(
-            page=page,
-            elements=await fetch_neighboring_elements(
-                element=element, element_filter=tag_name
-            ),
-            fetch_urls=not is_truthy(url),
-            filter_element_tag_name=tag_name,
-        )
-        description += remove_special_chars(
-            remove_newlines(
-                " ".join(description for description in neighbor_elements_descriptions)
-            )
-        )
-
-        if is_truthy(url):
-            interactable_web_elements.append(
-                WebElement(
-                    label=label,
-                    url=url,  # type: ignore
-                    description=description,
+    processed_html_elements: Set[str] = set()
+    max_attempts = 2
+    for attempt in range(max_attempts):
+        try:
+            print_var_name_value(attempt)
+            for element in elements:
+                html = await get_element_html(element=element)
+                if html in processed_html_elements:
+                    continue
+                label = remove_special_chars(
+                    remove_newlines(await element.inner_text())
                 )
-            )
-        elif is_truthy(neighbor_elements_urls):
-            interactable_web_elements += [
-                WebElement(
-                    label=label,
-                    url=url,
-                    description=description,
+                description = none_to_str(await get_element_inner_text(element=element))
+
+                tag_name = await get_element_tag_name(element=element)
+
+                print_var_name_value(label)
+                print_var_name_value(description)
+                print_var_name_value(tag_name)
+                print()
+                url = await get_element_url(
+                    page=page,
+                    element=element,
                 )
-                for url in neighbor_elements_urls
-            ]
+                """
+                    Extract metadata of neighboring elements
+                    This is useful when we have an <a>'s description
+                    in a adjacent div or h2.
+                    For eg - https://www.anthropic.com/jobs
+                    """
+                (
+                    neighbor_elements_descriptions,
+                    neighbor_elements_urls,
+                ) = await fetch_elements_description_and_url(
+                    page=page,
+                    elements=await fetch_neighboring_elements(
+                        element=element, element_filter=tag_name
+                    ),
+                    fetch_urls=not is_truthy(url),
+                    filter_element_tag_name=tag_name,
+                )
+                description += remove_special_chars(
+                    remove_newlines(
+                        " ".join(
+                            description
+                            for description in neighbor_elements_descriptions
+                        )
+                    )
+                )
+
+                if is_truthy(url):
+                    interactable_web_elements.append(
+                        WebElement(
+                            label=label,
+                            url=url,  # type: ignore
+                            description=description,
+                            html=html,
+                        )
+                    )
+                elif is_truthy(neighbor_elements_urls):
+                    interactable_web_elements += [
+                        WebElement(
+                            html=html,
+                            label=label,
+                            url=url,
+                            description=description,
+                        )
+                        for url in neighbor_elements_urls
+                    ]
+                processed_html_elements.add(html)
+        except Exception as e:
+            if "Element is not attached to the DOM" in str(e):
+                if attempt == max_attempts - 1:
+                    raise e
+                await restore_page_initial_dom_state()
+                sleep(2)
+                if main_element:
+                    # elements = await main_element.query_selector_all(selector.value)
+                    elements = await main_element.query_selector_all("button")
+                else:
+                    elements = await page.query_selector_all("button")
+
+            ...
 
     return interactable_web_elements

@@ -2,7 +2,10 @@ from enum import Enum
 from typing import DefaultDict, Dict, List, TypedDict, Union
 import re
 
+from playwright_utils import get_element_html
 from utils import get_first_or_raise, group_by
+
+from playwright.async_api import ElementHandle
 
 
 class WebElementType(Enum):
@@ -12,10 +15,10 @@ class WebElementType(Enum):
 
 
 class WebElement(TypedDict):
-    # element_type: WebElementType
     label: str
     url: str
     description: str
+    html: str
 
 
 def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
@@ -35,7 +38,7 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
     for url, web_elements in web_element_by_url.items():
         coalesced_web_elements.append(
             WebElement(
-                # element_type=get_first_or_raise(web_elements)["element_type"],
+                html=" ".join(web_element["html"] for web_element in web_elements),
                 description=" ".join(
                     web_element["description"] for web_element in web_elements
                 ),
@@ -78,6 +81,16 @@ def order_web_elements_by_regex(dicts: List[WebElement]) -> List[WebElement]:
     ordered_dicts = [d[0] for d in sorted_scored_dicts]
 
     return ordered_dicts
+
+
+def web_element_list_contains_element_handle(
+    web_elements: List[WebElement], element: ElementHandle
+) -> bool:
+    element_html = get_element_html(element=element)
+    for web_element in web_elements:
+        if web_element["html"] == element_html:
+            return True
+    return False
 
 
 def print_web_element_list(metadata_list: List[WebElement]) -> None:

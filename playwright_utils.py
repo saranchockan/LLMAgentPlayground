@@ -152,6 +152,8 @@ async def click_and_retrieve_new_tab_url(
 
             return new_tab_url
     except Exception as e:
+        if "Element is not attached to the DOM" in str(e):
+            raise e
 
         print(e)
 
@@ -314,3 +316,7 @@ async def get_element_url(page: Page, element: ElementHandle) -> Union[str, None
 
 async def get_element_tag_name(element: ElementHandle) -> Union[str, None]:
     return await (await element.get_property("tagName")).json_value()
+
+
+async def get_element_html(element: ElementHandle) -> str:
+    return await element.evaluate("el => el.outerHTML")

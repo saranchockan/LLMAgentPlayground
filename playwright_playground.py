@@ -19,7 +19,19 @@ def extract_all_text(url):
         return all_text
 
 
-# Usage
-url = "https://boards.greenhouse.io/anthropic/jobs/4035785008"
-text = extract_all_text(url)
-print(text)
+def get_element_raw_html_text(url: str, selector: str):
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.goto(url)
+
+        elements = page.query_selector_all(selector=selector)
+
+        for element in elements:
+            print(element.evaluate("el => el.outerHTML"))
+
+        browser.close()
+
+
+url = "https://www.benchling.com/careers"
+get_element_raw_html_text(url=url, selector="button")

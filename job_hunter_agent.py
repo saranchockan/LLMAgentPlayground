@@ -59,8 +59,16 @@ async def run_job_hunter_agent(playwright: Playwright):
 
     sleep(5)
 
-    interactable_web_elements = await get_interactable_career_web_elements(page=page)
-    print_var_name_value(interactable_web_elements)
+    # TODO: Modularize this on wrapper
+    # over page to avoid prop drilling
+    async def restore_page_initial_dom_state():
+        print("restore_page_initial_dom_state()")
+        await search_software_roles(page=page, job_search_element=job_search_element)
+
+    interactable_web_elements = await get_interactable_career_web_elements(
+        page=page, restore_page_initial_dom_state=restore_page_initial_dom_state
+    )
+    print_web_element_list(interactable_web_elements)
 
     software_role_app_urls: List[WebElement] = []
 
