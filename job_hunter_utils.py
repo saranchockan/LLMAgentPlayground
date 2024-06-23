@@ -11,7 +11,7 @@ from prompts import (
     IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT,
     IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT,
     IS_WEB_PAGE_A_SOFTWARE_APPLICATION_PROMPT,
-    SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT,
+    SEARCH_FOR_SOFTWARE_ROLES_PROMPT,
 )
 from utils import str_to_bool
 from web_element import WebElement
@@ -46,7 +46,7 @@ def get_job_search_element(html_input_elements: List[str]) -> Union[str, None]:
         messages=[
             {
                 "role": "user",
-                "content": SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT.format(
+                "content": SEARCH_FOR_SOFTWARE_ROLES_PROMPT.format(
                     HTML_INPUT_ELEMENTS=html_input_elements
                 ),
             },

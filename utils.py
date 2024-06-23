@@ -1,11 +1,19 @@
 import re
-from typing import Any, Dict, List, Mapping, TypedDict, Union
-
-
-from typing import TypeVar, Iterable, Callable, DefaultDict, Generic
 from collections import defaultdict
-
 from difflib import SequenceMatcher
+from typing import (
+    Any,
+    Callable,
+    DefaultDict,
+    Dict,
+    Generic,
+    Iterable,
+    List,
+    Mapping,
+    TypedDict,
+    TypeVar,
+    Union,
+)
 
 
 def similarity_ratio(str1: str, str2: str) -> float:
@@ -134,7 +142,7 @@ def print_var_name_value(var):
 
     for name, value in caller_vars.items():
         if value is var:
-            print_with_newline(f"{name} = {value}")
+            print(f"{name} = {value}")
             break
 
 

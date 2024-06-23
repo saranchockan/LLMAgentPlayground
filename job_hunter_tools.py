@@ -1,11 +1,11 @@
 import os
 from enum import Enum
 from re import L
-from typing import Any, Dict, List, TypedDict, Union
-from urllib.parse import urljoin, urlparse
 from time import sleep
+from typing import Any, Callable, Dict, List, Optional, TypedDict, Union
+from urllib.parse import urljoin, urlparse
 
-from playwright.async_api import ElementHandle, Page, BrowserContext
+from playwright.async_api import BrowserContext, ElementHandle, Page
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from job_hunter_utils import get_job_search_element
@@ -62,93 +62,113 @@ def get_company_page_career_url(company_name: str) -> str:
     )
 
 
-async def search_software_roles(web_page: Page):
+async def fetch_job_search_element(page: Page) -> Union[ElementHandle, None]:
+    """Fetches the job search element in the web page
+
+    Args:
+        page (Page): web page to retrieve
+    """
+    try:
+        await page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
+        search_elements = await page.query_selector_all(WebElementType.INPUT.value)
+    except Exception as e:
+        print("Web page does not have search.")
+        raise e
+
+    search_elements_map: Dict[str, ElementHandle] = {}
+    for search_element in search_elements:
+        """
+        Removing special chars because
+        LLM can re-format special chars that
+        affect str comparison ' -> \'
+        """
+        search_element_html_str = remove_special_chars(
+            str(await search_element.get_property("outerHTML"))
+        )
+        search_elements_map[search_element_html_str] = search_element
+
+    job_search_element_key = get_job_search_element(list(search_elements_map.keys()))
+    """
+    TODO: Prompt the LLM to return empty output if none of the
+    input elements are relevant for job search
+    TODO: Add error handling
+    Case 1: Hallucination: If the LLM returns a job_search_element_key
+    that is not in the search_elements_map, teach the LLM that it is hallucinating
+    and tell it to pick an input element from the provided list
+    Case 2: Misdirection: LLM picks an input element from the examples. Tell the
+    LLM that it picked an input element from the list and tell it to pick
+    an input element from the user provided list.
+    Case 3: LLM determines that none of the search input
+    are for searching software roles
+
+    TODO: Memory
+    How can the LLM learn to pick search elements better by relying
+    on past examples?
+
+    TODO: Collect examples
+    As the LLM performs this task, collect a list of input elements
+    and output. This will be useful for fine tune data modelling
+
+    TODO: Use Langchain Prompt Template (Few Shot)
+    and Output parsing for greater control
+    """
+
+    try:
+        if job_search_element_key:
+            return search_elements_map[job_search_element_key]
+    except KeyError as k:
+        raise k
+    return None
+
+
+async def search_software_roles(
+    page: Page, job_search_element: Optional[ElementHandle] = None
+) -> Union[ElementHandle, None]:
     """SEARCH for software engineer roles in the
     the web page.
 
     Args:
         page (Page): web page to search for software roles
     """
-
+    if not is_truthy(job_search_element):
+        job_search_element = await fetch_job_search_element(page)
     try:
-        await web_page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
-
-        search_elements = await web_page.query_selector_all(WebElementType.INPUT.value)
-
-        search_elements_map: Dict[str, ElementHandle] = {}
-        for search_element in search_elements:
-
-            """
-            Removing special chars because
-            LLM can re-format special chars that
-            affect str comparison ' -> \'
-            """
-            search_element_html_str = remove_special_chars(
-                str(await search_element.get_property("outerHTML"))
-            )
-            search_elements_map[search_element_html_str] = search_element
-
         """
-        TODO: Prompt the LLM to return empty output if none of the
-        input elements are relevant for job search
+        TODO: Instead of naively typing in 'Software', we should check
+        if the search input has options. For example, https://www.anthropic.com/jobs
         """
-        job_search_element_key = get_job_search_element(
-            list(search_elements_map.keys())
-        )
-        """
-        TODO: Add error handling
-        Case 1: Hallucination: If the LLM returns a job_search_element_key
-        that is not in the search_elements_map, teach the LLM that it is hallucinating
-        and tell it to pick an input element from the provided list
-        Case 2: Misdirection: LLM picks an input element from the examples. Tell the
-        LLM that it picked an input element from the list and tell it to pick
-        an input element from the user provided list.
-        Case 3: LLM determines that none of the search input
-        are for searching software roles
-
-        TODO: Memory
-        How can the LLM learn to pick search elements better by relying
-        on past examples?
-
-        TODO: Collect examples
-        As the LLM performs this task, collect a list of input elements
-        and output. This will be useful for fine tune data modelling
-
-        TODO: Use Langchain Prompt Template (Few Shot)
-        and Output parsing for greater control
-        """
-
-        if job_search_element_key:
-            try:
-                job_search_element = search_elements_map[job_search_element_key]
-            except KeyError as k:
-                print("Key Error")
-                raise k
-
-            try:
-                """
-                TODO: Instead of naively typing in 'Software', we should check
-                if the search input has options. For example, https://www.anthropic.com/jobs
-                """
-                await job_search_element.type("Software")
-                await job_search_element.press("Enter")
-            except:
-                print_with_newline("Unable to search for software roles!")
-                ...
-
-    except PlaywrightTimeoutError:
-        print("Timeout! Page does not have search")
+        if is_truthy(job_search_element):
+            await job_search_element.type("Software")  # type: ignore
+            await job_search_element.press("Enter")  # type: ignore
+            return job_search_element
+    except Exception as e:
+        print(e)
+    print_with_newline("Unable to search for software roles!")
 
 
-async def get_interactable_career_web_elements(page: Page) -> List[WebElement]:
+async def get_interactable_career_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
+) -> List[WebElement]:
+    """_summary_
+
+    Args:
+        page (Page): _description_
+
+    Returns:
+        List[WebElement]: _description_
+    """
     interactable_web_elements = order_web_elements_by_regex(
-        coalesce_web_elements(await fetch_interactable_web_elements(page))
+        coalesce_web_elements(
+            await fetch_interactable_web_elements(page, restore_page_initial_dom_state)
+        )
     )
     return interactable_web_elements
 
 
 # TODO: shift this to webelement module
-async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
+async def fetch_interactable_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
+) -> List[WebElement]:
     """Extracts metadata of web elements (eg - anchor (<element> </element>))
     from the page.
 
@@ -166,26 +186,26 @@ async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
 
     if main_element:
         # elements = await main_element.query_selector_all(selector.value)
-        elements = await main_element.query_selector_all("a, button")
+        elements = await main_element.query_selector_all("button")
     else:
-        elements = await page.query_selector_all("a, button")
+        elements = await page.query_selector_all("button")
 
     interactable_web_elements: List[WebElement] = []
     for element in elements:
-        print_var_name_value(element)
-
         label = remove_special_chars(remove_newlines(await element.inner_text()))
-        print_var_name_value(label)
-
         description = none_to_str(await get_element_inner_text(element=element))
-        print_var_name_value(description)
 
         tag_name = await get_element_tag_name(element=element)
+
+        print_var_name_value(label)
+        print_var_name_value(description)
         print_var_name_value(tag_name)
-
-        url = await get_element_url(page=page, element=element)
-        print_var_name_value(url)
-
+        print()
+        url = await get_element_url(
+            page=page,
+            element=element,
+            restore_page_initial_dom_state=restore_page_initial_dom_state,
+        )
         """
         Extract metadata of neighboring elements
         This is useful when we have an <a>'s description
@@ -208,13 +228,10 @@ async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
                 " ".join(description for description in neighbor_elements_descriptions)
             )
         )
-        print_var_name_value(neighbor_elements_urls)
-        print_var_name_value(description)
 
         if is_truthy(url):
             interactable_web_elements.append(
                 WebElement(
-                    # element_type=selector,
                     label=label,
                     url=url,  # type: ignore
                     description=description,
@@ -223,7 +240,6 @@ async def fetch_interactable_web_elements(page: Page) -> List[WebElement]:
         elif is_truthy(neighbor_elements_urls):
             interactable_web_elements += [
                 WebElement(
-                    # element_type=selector,
                     label=label,
                     url=url,
                     description=description,

@@ -8,7 +8,7 @@ official careers page for a tech company called {COMPANY_NAME}?
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE."""
 
 
-SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT = """ You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. 
+SEARCH_FOR_SOFTWARE_ROLES_PROMPT = """ You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. 
 
 You will be given a list called HTML_INPUT_ELEMENTS. Each element in HTML_INPUT_ELEMENTS list is an HTML input element that is searchable on a company's career website.   
 You should pick one input element that is prompting the user to search for specific job openings in the company. The input element you pick should be

@@ -9,6 +9,7 @@ from job_hunter_playground import is_url_software_role_application
 from job_hunter_tools import (
     fetch_interactable_web_elements,
     get_company_page_career_url,
+    get_interactable_career_web_elements,
     search_software_roles,
 )
 from job_hunter_utils import (
@@ -48,31 +49,49 @@ async def run_job_hunter_agent(playwright: Playwright):
     page = await browser.new_page()
     page.set_default_timeout(100000)
 
+    await page.goto(company_career_page_url)
+
+    try:
+        job_search_element = await search_software_roles(page=page)
+    except Exception as e:
+        print("Search failed!")
+        print("Exception:", e)
+
+    # TODO: Modularize this on wrapper
+    # over page to avoid prop drilling
+    async def restore_page_initial_dom_state():
+        print("restore_page_initial_dom_state()")
+        await search_software_roles(page=page, job_search_element=job_search_element)
+
+    sleep(5)
+
+    interactable_web_elements = await get_interactable_career_web_elements(
+        page=page, restore_page_initial_dom_state=restore_page_initial_dom_state
+    )
+    print_var_name_value(interactable_web_elements)
+
     software_role_app_urls: List[WebElement] = []
 
-    async def software_role_app_web_crawler(
-        url: str, software_role_app_urls: List[WebElement]
-    ):
-        if len(software_role_app_urls) != 0:
-            return
-        # Navigate to URL in browser
-        await page.goto(url)
+    # async def software_role_app_web_crawler(
+    #     url: str, software_role_app_urls: List[WebElement]
+    # ):
+    #     if len(software_role_app_urls) != 0:
+    #         return
+    #     # Navigate to URL in browser
+    #     await page.goto(url)
 
-        """
-        SEARCH for software engineer roles in the 
-        current page.
-        """
+    #     """
+    #     SEARCH for software engineer roles in the
+    #     current page.
+    #     """
+    #     try:
+    #         await search_software_roles(web_page=page)
+    #     except Exception as e:
+    #         print("SEARCH for software roles failed!", e)
 
-        try:
-            await search_software_roles(web_page=page)
-        except Exception as e:
-            print("Search failed!")
-            print("Exception:", e)
+    #     sleep(5)
 
-        sleep(5)
-
-        interactable_web_elements = await fetch_interactable_web_elements(page=page)
-        return interactable_web_elements
+    #     await fetch_interactable_web_elements(page=page)
 
     #     for web_element in interactable_web_elements:
     #         if is_web_element_related_to_career_exploration(web_element=web_element):
@@ -105,14 +124,6 @@ async def run_job_hunter_agent(playwright: Playwright):
     #             )
 
     #     ...
-
-    interactable_web_elements = await software_role_app_web_crawler(
-        url=company_career_page_url, software_role_app_urls=software_role_app_urls
-    )
-
-    print("Software engineering web app elements")
-    if interactable_web_elements:
-        print_web_element_list(interactable_web_elements)
 
 
 async def main():

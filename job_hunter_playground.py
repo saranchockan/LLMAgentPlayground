@@ -50,7 +50,7 @@ async def run_job_hunter(playwright: Playwright):
     """
 
     try:
-        await search_software_roles(web_page=page)
+        await search_software_roles(page=page)
     except Exception as e:
         print("Search failed!")
         print("Exception:", e)
@@ -113,14 +113,6 @@ async def run_job_hunter(playwright: Playwright):
     )
 
     print_web_element_list(interactable_web_elements)
-
-    # TODO: Coalesce anchors and buttons
-
-    # for web_element in interactable_web_elements:
-    #     if web_element["url"] not in company_career_page_url:
-    #         if is_web_element_related_to_career_exploration(web_element=web_element):
-    #             print_web_element(web_element)
-    #     ...
 
     input("Press Enter to close the browser...")
     await browser.close()
