@@ -27,6 +27,7 @@ from prompts import (
     EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
 )
 from utils import (
+    debug_print,
     is_truthy,
     none_to_str,
     print_var_name_value,
@@ -75,7 +76,7 @@ async def fetch_job_search_element(page: Page) -> Union[ElementHandle, None]:
         await page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
         search_elements = await page.query_selector_all(WebElementType.INPUT.value)
     except Exception as e:
-        print("Web page does not have search.")
+        debug_print("Web page does not have search element!", e)
         raise e
 
     search_elements_map: Dict[str, ElementHandle] = {}
@@ -145,7 +146,7 @@ async def search_software_roles(
             await job_search_element.press("Enter")  # type: ignore
             return job_search_element
     except Exception as e:
-        print(e)
+        debug_print(e)
     print_with_newline("Unable to search for software roles!")
 
 
@@ -212,10 +213,6 @@ async def fetch_interactable_web_elements(
 
                 tag_name = await get_element_tag_name(element=element)
 
-                print_var_name_value(label)
-                print_var_name_value(description)
-                print_var_name_value(tag_name)
-                print()
                 url = await get_element_url(
                     page=page,
                     element=element,

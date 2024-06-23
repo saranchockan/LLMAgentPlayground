@@ -5,7 +5,7 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from playwright.async_api import BrowserContext, ElementHandle, Page, async_playwright
 
-from utils import is_truthy, print_var_name_value
+from utils import is_truthy, print_var_name_value, debug_print
 
 
 async def take_full_page_screenshots(
@@ -131,31 +131,31 @@ async def click_and_retrieve_new_tab_url(
         # Expect a new page to be opened
         async with page.context.expect_page(timeout=500) as new_page_info:
             # Click the element with Meta key (Command key on macOS)
-            print("Attempting to click button")
+            debug_print("Attempting to click button")
             await element.click(button="left", modifiers=["Meta"], timeout=500)
-            print("Clicked button")
+            debug_print("Clicked button")
 
             # Get the new page object
             new_page = await new_page_info.value
 
-            print("Got new page")
+            debug_print("Got new page")
 
             # Get the URL of the new page
             new_tab_url = new_page.url
 
-            print("Got new_tab_url", new_tab_url)
+            debug_print("Got new_tab_url", new_tab_url)
 
             # Close the new page
             await new_page.close()
 
-            print("Closed new page")
+            debug_print("Closed new page")
 
             return new_tab_url
     except Exception as e:
         if "Element is not attached to the DOM" in str(e):
             raise e
 
-        print(e)
+        debug_print(e)
 
 
 async def get_all_child_elements(
@@ -281,7 +281,7 @@ async def fetch_elements_description_and_url(
             try:
                 descriptions.append(await element.inner_text())
             except Exception as e:
-                print("Failed to retrieve neighboring element inner text", e)
+                debug_print("Failed to retrieve neighboring element inner text", e)
             try:
                 href = await element.get_attribute("href")
                 if fetch_urls:
@@ -289,7 +289,7 @@ async def fetch_elements_description_and_url(
                     if is_truthy(url):
                         urls.append(url)  # type: ignore
             except Exception as e:
-                print("Failed to retrieve neighboring element href", e)
+                debug_print("Failed to retrieve neighboring element href", e)
 
     return (descriptions, urls)
 
@@ -298,7 +298,7 @@ async def get_element_inner_text(element: ElementHandle) -> Union[str, None]:
     try:
         return await element.inner_text()
     except Exception as e:
-        print("Failed to get inner text of element", e)
+        debug_print("Failed to get inner text of element", e)
         return None
 
 
@@ -307,7 +307,7 @@ async def get_element_url(page: Page, element: ElementHandle) -> Union[str, None
     url = get_absolute_url(page, href)
     if is_truthy(url):
         return url
-    print("click_and_retrieve_new_tab_url()")
+    debug_print("click_and_retrieve_new_tab_url()")
     return await click_and_retrieve_new_tab_url(
         page=page,
         element=element,

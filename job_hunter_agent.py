@@ -18,6 +18,7 @@ from job_hunter_utils import (
 )
 from utils import (
     are_urls_similar,
+    debug_print,
     get_first_or_raise,
     print_var_name_value,
     print_with_newline,
@@ -54,15 +55,13 @@ async def run_job_hunter_agent(playwright: Playwright):
     try:
         job_search_element = await search_software_roles(page=page)
     except Exception as e:
-        print("Search failed!")
-        print("Exception:", e)
+        debug_print("Failed to search software roles", e)
 
     sleep(5)
 
     # TODO: Modularize this on wrapper
     # over page to avoid prop drilling
     async def restore_page_initial_dom_state():
-        print("restore_page_initial_dom_state()")
         await search_software_roles(page=page, job_search_element=job_search_element)
 
     interactable_web_elements = await get_interactable_career_web_elements(

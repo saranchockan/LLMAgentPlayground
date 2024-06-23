@@ -125,7 +125,7 @@ def print_if_not_empty(*strings, sep=" ", prefix="", suffix=""):
     """
     combined_string = sep.join(str(s) for s in strings)
     if combined_string:
-        print(f"{prefix}{combined_string}{suffix}", end="\n")
+        debug_print(f"{prefix}{combined_string}{suffix}", end="\n")
 
 
 def print_var_name_value(var):
@@ -142,7 +142,7 @@ def print_var_name_value(var):
 
     for name, value in caller_vars.items():
         if value is var:
-            print(f"{name} = {value}")
+            debug_print(f"{name} = {value}")
             break
 
 
@@ -166,7 +166,7 @@ def print_with_newline(value: Any, end: str = "\n\n") -> None:
         42--
 
     """
-    print(value, end=end)
+    debug_print(value, end=end)
 
 
 def remove_newlines(text):
@@ -263,3 +263,18 @@ def none_to_str(value: Union[str, None]) -> str:
         str: The original string if not None, otherwise an empty string.
     """
     return "" if value is None else value
+
+
+import os
+
+
+def debug_print(*args, **kwargs):
+    """
+    Print debug information only if the DEBUG environment variable is set to 'ON'.
+
+    Usage:
+    debug_print("Debug message", variable, other_stuff)
+    debug_print("Debug message with custom separator", sep='|')
+    """
+    if os.environ.get("DEBUG", "").upper() == "ON":
+        print(*args, **kwargs)
