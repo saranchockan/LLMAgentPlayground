@@ -1,30 +1,16 @@
-import asyncio
 import os
-from enum import Enum
 from time import sleep
-from typing import Dict, List, TypedDict
+from typing import List
 
-from playwright.async_api import ElementHandle, Playwright
-from playwright.async_api import TimeoutError as PlaywrightTimeoutError
-from playwright.async_api import async_playwright
+from playwright.async_api import Playwright, async_playwright
 
-from job_hunter_llm_utils import (
-    is_web_page_a_software_role_application,
-    get_job_search_element,
-    is_web_element_related_to_career_exploration,
-)
 from job_hunter_tools import (
-    fetch_web_element_metadata,
-    is_web_element_related_to_software_engineering_role,
+    fetch_interactable_web_elements,
+    get_company_page_career_url,
     search_software_roles,
-    take_full_page_screenshots,
 )
-from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
-from prompts import (
-    COMPANY_NAME,
-    EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-    EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
-)
+from job_hunter_utils import is_web_page_a_software_role_application
+from playwright_utils import take_full_page_screenshots
 from utils import print_with_newline
 from web_element import (
     WebElement,
@@ -33,6 +19,8 @@ from web_element import (
     order_web_elements_by_regex,
     print_web_element_list,
 )
+
+COMPANY_NAME = os.environ["COMPANY_NAME"]
 
 
 async def run_job_hunter(playwright: Playwright):
@@ -50,16 +38,7 @@ async def run_job_hunter(playwright: Playwright):
     ASK perplexity for company's official career page url.
     """
 
-    # TODO: Add error handling
-    # TODO: Add career url validation
-    # TODO: LLM DB Cache: if perplexity has previously
-    # give us this company's career page URL, extract
-    # URL from DB
-    company_career_page_url = call_perpexity_llm(
-        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
-        model=SONAR_SMALL_ONLINE_MODEL,
-    )
+    company_career_page_url = get_company_page_career_url(COMPANY_NAME)
 
     print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
@@ -71,7 +50,7 @@ async def run_job_hunter(playwright: Playwright):
     """
 
     try:
-        await search_software_roles(page=page)
+        await search_software_roles(web_page=page)
     except Exception as e:
         print("Search failed!")
         print("Exception:", e)
@@ -95,9 +74,7 @@ async def run_job_hunter(playwright: Playwright):
     Extrack links to software engineer roles
     """
     sleep(5)
-    anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        context, page, WebElementType.ANCHOR
-    )
+    anchor_web_elements: List[WebElement] = await fetch_interactable_web_elements(page)
 
     """
     We search of buttons b/c some websites
@@ -110,9 +87,7 @@ async def run_job_hunter(playwright: Playwright):
     and should be clicked
 
     """
-    button_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        context, page, WebElementType.BUTTON
-    )
+    button_web_elements: List[WebElement] = await fetch_interactable_web_elements(page)
 
     """
     Keywords to regex

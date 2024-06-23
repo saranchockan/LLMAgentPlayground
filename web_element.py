@@ -12,13 +12,21 @@ class WebElementType(Enum):
 
 
 class WebElement(TypedDict):
-    element_type: WebElementType
+    # element_type: WebElementType
     label: str
     url: str
     description: str
 
 
 def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
+    """Coalesces a list of web elements by grouping them based on their URL and combining their descriptions and labels.
+
+    Args:
+        web_elements (List[WebElement]): A list of WebElement objects to be coalesced.
+
+    Returns:
+        List[WebElement]: A list of coalesced WebElement objects.
+    """
     coalesced_web_elements: List[WebElement] = []
     web_element_by_url: Dict[str, List[WebElement]] = group_by(
         web_elements, lambda w: w["url"]
@@ -27,7 +35,7 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
     for url, web_elements in web_element_by_url.items():
         coalesced_web_elements.append(
             WebElement(
-                element_type=get_first_or_raise(web_elements)["element_type"],
+                # element_type=get_first_or_raise(web_elements)["element_type"],
                 description=" ".join(
                     web_element["description"] for web_element in web_elements
                 ),
@@ -36,8 +44,6 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
             )
         )
     return coalesced_web_elements
-
-    ...
 
 
 def order_web_elements_by_regex(dicts: List[WebElement]) -> List[WebElement]:

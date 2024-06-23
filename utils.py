@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Mapping, TypedDict
+from typing import Any, Dict, List, Mapping, TypedDict, Union
 
 
 from typing import TypeVar, Iterable, Callable, DefaultDict, Generic
@@ -205,3 +205,53 @@ def str_to_bool(string):
         return False
     else:
         raise ValueError(f"Invalid input: {string}. Expected 'True' or 'False'.")
+
+
+def is_truthy(value) -> bool:
+    """
+    Determine if a value is truthy according to Python's truthiness rules.
+
+    This function returns False for None and all falsy values, and True otherwise.
+
+    Falsy values in Python include:
+    - None
+    - False
+    - Zero of any numeric type (0, 0.0, 0j)
+    - Empty sequences and collections ('', (), [], {}, set(), range(0))
+
+    Parameters:
+    value (any): The value to be evaluated for truthiness.
+
+    Returns:
+    bool: False if the value is None or falsy, True otherwise.
+
+    Examples:
+    >>> is_truthy(None)
+    False
+    >>> is_truthy(0)
+    False
+    >>> is_truthy('')
+    False
+    >>> is_truthy([])
+    False
+    >>> is_truthy(1)
+    True
+    >>> is_truthy('Hello')
+    True
+    >>> is_truthy([1, 2, 3])
+    True
+    """
+    return bool(value)
+
+
+def none_to_str(value: Union[str, None]) -> str:
+    """
+    Convert None to an empty string.
+
+    Args:
+        value (str): The input string or None.
+
+    Returns:
+        str: The original string if not None, otherwise an empty string.
+    """
+    return "" if value is None else value

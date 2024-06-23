@@ -1,10 +1,9 @@
 import os
 
-COMPANY_NAME = os.getenv("COMPANY_NAME")
 EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT = """You are a website crawler. You will be given the name of a company. 
 You should output the URL of the company's career page. 
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE"""
-EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT = f"""Can you output the URL that is the 
+EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT = """Can you output the URL that is the 
 official careers page for a tech company called {COMPANY_NAME}? 
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE."""
 
@@ -44,11 +43,6 @@ Pick the most relevant input element from the USR_HTML_INPUT_ELEMENTS list that 
 Pick an element from USR_HTML_INPUT_ELEMENTS LIST. Remember, YOUR OUTPUT SHOULD ONLY BE AN ELEMENT FROM USR_HTML_INPUT_ELEMENTS LIST and NOTHING ELSE.
 """
 
-"""
-The OUTPUT is "<input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">", because it appears to be the search input field that allows the user to search for specific job openings. This is the most relevant input element for a job search functionality on a company's career website.
-
-The OUTPUT is "<input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">", which is the "role" input field, because it appears to be the most relevant for searching for software engineer job openings on a company's career website. This input field allows the user to directly enter the job role or title they are searching for, which is a common and effective way to find specific job listings on a company's career site.
-"""
 
 IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in search for software engineer roles on company career websites.
 

@@ -1,21 +1,20 @@
 import asyncio
+import os
 from time import sleep
 from typing import List
 
-from playwright.async_api import ElementHandle, Playwright
+from playwright.async_api import ElementHandle, Playwright, async_playwright
 
-from job_hunter_llm_utils import (
-    is_job_application_web_page_a_software_role,
-    is_web_page_a_software_role_application,
-    is_web_element_related_to_career_exploration,
-)
 from job_hunter_playground import is_url_software_role_application
 from job_hunter_tools import (
-    fetch_web_element_metadata,
+    fetch_interactable_web_elements,
     get_company_page_career_url,
     search_software_roles,
 )
-from prompts import COMPANY_NAME
+from job_hunter_utils import (
+    is_job_application_web_page_a_software_role,
+    is_web_element_related_to_career_exploration,
+)
 from utils import (
     are_urls_similar,
     get_first_or_raise,
@@ -31,14 +30,14 @@ from web_element import (
     print_web_element_list,
 )
 
-from playwright.async_api import async_playwright
+COMPANY_NAME = os.getenv("COMPANY_NAME", "")
 
 
 async def run_job_hunter_agent(playwright: Playwright):
     print_with_newline(
         f"✨✨✨ Extracting software engineering positions from {COMPANY_NAME} ✨✨✨"
     )
-    company_career_page_url = await get_company_page_career_url()
+    company_career_page_url = get_company_page_career_url(COMPANY_NAME)
     ...
 
     print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
@@ -49,19 +48,12 @@ async def run_job_hunter_agent(playwright: Playwright):
     page = await browser.new_page()
     page.set_default_timeout(100000)
 
-    software_role_app_urls: List[WebElement] = [
-        WebElement(
-            description="",
-            label="",
-            url="https://boards.greenhouse.io/anthropic/jobs/4035354008",
-            element_type=WebElementType.ANCHOR,
-        )
-    ]
+    software_role_app_urls: List[WebElement] = []
 
     async def software_role_app_web_crawler(
         url: str, software_role_app_urls: List[WebElement]
     ):
-        if len(software_role_app_urls) != 1:
+        if len(software_role_app_urls) != 0:
             return
         # Navigate to URL in browser
         await page.goto(url)
@@ -72,60 +64,55 @@ async def run_job_hunter_agent(playwright: Playwright):
         """
 
         try:
-            await search_software_roles(page=page)
+            await search_software_roles(web_page=page)
         except Exception as e:
             print("Search failed!")
             print("Exception:", e)
 
         sleep(5)
-        anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
-            context, page, WebElementType.ANCHOR
-        )
-        button_web_elements: List[WebElement] = await fetch_web_element_metadata(
-            context, page, WebElementType.BUTTON
-        )
-        interactable_web_elements = order_web_elements_by_regex(
-            coalesce_web_elements((anchor_web_elements + button_web_elements))
-        )
 
-        for web_element in interactable_web_elements:
-            if is_web_element_related_to_career_exploration(web_element=web_element):
-                try:
-                    software_role_url = get_first_or_raise(software_role_app_urls)
+        interactable_web_elements = await fetch_interactable_web_elements(page=page)
+        return interactable_web_elements
 
-                    if are_urls_similar(software_role_url["url"], web_element["url"]):
-                        if await is_job_application_web_page_a_software_role(
-                            web_element["url"]
-                        ):
-                            print("Found software engineering role w/o vision!")
-                            print_web_element(web_element=web_element)
-                            software_role_app_urls.append(web_element)
-                            continue
-                        print("Not a software engineering application role!")
-                        print_web_element(web_element=web_element)
-                        continue
-                except Exception as e:
-                    print(e)
-                print("Running vision !! !!")
-                if await is_url_software_role_application(url=web_element["url"]):
-                    print("Found software engineering role w/ vision!")
-                    print_web_element(web_element=web_element)
-                    software_role_app_urls.append(web_element)
-                    continue
+    #     for web_element in interactable_web_elements:
+    #         if is_web_element_related_to_career_exploration(web_element=web_element):
+    #             try:
+    #                 software_role_url = get_first_or_raise(software_role_app_urls)
 
-                await software_role_app_web_crawler(
-                    url=web_element["url"],
-                    software_role_app_urls=software_role_app_urls,
-                )
+    #                 if are_urls_similar(software_role_url["url"], web_element["url"]):
+    #                     if await is_job_application_web_page_a_software_role(
+    #                         web_element["url"]
+    #                     ):
+    #                         print("Found software engineering role w/o vision!")
+    #                         print_web_element(web_element=web_element)
+    #                         software_role_app_urls.append(web_element)
+    #                         continue
+    #                     print("Not a software engineering application role!")
+    #                     print_web_element(web_element=web_element)
+    #                     continue
+    #             except Exception as e:
+    #                 print(e)
+    #             print("Running vision !! !!")
+    #             if await is_url_software_role_application(url=web_element["url"]):
+    #                 print("Found software engineering role w/ vision!")
+    #                 print_web_element(web_element=web_element)
+    #                 software_role_app_urls.append(web_element)
+    #                 continue
 
-        ...
+    #             await software_role_app_web_crawler(
+    #                 url=web_element["url"],
+    #                 software_role_app_urls=software_role_app_urls,
+    #             )
 
-    await software_role_app_web_crawler(
+    #     ...
+
+    interactable_web_elements = await software_role_app_web_crawler(
         url=company_career_page_url, software_role_app_urls=software_role_app_urls
     )
 
     print("Software engineering web app elements")
-    print_web_element_list(software_role_app_urls)
+    if interactable_web_elements:
+        print_web_element_list(interactable_web_elements)
 
 
 async def main():
