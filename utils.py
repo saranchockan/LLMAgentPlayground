@@ -1,9 +1,49 @@
 import re
-from typing import Any, Dict, List, Mapping, TypedDict
-
-
-from typing import TypeVar, Iterable, Callable, DefaultDict, Generic
 from collections import defaultdict
+from difflib import SequenceMatcher
+from typing import (
+    Any,
+    Callable,
+    DefaultDict,
+    Dict,
+    Generic,
+    Iterable,
+    List,
+    Mapping,
+    TypedDict,
+    TypeVar,
+    Union,
+)
+
+
+def similarity_ratio(str1: str, str2: str) -> float:
+    """
+    Calculate the similarity ratio between two strings.
+
+    Parameters:
+    str1 (str): The first string.
+    str2 (str): The second string.
+
+    Returns:
+    float: The similarity ratio between the two strings.
+    """
+    return SequenceMatcher(None, str1, str2).ratio()
+
+
+def are_urls_similar(url1: str, url2: str, threshold: float = 0.9) -> bool:
+    """
+    Determine if two URLs are similar based on a given threshold.
+
+    Parameters:
+    url1 (str): The first URL.
+    url2 (str): The second URL.
+    threshold (float): The similarity ratio threshold. Default is 0.9.
+
+    Returns:
+    bool: True if the similarity ratio is above the threshold, False otherwise.
+    """
+    ratio = similarity_ratio(url1, url2)
+    return ratio >= threshold
 
 
 def get_first_or_raise(lst):
@@ -85,7 +125,7 @@ def print_if_not_empty(*strings, sep=" ", prefix="", suffix=""):
     """
     combined_string = sep.join(str(s) for s in strings)
     if combined_string:
-        print(f"{prefix}{combined_string}{suffix}", end="\n")
+        debug_print(f"{prefix}{combined_string}{suffix}", end="\n")
 
 
 def print_var_name_value(var):
@@ -102,7 +142,7 @@ def print_var_name_value(var):
 
     for name, value in caller_vars.items():
         if value is var:
-            print_with_newline(f"{name} = {value}")
+            debug_print(f"{name} = {value}")
             break
 
 
@@ -126,7 +166,7 @@ def print_with_newline(value: Any, end: str = "\n\n") -> None:
         42--
 
     """
-    print(value, end=end)
+    debug_print(value, end=end)
 
 
 def remove_newlines(text):
@@ -173,3 +213,74 @@ def str_to_bool(string):
         return False
     else:
         raise ValueError(f"Invalid input: {string}. Expected 'True' or 'False'.")
+
+
+def is_truthy(value) -> bool:
+    """
+    Determine if a value is truthy according to Python's truthiness rules.
+
+    This function returns False for None and all falsy values, and True otherwise.
+
+    Falsy values in Python include:
+    - None
+    - False
+    - Zero of any numeric type (0, 0.0, 0j)
+    - Empty sequences and collections ('', (), [], {}, set(), range(0))
+
+    Parameters:
+    value (any): The value to be evaluated for truthiness.
+
+    Returns:
+    bool: False if the value is None or falsy, True otherwise.
+
+    Examples:
+    >>> is_truthy(None)
+    False
+    >>> is_truthy(0)
+    False
+    >>> is_truthy('')
+    False
+    >>> is_truthy([])
+    False
+    >>> is_truthy(1)
+    True
+    >>> is_truthy('Hello')
+    True
+    >>> is_truthy([1, 2, 3])
+    True
+    """
+    return bool(value)
+
+
+def none_to_str(value: Union[str, None]) -> str:
+    """
+    Convert None to an empty string.
+
+    Args:
+        value (str): The input string or None.
+
+    Returns:
+        str: The original string if not None, otherwise an empty string.
+    """
+    return "" if value is None else value
+
+
+import os
+
+
+def debug_print(*args, **kwargs):
+    """
+    Print debug information only if the DEBUG environment variable is set to 'ON'.
+
+    Usage:
+    debug_print("Debug message", variable, other_stuff)
+    debug_print("Debug message with custom separator", sep='|')
+    """
+    if os.environ.get("DEBUG", "").upper() == "ON":
+        print(*args, **kwargs)
+
+
+def format_execution_time(execution_time: float):
+    minutes = int(execution_time // 60)
+    seconds = execution_time % 60
+    return f"{minutes:02d}:{seconds:05.2f}"

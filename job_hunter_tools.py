@@ -1,105 +1,187 @@
 import os
+from ast import Set
 from enum import Enum
 from re import L
-from typing import Any, Dict, List, TypedDict, Union
-from urllib.parse import urljoin, urlparse
 from time import sleep
+from typing import Any, Callable, Dict, List, Optional, Set, TypedDict, Union
+from urllib.parse import urljoin, urlparse
 
-from playwright.async_api import ElementHandle, Page, BrowserContext
+from playwright.async_api import BrowserContext, ElementHandle, Page, Playwright
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
+from playwright.async_api import async_playwright
 
-from job_hunter_llm_utils import get_job_search_element
+from job_hunter_utils import (
+    get_job_search_element,
+    is_web_page_a_software_role_application,
+)
+from perplexity import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
+from playwright_utils import (
+    click_and_retrieve_new_tab_url,
+    fetch_elements_description_and_url,
+    fetch_neighboring_elements,
+    get_absolute_url,
+    get_all_child_elements,
+    get_element_html,
+    get_element_inner_text,
+    get_element_tag_name,
+    get_element_url,
+    take_full_page_screenshots,
+)
+from prompts import (
+    EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+    EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+)
 from utils import (
+    debug_print,
+    is_truthy,
+    none_to_str,
     print_var_name_value,
     print_with_newline,
     remove_newlines,
     remove_special_chars,
 )
-from web_element import WebElement, WebElementType
+from web_element import (
+    WebElement,
+    WebElementType,
+    coalesce_web_elements,
+    order_web_elements_by_career_regex,
+    web_element_list_contains_element_handle,
+)
+
+# TODO: Should be in a separate "Env" module
+# instead of reading in every other module
+COMPANY_NAME = os.getenv("COMPANY_NAME", "")
 
 
-async def search_software_roles(page: Page):
+def get_company_page_career_url(company_name: str) -> str:
+    """Gets the career page url of the company
+    from an online LLM model.
+
+    Args:
+        company_name (str): name of the company
+
+    Returns:
+        str: URL of the company name's career page url
+    """
+    # TODO: Add error handling
+    # TODO: Add career url validation
+    # TODO: LLM DB Cache: if perplexity has previously
+    # give us this company's career page URL, extract
+    # URL from DB
+    return call_perpexity_llm(
+        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
+        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT.format(COMPANY_NAME=company_name),
+        model=SONAR_SMALL_ONLINE_MODEL,
+    )
+
+
+async def fetch_job_search_element(page: Page) -> Union[ElementHandle, None]:
+    """Fetches the job search element in the web page
+
+    Args:
+        page (Page): web page to retrieve
+    """
+    try:
+        await page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
+        search_elements = await page.query_selector_all(WebElementType.INPUT.value)
+    except Exception as e:
+        debug_print("Web page does not have search element!", e)
+        raise e
+
+    search_elements_map: Dict[str, ElementHandle] = {}
+    for search_element in search_elements:
+        """
+        Removing special chars because
+        LLM can re-format special chars that
+        affect str comparison ' -> \'
+        """
+        search_element_html_str = remove_special_chars(
+            str(await search_element.get_property("outerHTML"))
+        )
+        search_elements_map[search_element_html_str] = search_element
+
+    job_search_element_key = get_job_search_element(list(search_elements_map.keys()))
+    """
+    TODO: Prompt the LLM to return empty output if none of the
+    input elements are relevant for job search
+    TODO: Add error handling
+    Case 1: Hallucination: If the LLM returns a job_search_element_key
+    that is not in the search_elements_map, teach the LLM that it is hallucinating
+    and tell it to pick an input element from the provided list
+    Case 2: Misdirection: LLM picks an input element from the examples. Tell the
+    LLM that it picked an input element from the list and tell it to pick
+    an input element from the user provided list.
+    Case 3: LLM determines that none of the search input
+    are for searching software roles
+
+    TODO: Memory
+    How can the LLM learn to pick search elements better by relying
+    on past examples?
+
+    TODO: Collect examples
+    As the LLM performs this task, collect a list of input elements
+    and output. This will be useful for fine tune data modelling
+
+    TODO: Use Langchain Prompt Template (Few Shot)
+    and Output parsing for greater control
+    """
+
+    try:
+        if job_search_element_key:
+            return search_elements_map[job_search_element_key]
+    except KeyError as k:
+        raise k
+    return None
+
+
+async def search_software_roles(
+    page: Page, job_search_element: Optional[ElementHandle] = None
+) -> Union[ElementHandle, None]:
     """SEARCH for software engineer roles in the
-    company's career page.
+    the web page.
+
+    Args:
+        page (Page): web page to search for software roles
+    """
+    if not is_truthy(job_search_element):
+        job_search_element = await fetch_job_search_element(page)
+    try:
+        """
+        TODO: Instead of naively typing in 'Software', we should check
+        if the search input has options. For example, https://www.anthropic.com/jobs
+        """
+        if is_truthy(job_search_element):
+            await job_search_element.fill("Software")  # type: ignore
+            await job_search_element.press("Enter")  # type: ignore
+            return job_search_element
+    except Exception as e:
+        debug_print(e)
+    print_with_newline("Unable to search for software roles!")
+
+
+async def get_interactable_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
+) -> List[WebElement]:
+    """_summary_
 
     Args:
         page (Page): _description_
+
+    Returns:
+        List[WebElement]: _description_
     """
-    # TODO: Error handle cases where
-    # there are no search inputs. Eg - Notion!
-    try:
-        await page.wait_for_selector(WebElementType.INPUT.value, timeout=10000)
+    interactable_web_elements = coalesce_web_elements(
+        await fetch_interactable_web_elements(
+            page, restore_page_initial_dom_state=restore_page_initial_dom_state
+        ),
+    )
 
-        search_elements = await page.query_selector_all(WebElementType.INPUT.value)
-
-        search_elements_map: Dict[str, ElementHandle] = {}
-        for search_element in search_elements:
-            # Removing special chars because
-            # LLM can re-format special chars that
-            # affect str comparison ' -> \'
-            search_element_html_str = remove_special_chars(
-                str(await search_element.get_property("outerHTML"))
-            )
-            search_elements_map[search_element_html_str] = search_element
-
-        print_var_name_value(search_elements_map)
-        html_input_elements = list(search_elements_map.keys())
-        print_var_name_value(html_input_elements)
-        # TODO: Prompt the LLM to return empty output if none of the
-        # input elements are relevant for job search
-        job_search_element_key = get_job_search_element(
-            list(search_elements_map.keys())
-        )
-        # TODO: Add error handling
-        # Case 1: Hallucination: If the LLM returns a job_search_element_key
-        # that is not in the search_elements_map, teach the LLM that it is hallucinating
-        # and tell it to pick an input element from the provided list
-        # Case 2: Misdirection: LLM picks an input element from the examples. Tell the
-        # LLM that it picked an input element from the list and tell it to pick
-        # an input element from the user provided list.
-        # Case 3: LLM determines that none of the search input
-        # are for searching software roles
-
-        # TODO: Memory
-        # How can the LLM learn to pick search elements better by relying
-        # on past examples?
-
-        # TODO: Collect examples
-        # As the LLM performs this task, collect a list of input elements
-        # and output. This will be useful for fine tune data modelling
-
-        # TODO: Use Langchain Prompt Template (Few Shot)
-        # and Output parsing for greater control
-
-        print_var_name_value(job_search_element_key)
-
-        if job_search_element_key:
-            try:
-                job_search_element = search_elements_map[job_search_element_key]
-            except KeyError as k:
-                print("Key Error")
-                raise k
-
-            # TODO: Instead of naively typing in 'Software', we should check
-            # if the search input has options. For example, https://www.anthropic.com/jobs
-            print("Attempting to search for software roles...")
-            try:
-                await job_search_element.type("Software")
-                await job_search_element.press("Enter")
-            except:
-                print_with_newline("Unable to search!")
-                ...
-        else:
-            # TODO: Handle None job_search_element_key
-            ...
-
-    except PlaywrightTimeoutError:
-        print("Timeout! Page does not have search")
+    return interactable_web_elements
 
 
-# TODO: shift this to webelement module
-async def fetch_web_element_metadata(
-    context: BrowserContext, page: Page, selector: WebElementType
+# TODO: Shift web element fns to WebElement module
+async def fetch_interactable_web_elements(
+    page: Page, restore_page_initial_dom_state: Callable
 ) -> List[WebElement]:
     """Extracts metadata of web elements (eg - anchor (<element> </element>))
     from the page.
@@ -108,223 +190,127 @@ async def fetch_web_element_metadata(
         page (Page):
             page to extract anchor elements.
     """
-    # Retrieving elements from <main> lets us
-    # chase to relevent elements (<footer> elements are definitively not relevant) and reduce calls
-    # to LLMs to determine career relevancy
+
+    """
+    Retrieving elements from <main> lets us
+    chase to relevent elements (<footer> elements are definitively not relevant) and reduce calls
+    to LLMs to determine career relevancy
+    """
     main_element = await page.query_selector("main")
 
     if main_element:
-        elements = await main_element.query_selector_all(selector.value)
+        elements = await main_element.query_selector_all("a,button")
     else:
-        s = f"{selector.value}:not(footer {selector.value})"
-        print_with_newline(f"No main content, filtering out footer elements: {s}")
-        elements = await page.query_selector_all(s)
+        elements = await page.query_selector_all("a,button")
 
-    elementsMetadata: List[WebElement] = []
-    for element in elements:
-        label = await element.inner_text()
-        href = await element.get_attribute("href")
-        urls: List[str] = []
-        root_url = get_absolute_url(page, href)
-        if root_url:
-            urls.append(root_url)
+    interactable_web_elements: List[WebElement] = []
+    processed_html_elements: Set[str] = set()
+    try:
+        for element in elements:
+            html = await get_element_html(element=element)
+            if html in processed_html_elements:
+                continue
+            label = remove_special_chars(remove_newlines(await element.inner_text()))
+            description = none_to_str(await get_element_inner_text(element=element))
 
-        tag_name = await element.get_property("tagName")
-        tag_name_value = await tag_name.json_value()
+            tag_name = await get_element_tag_name(element=element)
 
-        # Extract metadata of adjacent elements
-        # This is useful when we have an <a>'s description
-        # in a adjacent div or h2 Eg - https://www.anthropic.com/jobs
-
-        # Get parent element
-        parent_element = await element.query_selector("..")
-
-        # If parent exists, get all adjacent elements
-        # of element
-
-        adjacent_elements = (
-            await get_all_child_elements(parent_element, tag_name_value)
-            if parent_element
-            else []
-        )
-
-        # Extract metadata of sub elements
-        child_elements = await get_all_child_elements(
-            element=element, element_filter=tag_name_value
-        )
-
-        neighbor_elements = adjacent_elements + child_elements
-        description = ""
-
-        for neighbor_element in neighbor_elements:
-            neighbor_element_tag_name = await neighbor_element.get_property("tagName")
-            neighbor_element_tag_name_value = (
-                await neighbor_element_tag_name.json_value()
+            url = await get_element_url(
+                page=page,
+                element=element,
             )
-            # Neighboring elements that are of the same
-            # web element type of element is highly likely
-            # to not contain useful metadata
-            if neighbor_element_tag_name_value.lower() != selector.value:
-                try:
-                    description += await neighbor_element.inner_text() + " "
-                except:
-                    ...
-                try:
-                    href = await neighbor_element.get_attribute("href")
-                    child_url = get_absolute_url(page, href)
-                    if child_url:
-                        urls.append(child_url)
-                except:
-                    ...
-        if urls == []:
-            if "software" in label.lower() or "software" in description.lower():
+            """
+                Extract metadata of neighboring elements
+                This is useful when we have an <a>'s description
+                in a adjacent div or h2.
+                For eg - https://www.anthropic.com/jobs
                 """
-                There will be buttons with no urls (Like Lyft "software")
-                We will ignore them for now
-                """
-                print_var_name_value(label)
-                print_var_name_value(description)
-                new_url = None
-
-                if selector == WebElementType.BUTTON:
-                    # Go to this button and get the url
-                    # and then come back
-                    try:
-                        async with page.context.expect_page() as new_page_info:
-                            await element.click(button="left", modifiers=["Meta"])
-
-                            # Get the new page object
-                            new_page = await new_page_info.value
-
-                            # Get the URL of the new page
-                            new_tab_url = new_page.url
-
-                            elementsMetadata.append(
-                                WebElement(
-                                    element_type=selector,
-                                    label=remove_special_chars(remove_newlines(label)),
-                                    url=str(new_tab_url),
-                                    description=remove_special_chars(
-                                        remove_newlines(description)
-                                    ),
-                                )
-                            )
-                            await new_page.close()
-                    except Exception as e:
-                        print(e)
-
-            ...
-        else:
-            elementsMetadata += [
-                WebElement(
-                    element_type=selector,
-                    label=remove_special_chars(remove_newlines(label)),
-                    url=url,
-                    description=remove_special_chars(remove_newlines(description)),
+            (
+                neighbor_elements_descriptions,
+                neighbor_elements_urls,
+            ) = await fetch_elements_description_and_url(
+                page=page,
+                elements=await fetch_neighboring_elements(
+                    element=element, element_filter=tag_name
+                ),
+                fetch_urls=not is_truthy(url),
+                filter_element_tag_name=tag_name,
+            )
+            description += remove_special_chars(
+                remove_newlines(
+                    " ".join(
+                        description for description in neighbor_elements_descriptions
+                    )
                 )
-                for url in urls
-            ]
-    return elementsMetadata
+            )
+
+            if is_truthy(url):
+                interactable_web_elements.append(
+                    WebElement(
+                        label=label,
+                        url=url,  # type: ignore
+                        description=description,
+                        html=html,
+                    )
+                )
+            elif is_truthy(neighbor_elements_urls):
+                interactable_web_elements += [
+                    WebElement(
+                        html=html,
+                        label=label,
+                        url=url,
+                        description=description,
+                    )
+                    for url in neighbor_elements_urls
+                ]
+            processed_html_elements.add(html)
+    except Exception as e:
+        if "Element is not attached to the DOM" in str(e):
+            # BUG: If Software search is in the state,
+            # we search Software Software
+            await restore_page_initial_dom_state()
+            sleep(2)
+            if main_element:
+                # elements = await main_element.query_selector_all(selector.value)
+                elements = await main_element.query_selector_all("button")
+            else:
+                elements = await page.query_selector_all("button")
+
+        ...
+
+    return interactable_web_elements
 
 
-async def get_all_child_elements(
-    element: ElementHandle, element_filter: Any
-) -> List[ElementHandle]:
-    all_child_elements: List[ElementHandle] = []
+async def is_web_element_a_software_role_application(web_element: WebElement) -> bool:
 
-    async def helper(
-        curr_element: Union[ElementHandle, None],
-        all_child_elements: List[ElementHandle],
-    ):
-        if not curr_element:
-            return
-        child_elements: List[ElementHandle] = await curr_element.query_selector_all(
-            ":scope > *"
+    if is_web_element_company_career_page(web_element=web_element):
+        debug_print(
+            "Web Element is not a software role application since it is a career page!"
         )
-        all_child_elements += child_elements
-        for child_element in child_elements:
-            tag_name = await child_element.get_property("tagName")
-            tag_name_value = await tag_name.json_value()
-            # Neighboring elements that are of the same
-            # web element type of element is highly likely
-            # to not contain useful metadata
-            if tag_name_value != element_filter:
-                await helper(child_element, all_child_elements)
+        return False
 
-    await helper(element, all_child_elements)
+    async with async_playwright() as playwright:
+        browser = await playwright.chromium.launch(headless=True)
 
-    return all_child_elements
+        page = await browser.new_page()
+        try:
+            await page.goto(web_element["url"])
+        except Exception as e:
+            # TODO: Catch timeout error and
+            # retry
+            print(e)
+            return False
 
+        # Take a full page screenshot
+        num_of_screenshots = await take_full_page_screenshots(
+            page=page, output_prefix="full_page_screenshot"
+        )
+        r = is_web_page_a_software_role_application(num_of_screenshots)
 
-def is_web_element_related_to_software_engineering_role(
-    web_element: WebElement,
-) -> bool: ...
+        await browser.close()
 
-
-async def take_full_page_screenshots(
-    page: Page,
-    output_prefix: str,
-    viewport_width: int = 1092,
-    viewport_height: int = 1092,
-):
-    """
-    Take multiple screenshots to cover the entire web page.
-
-    Args:
-        page (Page): The Playwright page object.
-        output_prefix (str): The prefix for the screenshot file names.
-        viewport_width (int, optional): The viewport width in pixels. Defaults to 1092.
-        viewport_height (int, optional): The viewport height in pixels. Defaults to 11092080.
-    """
-    # Get the height of the rendered page
-    height = await page.evaluate("() => document.body.scrollHeight")
-
-    # Set the viewport size
-    await page.set_viewport_size(
-        viewport_size={"width": viewport_width, "height": viewport_height}
-    )
-
-    # Calculate the number of screenshots needed
-    num_screenshots = (height // viewport_height) + 1
-
-    # Scroll and capture screenshots
-    for i in range(num_screenshots):
-        # Scroll to the desired position
-        scroll_position = i * viewport_height
-        await page.evaluate(f"window.scrollTo(0, {scroll_position})")
-
-        # Capture the screenshot
-        screenshot_path = f"screenshots/{output_prefix}_{i}.png"
-        await page.screenshot(path=screenshot_path)
-
-    return num_screenshots
+        return r
 
 
-def get_absolute_url(page: Page, url: Union[str, None]) -> Union[str, None]:
-    """Gets the absolute url relative to the page
-
-    Args:
-        page (Page): page
-        relative_url (_type_): _description_
-
-    Returns:
-        str: absolute url
-    """
-    if url == None:
-        return None
-
-    def is_absolute_url(url) -> bool:
-        """Checks if the url is absolute
-
-        Args:
-            url (str): url
-
-        Returns:
-            bool: if url is absolute
-        """
-        return bool(urlparse(url).netloc)
-
-    if is_absolute_url(url):
-        return url
-
-    return urljoin(page.url, url)
+def is_web_element_company_career_page(web_element: WebElement) -> bool:
+    return web_element["label"] == f"{COMPANY_NAME} career page"

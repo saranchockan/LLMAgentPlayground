@@ -2,7 +2,10 @@ from enum import Enum
 from typing import DefaultDict, Dict, List, TypedDict, Union
 import re
 
+from playwright_utils import get_element_html
 from utils import get_first_or_raise, group_by
+
+from playwright.async_api import ElementHandle
 
 
 class WebElementType(Enum):
@@ -12,13 +15,21 @@ class WebElementType(Enum):
 
 
 class WebElement(TypedDict):
-    element_type: WebElementType
     label: str
     url: str
     description: str
+    html: str
 
 
 def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
+    """Coalesces a list of web elements by grouping them based on their URL and combining their descriptions and labels.
+
+    Args:
+        web_elements (List[WebElement]): A list of WebElement objects to be coalesced.
+
+    Returns:
+        List[WebElement]: A list of coalesced WebElement objects.
+    """
     coalesced_web_elements: List[WebElement] = []
     web_element_by_url: Dict[str, List[WebElement]] = group_by(
         web_elements, lambda w: w["url"]
@@ -27,7 +38,7 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
     for url, web_elements in web_element_by_url.items():
         coalesced_web_elements.append(
             WebElement(
-                element_type=get_first_or_raise(web_elements)["element_type"],
+                html=" ".join(web_element["html"] for web_element in web_elements),
                 description=" ".join(
                     web_element["description"] for web_element in web_elements
                 ),
@@ -37,10 +48,8 @@ def coalesce_web_elements(web_elements: List[WebElement]) -> List[WebElement]:
         )
     return coalesced_web_elements
 
-    ...
 
-
-def order_web_elements_by_regex(dicts: List[WebElement]) -> List[WebElement]:
+def order_web_elements_by_career_regex(dicts: List[WebElement]) -> List[WebElement]:
     """
     Orders a list of typed dictionaries based on the best match of a regular expression search
     through all their elements.
@@ -74,6 +83,16 @@ def order_web_elements_by_regex(dicts: List[WebElement]) -> List[WebElement]:
     return ordered_dicts
 
 
+def web_element_list_contains_element_handle(
+    web_elements: List[WebElement], element: ElementHandle
+) -> bool:
+    element_html = get_element_html(element=element)
+    for web_element in web_elements:
+        if web_element["html"] == element_html:
+            return True
+    return False
+
+
 def print_web_element_list(metadata_list: List[WebElement]) -> None:
     """
     Prints a list of WebElement objects in a readable format with spacing.
@@ -98,7 +117,7 @@ def print_web_element_list(metadata_list: List[WebElement]) -> None:
     print("]")
 
 
-def print_web_element(web_element: Dict) -> None:
+def print_web_element(web_element: WebElement) -> None:
     """
     Prints a list of WebElement objects in a readable format with spacing.
 

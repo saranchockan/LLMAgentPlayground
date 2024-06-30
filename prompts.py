@@ -1,15 +1,14 @@
 import os
 
-COMPANY_NAME = os.getenv("COMPANY_NAME")
 EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT = """You are a website crawler. You will be given the name of a company. 
 You should output the URL of the company's career page. 
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE"""
-EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT = f"""Can you output the URL that is the 
+EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT = """Can you output the URL that is the 
 official careers page for a tech company called {COMPANY_NAME}? 
 Remember, YOUR OUTPUT SHOULD ONLY BE THE URL and NOTHING ELSE."""
 
 
-SEARCH_FOR_SOFTWARE_ROLES_USR_PROMPT = """ You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. 
+SEARCH_FOR_SOFTWARE_ROLES_PROMPT = """ You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. 
 
 You will be given a list called HTML_INPUT_ELEMENTS. Each element in HTML_INPUT_ELEMENTS list is an HTML input element that is searchable on a company's career website.   
 You should pick one input element that is prompting the user to search for specific job openings in the company. The input element you pick should be
@@ -44,11 +43,6 @@ Pick the most relevant input element from the USR_HTML_INPUT_ELEMENTS list that 
 Pick an element from USR_HTML_INPUT_ELEMENTS LIST. Remember, YOUR OUTPUT SHOULD ONLY BE AN ELEMENT FROM USR_HTML_INPUT_ELEMENTS LIST and NOTHING ELSE.
 """
 
-"""
-The OUTPUT is "<input data-testid="SearchInput" color="pink80" name="search" placeholder="Openings" class="sc-bc6dc228-2 hQcbLS" value="">", because it appears to be the search input field that allows the user to search for specific job openings. This is the most relevant input element for a job search functionality on a company's career website.
-
-The OUTPUT is "<input type="text" class="BaseInput-module_input__At1nr BaseInput-module_size48__OHWCP" name="role" value="" id="role-zRPV1pf0o6eghG60mGVW9" spellcheck="false">", which is the "role" input field, because it appears to be the most relevant for searching for software engineer job openings on a company's career website. This input field allows the user to directly enter the job role or title they are searching for, which is a common and effective way to find specific job listings on a company's career site.
-"""
 
 IS_WEB_ELEMENT_RELATED_TO_CAREER_EXPLORATION_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in search for software engineer roles on company career websites.
 
@@ -65,13 +59,13 @@ opportunities or job openings.
 Your output should be "True" if the web element metadata meets these criteria and "False" if it does not.
 
 Output Format:
-Your output should be a single word: "True" or "False."
+Your output should be a single word: "True" or "False".
 
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """
 
 
-DETERMINE_WEB_PAGE_IS_SOFTWARE_APPLICATION_PROMPT = """
+IS_WEB_PAGE_A_SOFTWARE_APPLICATION_PROMPT = """
 You are an AI trained to analyze images of a web page. The images stitched together is the entire web page. Determine if the web page is for a software engineering role job listing where the user can fill out their information and submit the job application. Evaluate the web page based on the following criteria:
 
 1. Job Title and Description: Look for terms related to software engineering such as "Software Engineer," "Developer," "Programmer," or similar titles. Read the description to ensure it aligns with typical software engineering duties.
@@ -83,7 +77,33 @@ You are an AI trained to analyze images of a web page. The images stitched toget
 If the web page contains all of these elements, then it is a job listing for a software engineering role. Your output should be "True" if the web page meets these criteria and "False" if it does not.
 
 Output Format:
-Your output should be a single word: "True" or "False."
+Your output should be a single word: "True" or "False".
 
+REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
+"""
+
+IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT = """You are an AI Job Hunter Web Agent who is an expert in searching for software engineer roles on company career websites. This is text from a job application web page. Determine if the text indicates that the web page is for a software engineering role. 
+
+Evaluate based on the following criteria:
+
+1. Mentions of software development, programming, or coding.
+References to specific programming languages or software technologies.
+
+2. Responsibilities related to designing, developing, testing, or maintaining software.
+
+3. Requirements for software engineering skills or experience.
+
+4. Involvement in software projects or development teams.
+
+<text>
+{WEB_PAGE_TEXT} 
+</text>
+
+
+Output Format:
+Your output should be a single word: "True" or "False".
+"""
+
+"""
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """

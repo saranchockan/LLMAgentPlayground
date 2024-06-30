@@ -1,42 +1,33 @@
-import asyncio
 import os
-from enum import Enum
 from time import sleep
-from typing import Dict, List, TypedDict
+from typing import List
+import asyncio
 
-from playwright.async_api import ElementHandle, Playwright
-from playwright.async_api import TimeoutError as PlaywrightTimeoutError
-from playwright.async_api import async_playwright
+from playwright.async_api import Playwright, async_playwright
 
-from job_hunter_llm_utils import (
-    determine_if_web_page_is_software_role_application,
-    get_job_search_element,
-    is_web_element_related_to_career_exploration,
-)
 from job_hunter_tools import (
-    fetch_web_element_metadata,
-    is_web_element_related_to_software_engineering_role,
+    fetch_interactable_web_elements,
+    get_company_page_career_url,
     search_software_roles,
-    take_full_page_screenshots,
 )
-from perplexity_utils import SONAR_SMALL_ONLINE_MODEL, call_perpexity_llm
-from prompts import (
-    COMPANY_NAME,
-    EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-    EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
+from job_hunter_utils import (
+    is_job_application_web_page_a_software_role,
+    is_web_page_a_software_role_application,
 )
+from playwright_utils import take_full_page_screenshots
 from utils import print_with_newline
 from web_element import (
     WebElement,
     WebElementType,
     coalesce_web_elements,
-    order_web_elements_by_regex,
+    order_web_elements_by_career_regex,
     print_web_element_list,
 )
 
+COMPANY_NAME = os.environ["COMPANY_NAME"]
+
 
 async def run_job_hunter(playwright: Playwright):
-
     chromium = playwright.chromium
     browser = await chromium.launch(headless=False)
     context = await browser.new_context()
@@ -50,25 +41,14 @@ async def run_job_hunter(playwright: Playwright):
     ASK perplexity for company's official career page url.
     """
 
-    # TODO: Add error handling
-    # TODO: Add career url validation
-    # TODO: LLM DB Cache: if perplexity has previously
-    # give us this company's career page URL, extract
-    # URL from DB
-    company_career_page_url = call_perpexity_llm(
-        EXTRACT_COMPANY_CAREER_PAGE_URL_SYS_PROMPT,
-        EXTRACT_COMPANY_CAREER_PAGE_URL_USER_PROMPT,
-        model=SONAR_SMALL_ONLINE_MODEL,
-    )
-
-    # company_career_page_url = "https://www.benchling.com/careers"
+    company_career_page_url = get_company_page_career_url(COMPANY_NAME)
 
     print_with_newline(f"{COMPANY_NAME} Career Page URL: {company_career_page_url}")
 
     await page.goto(company_career_page_url)
 
     """
-    SEARCH for software engineer roles in the 
+    SEARCH for software engineer roles in the
     company's career page.
     """
 
@@ -91,37 +71,33 @@ async def run_job_hunter(playwright: Playwright):
         Search for software (Lyft)
         Click on Engineering button (Anthropic)
     B) A software role page
-        At this point of time, AgentHunt is done. AgentApply 
+        At this point of time, AgentHunt is done. AgentApply
         should take over to deem role fit and apply
 
     Extrack links to software engineer roles
     """
     sleep(5)
-    anchor_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        context, page, WebElementType.ANCHOR
-    )
+    anchor_web_elements: List[WebElement] = await fetch_interactable_web_elements(page)
 
     """
     We search of buttons b/c some websites
     don't expose <a> hrefs For eg - Benchling
 
-    There could be anchors and buttons that represent the same 
+    There could be anchors and buttons that represent the same
     thing and we should coalesce them.
 
-    Buttons that don't have URLs are compeletly valid 
+    Buttons that don't have URLs are compeletly valid
     and should be clicked
 
     """
-    button_web_elements: List[WebElement] = await fetch_web_element_metadata(
-        context, page, WebElementType.BUTTON
-    )
+    button_web_elements: List[WebElement] = await fetch_interactable_web_elements(page)
 
     """
     Keywords to regex
     "job" "software" "engineer "apply" "lever" "greenhouse" "career"...
 
     Push prioritized web elements to the top of the list,
-    run through is_web_element_related_to_career_exploration, 
+    run through is_web_element_related_to_career_exploration,
     run the process in DFS, put a condition
     to stop checking web elemenst after n jobs have been extracted
     The objective here is to reduce the calls to LLMs. (Or maybe
@@ -132,22 +108,14 @@ async def run_job_hunter(playwright: Playwright):
     do we get web elements in order? If so, we can deduct that
     starting set of elements are in header and the ending set of
     elements are in footer. So, we start DFS in elements in the middle
-    set. 
+    set.
 
     """
-    interactable_web_elements = order_web_elements_by_regex(
+    interactable_web_elements = order_web_elements_by_career_regex(
         coalesce_web_elements((anchor_web_elements + button_web_elements))
     )
 
     print_web_element_list(interactable_web_elements)
-
-    # TODO: Coalesce anchors and buttons
-
-    # for web_element in interactable_web_elements:
-    #     if web_element["url"] not in company_career_page_url:
-    #         if is_web_element_related_to_career_exploration(web_element=web_element):
-    #             print_web_element(web_element)
-    #     ...
 
     input("Press Enter to close the browser...")
     await browser.close()
@@ -156,26 +124,15 @@ async def run_job_hunter(playwright: Playwright):
 SCREENSHOT_URL = os.getenv("SCREENSHOT_URL", "")
 
 
-async def run_software_job_app_web_page_detection_script():
-    async with async_playwright() as playwright:
-        browser = await playwright.chromium.launch()
-
-        page = await browser.new_page()
-        await page.goto(SCREENSHOT_URL)
-
-        # Take a full page screenshot
-        num_of_screenshots = await take_full_page_screenshots(
-            page=page, output_prefix="full_page_screenshot"
-        )
-        determine_if_web_page_is_software_role_application(num_of_screenshots)
-
-        await browser.close()
-
-
 async def main():
     async with async_playwright() as playwright:
         await run_job_hunter(playwright)
-        # await run_software_job_app_web_page_detection_script()
 
 
-asyncio.run(main=main())
+print(
+    asyncio.run(
+        main=is_job_application_web_page_a_software_role(
+            "https://boards.greenhouse.io/anthropic/jobs/4020295008"
+        )
+    )
+)
