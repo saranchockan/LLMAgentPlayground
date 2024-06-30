@@ -1,7 +1,7 @@
 import asyncio
 import os
 from time import sleep
-from typing import List
+from typing import List, Set
 
 from playwright.async_api import ElementHandle, Page, Playwright, async_playwright
 
@@ -39,66 +39,79 @@ async def software_role_app_web_crawler(
     page: Page,
     web_element: WebElement,
     software_role_app_web_elements: List[WebElement],
+    visited_urls: Set[str] = set(),
 ):
-    if is_web_element_related_to_career_exploration(web_element=web_element):
-        try:
-            software_role_url = get_first_or_raise(software_role_app_web_elements)
-        except ValueError as e:
-            debug_print("No software roles have been found yet, attempting vision", e)
-            if await is_web_element_a_software_role_application(
-                web_element=web_element
-            ):
-                debug_print("Found software engineering role using Claude Vision")
+    if web_element[
+        "url"
+    ] in visited_urls or not is_web_element_related_to_career_exploration(
+        web_element=web_element
+    ):
+        return
+
+    try:
+        software_role_url = get_first_or_raise(software_role_app_web_elements)
+    except ValueError as e:
+        debug_print("No software roles have been found yet, attempting vision", e)
+        if await is_web_element_a_software_role_application(web_element=web_element):
+            debug_print("Found software engineering role using Claude Vision")
+            print_web_element(web_element=web_element)
+            software_role_app_web_elements.append(web_element)
+            return
+    else:
+        if are_urls_similar(
+            web_element["url"], software_role_url["url"], threshold=0.8
+        ):
+            # TODO: Wrap is_job_application_web_page_a_software_role
+            # in try catch
+            if await is_job_application_web_page_a_software_role(web_element["url"]):
+                debug_print(
+                    "Found software engineering role without without using Claude Vision!"
+                )
                 print_web_element(web_element=web_element)
                 software_role_app_web_elements.append(web_element)
-                return
+            else:
+                debug_print(
+                    "Found a job application, but it is not for a software engineering role"
+                )
+                print_web_element(web_element=web_element)
+            return
         else:
-            if are_urls_similar(web_element["url"], software_role_url["url"]):
-                if await is_job_application_web_page_a_software_role(
-                    web_element["url"]
-                ):
-                    debug_print(
-                        "Found software engineering role without without using Claude Vision!"
-                    )
-                    print_web_element(web_element=web_element)
-                    software_role_app_web_elements.append(web_element)
-                    return
-                else:
-                    debug_print(
-                        "Found a job application, but it is not for a software engineering role"
-                    )
-                    print_web_element(web_element=web_element)
-                    return
-
-        # Navigate to URL in browser
-        await page.goto(web_element["url"])
-        try:
-            job_search_element = await search_software_roles(page=page)
-        except Exception as e:
-            debug_print("Failed to search software roles", e)
-        sleep(5)
-
-        # TODO: Modularize this on wrapper
-        # over page to avoid prop drilling
-        async def restore_page_initial_dom_state():
-            await search_software_roles(
-                page=page, job_search_element=job_search_element
+            debug_print(
+                "Web Page URL is not similar to software_role_app_web_elements urls",
+                web_element["url"],
+                software_role_url["url"],
             )
 
-        interactable_web_elements = order_web_elements_by_career_regex(
-            await get_interactable_web_elements(
-                page=page,
-                restore_page_initial_dom_state=restore_page_initial_dom_state,
-            )
+    debug_print("Go to URL:", web_element["url"])
+    # Navigate to URL in browser
+    await page.goto(web_element["url"])
+    visited_urls.add(web_element["url"])
+    try:
+        job_search_element = await search_software_roles(page=page)
+    except Exception as e:
+        debug_print("Failed to search software roles", e)
+    sleep(5)
+
+    # TODO: Modularize this on wrapper
+    # over page to avoid prop drilling
+    async def restore_page_initial_dom_state():
+        await search_software_roles(page=page, job_search_element=job_search_element)
+
+    interactable_web_elements = order_web_elements_by_career_regex(
+        await get_interactable_web_elements(
+            page=page,
+            restore_page_initial_dom_state=restore_page_initial_dom_state,
         )
+    )
+    print("interactable_web_elements")
+    print_web_element_list(interactable_web_elements)
 
-        for web_element in interactable_web_elements:
-            await software_role_app_web_crawler(
-                page=page,
-                web_element=web_element,
-                software_role_app_web_elements=software_role_app_web_elements,
-            )
-    return
+    for web_element in interactable_web_elements:
+        await software_role_app_web_crawler(
+            page=page,
+            web_element=web_element,
+            software_role_app_web_elements=software_role_app_web_elements,
+        )
 
 
 async def run_job_hunter_agent(playwright: Playwright):
@@ -120,7 +133,7 @@ async def run_job_hunter_agent(playwright: Playwright):
         description=f"Career page of the company {COMPANY_NAME} that contains information about job opportunities",
         html="",
         url=company_career_page_url,
-        label="{COMPANY_NAME} career page",
+        label=f"{COMPANY_NAME} career page",
     )
     software_role_app_web_elements: List[WebElement] = []
     await software_role_app_web_crawler(

@@ -1,9 +1,11 @@
 import base64
+import os
 import re
 from typing import List, Union
 
 from anthropic import Anthropic
 from anthropic.types import Message
+from openai import OpenAI
 
 from anthropic_utils import extract_text_from_anthropic_message
 from openai_utils import extract_message_from_openai_message
@@ -17,13 +19,9 @@ from prompts import (
 from utils import debug_print, print_var_name_value, str_to_bool
 from web_element import WebElement
 
-ANTHROPIC_API_KEY = "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"
-anthropicClient = Anthropic(
-    # This is the default and can be omitted
-    api_key=ANTHROPIC_API_KEY,
-)
+ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
+anthropicClient = Anthropic(api_key=ANTHROPIC_API_KEY)
 
-from openai import OpenAI
 
 openAIClient = OpenAI()
 
@@ -68,8 +66,8 @@ def is_web_element_related_to_career_exploration(web_element: WebElement) -> boo
         WEB_ELEMENT_METADATA=web_element_str
     )
     print_var_name_value(content)
-    message: Message = anthropicClient.messages.create(
-        model="claude-3-opus-20240229",
+    completion = openAIClient.chat.completions.create(
+        model="gpt-4-turbo",
         max_tokens=1024,
         messages=[
             {
@@ -78,7 +76,7 @@ def is_web_element_related_to_career_exploration(web_element: WebElement) -> boo
             },
         ],
     )
-    ret = extract_text_from_anthropic_message(message)
+    ret = extract_message_from_openai_message(completion)
     debug_print(ret)
     return str_to_bool(ret)
 
@@ -89,6 +87,7 @@ def is_web_page_a_software_role_application(
     """
     https://docs.anthropic.com/en/docs/vision
     """
+    print("is_web_page_a_software_role_application_vision()")
     # Get image binary data from screenshots/
     images_content = []
     base64_images = []
@@ -125,11 +124,21 @@ def is_web_page_a_software_role_application(
             }
         ],
     )
-    return str_to_bool((extract_text_from_anthropic_message(message=message)))
+    ret = extract_text_from_anthropic_message(message=message)
+    print_var_name_value(ret)
+    return str_to_bool(ret)
 
 
 async def is_job_application_web_page_a_software_role(job_app_url: str) -> bool:
+    """
+    TODO: Fix bug https://app.careerpuck.com/job-board/lyft/job/7501001002?gh_jid=7501001002 fails
 
+    Args:
+        job_app_url (str): _description_
+
+    Returns:
+        bool: _description_
+    """
     content = IS_JOB_APP_WEB_PAGE_FOR_SOFTWARE_PROMPT.format(
         WEB_PAGE_TEXT=await extract_all_text_from_web_page(job_app_url)
     )

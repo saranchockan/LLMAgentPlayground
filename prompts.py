@@ -59,7 +59,7 @@ opportunities or job openings.
 Your output should be "True" if the web element metadata meets these criteria and "False" if it does not.
 
 Output Format:
-Your output should be a single word: "True" or "False."
+Your output should be a single word: "True" or "False".
 
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """
@@ -77,7 +77,7 @@ You are an AI trained to analyze images of a web page. The images stitched toget
 If the web page contains all of these elements, then it is a job listing for a software engineering role. Your output should be "True" if the web page meets these criteria and "False" if it does not.
 
 Output Format:
-Your output should be a single word: "True" or "False."
+Your output should be a single word: "True" or "False".
 
 REMEMBER, YOUR OUTPUT SHOULD ONLY EITHER "True" OR "False" AND NOTHING ELSE.
 """
@@ -101,7 +101,7 @@ References to specific programming languages or software technologies.
 
 
 Output Format:
-Your output should be a single word: "True" or "False."
+Your output should be a single word: "True" or "False".
 """
 
 """
