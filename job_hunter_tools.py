@@ -33,6 +33,7 @@ from prompts import (
 )
 from utils import (
     debug_print,
+    is_falsy,
     is_truthy,
     none_to_str,
     print_var_name_value,
@@ -143,7 +144,7 @@ async def search_software_roles(
     Args:
         page (Page): web page to search for software roles
     """
-    if not is_truthy(job_search_element):
+    if is_falsy(job_search_element):
         job_search_element = await fetch_job_search_element(page)
     try:
         """
@@ -197,7 +198,6 @@ async def fetch_interactable_web_elements(
     to LLMs to determine career relevancy
     """
     main_element = await page.query_selector("main")
-
     if main_element:
         elements = await main_element.query_selector_all("a,button")
     else:
@@ -233,7 +233,7 @@ async def fetch_interactable_web_elements(
                 elements=await fetch_neighboring_elements(
                     element=element, element_filter=tag_name
                 ),
-                fetch_urls=not is_truthy(url),
+                fetch_urls=is_falsy(url),
                 filter_element_tag_name=tag_name,
             )
             description += remove_special_chars(

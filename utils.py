@@ -252,6 +252,43 @@ def is_truthy(value) -> bool:
     return bool(value)
 
 
+def is_falsy(value) -> bool:
+    """
+    Determine if a value is falsy according to Python's truthiness rules.
+
+    This function returns True for None and all falsy values, and False otherwise.
+
+    Falsy values in Python include:
+    - None
+    - False
+    - Zero of any numeric type (0, 0.0, 0j)
+    - Empty sequences and collections ('', (), [], {}, set(), range(0))
+
+    Parameters:
+    value (any): The value to be evaluated for falsiness.
+
+    Returns:
+    bool: True if the value is None or falsy, False otherwise.
+
+    Examples:
+    >>> is_falsy(None)
+    True
+    >>> is_falsy(0)
+    True
+    >>> is_falsy('')
+    True
+    >>> is_falsy([])
+    True
+    >>> is_falsy(1)
+    False
+    >>> is_falsy('Hello')
+    False
+    >>> is_falsy([1, 2, 3])
+    False
+    """
+    return not bool(value)
+
+
 def none_to_str(value: Union[str, None]) -> str:
     """
     Convert None to an empty string.
